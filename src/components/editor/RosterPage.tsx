@@ -121,12 +121,9 @@ export function RosterPage() {
   const setCsvImportOpen = useUIStore((s) => s.setCsvImportOpen)
 
   const navigate = useNavigate()
-  // Transitional: prefer the Phase-4 `teamSlug`/`officeSlug` params, fall
-  // back to the legacy `:slug` while Phase 6 catches up with the route
-  // tree. See ProjectShell for why this gap exists.
-  const params = useParams<{ slug?: string; teamSlug?: string; officeSlug?: string }>()
-  const teamSlug = params.teamSlug
-  const officeSlug = params.officeSlug ?? params.slug
+  // Post Phase 6: the roster always lives under
+  // `/t/:teamSlug/o/:officeSlug/roster`, so both params are present.
+  const { teamSlug, officeSlug } = useParams<{ teamSlug: string; officeSlug: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
 
   const q = searchParams.get('q') ?? ''
@@ -470,10 +467,9 @@ export function RosterPage() {
         : null
       if (floor) switchToFloor(floor.id)
       if (fresh.seatId) useUIStore.getState().setSelectedIds([fresh.seatId])
-      const mapUrl = teamSlug && officeSlug
-        ? `/t/${teamSlug}/o/${officeSlug}/map`
-        : `/project/${officeSlug}/map`
-      navigate(mapUrl)
+      if (teamSlug && officeSlug) {
+        navigate(`/t/${teamSlug}/o/${officeSlug}/map`)
+      }
     },
     [navigate, teamSlug, officeSlug],
   )

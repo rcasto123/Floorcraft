@@ -9,12 +9,9 @@ import { isWallElement } from '../types/elements'
 
 export function useKeyboardShortcuts() {
   const navigate = useNavigate()
-  // Transitional: Phase 4→6 window. Prefer the new params, fall back
-  // to the legacy `:slug` so M/R hotkeys keep working until the route
-  // tree is rewritten.
-  const params = useParams<{ slug?: string; teamSlug?: string; officeSlug?: string }>()
-  const teamSlug = params.teamSlug
-  const officeSlug = params.officeSlug ?? params.slug
+  // Post Phase 6: editor is mounted exclusively at
+  // `/t/:teamSlug/o/:officeSlug/*`.
+  const { teamSlug, officeSlug } = useParams<{ teamSlug: string; officeSlug: string }>()
   const { selectedIds, clearSelection, setPresentationMode, presentationMode, setShortcutsOverlayOpen } = useUIStore(useShallow((s) => ({ selectedIds: s.selectedIds, clearSelection: s.clearSelection, setPresentationMode: s.setPresentationMode, presentationMode: s.presentationMode, setShortcutsOverlayOpen: s.setShortcutsOverlayOpen })))
   const { duplicateElements, moveElements, groupElements, ungroupElements } = useElementsStore(useShallow((s) => ({ duplicateElements: s.duplicateElements, moveElements: s.moveElements, groupElements: s.groupElements, ungroupElements: s.ungroupElements })))
   const elements = useElementsStore((s) => s.elements)
@@ -157,18 +154,18 @@ export function useKeyboardShortcuts() {
         if (e.key === 'g' || e.key === 'G') { toggleGrid(); return }
         if (e.key === 'p' || e.key === 'P') { setPresentationMode(!presentationMode); return }
         if (e.key === '?') { setShortcutsOverlayOpen(true); return }
-        // M / R jump between the MAP and ROSTER views of the current project.
-        // Guarded on `officeSlug` so the hotkeys are inert outside the
-        // project shell (and `navigate` is safe to call — we're inside
-        // the Router). Builds the new team-aware path when available.
-        if ((e.key === 'm' || e.key === 'M') && officeSlug) {
+        // M / R jump between the MAP and ROSTER views of the current
+        // office. Guarded on both params so the hotkeys are inert outside
+        // the project shell (and `navigate` is safe to call — we're
+        // inside the Router).
+        if ((e.key === 'm' || e.key === 'M') && teamSlug && officeSlug) {
           e.preventDefault()
-          navigate(teamSlug ? `/t/${teamSlug}/o/${officeSlug}/map` : `/project/${officeSlug}/map`)
+          navigate(`/t/${teamSlug}/o/${officeSlug}/map`)
           return
         }
-        if ((e.key === 'r' || e.key === 'R') && officeSlug) {
+        if ((e.key === 'r' || e.key === 'R') && teamSlug && officeSlug) {
           e.preventDefault()
-          navigate(teamSlug ? `/t/${teamSlug}/o/${officeSlug}/roster` : `/project/${officeSlug}/roster`)
+          navigate(`/t/${teamSlug}/o/${officeSlug}/roster`)
           return
         }
       }

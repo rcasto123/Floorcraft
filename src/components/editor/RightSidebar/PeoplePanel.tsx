@@ -40,16 +40,11 @@ export function PeoplePanel() {
   )
 
   const setCsvImportOpen = useUIStore((s) => s.setCsvImportOpen)
-  // Transitional during Phase 4→6: see ProjectShell. Prefer new param
-  // shape, fall back to the legacy `:slug`.
-  const params = useParams<{ slug?: string; teamSlug?: string; officeSlug?: string }>()
-  const teamSlug = params.teamSlug
-  const officeSlug = params.officeSlug ?? params.slug
-  const rosterHref = teamSlug && officeSlug
-    ? `/t/${teamSlug}/o/${officeSlug}/roster`
-    : officeSlug
-      ? `/project/${officeSlug}/roster`
-      : null
+  // Post Phase 6: the PeoplePanel only ever mounts inside an office
+  // route, so both params are guaranteed present.
+  const { teamSlug, officeSlug } = useParams<{ teamSlug: string; officeSlug: string }>()
+  const rosterHref =
+    teamSlug && officeSlug ? `/t/${teamSlug}/o/${officeSlug}/roster` : null
 
   const filteredEmployees = getFilteredEmployees()
   const totalCount = Object.keys(employees).length
