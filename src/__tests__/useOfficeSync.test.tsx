@@ -10,19 +10,28 @@ vi.mock('../lib/offices/officeRepository', () => ({
   saveOffice: (...a: unknown[]) => saveOffice(...a),
   saveOfficeForce: (...a: unknown[]) => saveOfficeForce(...a),
 }))
+// Zustand-store mocks. Each selector-or-undefined hook is packaged
+// through `unknown` to satisfy `tsc -b`'s stricter cast-checking,
+// which flags the arrow-function-cast-to-Record<string, unknown>
+// pattern that vi.mock's factory return type infers.
+type Selector<S> = ((s: S) => unknown) | undefined
+function makeStoreHook<S>(state: S) {
+  return ((sel: Selector<S>) => (sel ? sel(state) : state)) as unknown as (
+    sel?: Selector<S>,
+  ) => unknown
+}
+
 vi.mock('../stores/elementsStore', () => ({
-  useElementsStore: ((sel: any) => (sel ? sel({ elements: {} }) : { elements: {} })) as any,
+  useElementsStore: makeStoreHook({ elements: {} }),
 }))
 vi.mock('../stores/employeeStore', () => ({
-  useEmployeeStore: ((sel: any) =>
-    sel ? sel({ employees: {}, departmentColors: {} }) : { employees: {}, departmentColors: {} }) as any,
+  useEmployeeStore: makeStoreHook({ employees: {}, departmentColors: {} }),
 }))
 vi.mock('../stores/floorStore', () => ({
-  useFloorStore: ((sel: any) =>
-    sel ? sel({ floors: [], activeFloorId: null }) : { floors: [], activeFloorId: null }) as any,
+  useFloorStore: makeStoreHook({ floors: [], activeFloorId: null }),
 }))
 vi.mock('../stores/canvasStore', () => ({
-  useCanvasStore: ((sel: any) => (sel ? sel({ settings: {} }) : { settings: {} })) as any,
+  useCanvasStore: makeStoreHook({ settings: {} }),
 }))
 vi.mock('../stores/projectStore', () => {
   const state: Record<string, unknown> = {
@@ -41,8 +50,13 @@ vi.mock('../stores/projectStore', () => {
       state.lastSavedAt = at
     },
   }
-  const hook: any = (sel: any) => (sel ? sel(state) : state)
-  hook.setState = (u: any) => Object.assign(state, typeof u === 'function' ? u(state) : u)
+  const hook = makeStoreHook(state) as unknown as {
+    (sel?: Selector<Record<string, unknown>>): unknown
+    setState: (u: unknown) => void
+    getState: () => Record<string, unknown>
+  }
+  hook.setState = (u: unknown) =>
+    Object.assign(state, typeof u === 'function' ? (u as (s: unknown) => object)(state) : (u as object))
   hook.getState = () => state
   return { useProjectStore: hook }
 })
