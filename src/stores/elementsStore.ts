@@ -63,7 +63,8 @@ export const useElementsStore = create<ElementsState>()(
 
       removeElement: (id) =>
         set((state) => {
-          const { [id]: _, ...rest } = state.elements
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { [id]: _removed, ...rest } = state.elements
           return { elements: rest }
         }),
 
