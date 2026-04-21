@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
+import { useSession } from '../../lib/auth/session'
 import type { Team, TeamMember, Invite } from '../../types/team'
 import {
   listTeamMembers,
@@ -12,12 +13,20 @@ import {
 export function TeamSettingsMembers({
   team,
   isAdmin,
-  selfId,
+  selfId: selfIdProp,
 }: {
   team: Team
   isAdmin: boolean
-  selfId: string
+  /**
+   * Optional override. When omitted (the default route-wired case) the
+   * component reads the signed-in user id from `useSession()` so the
+   * caller doesn't have to plumb auth state through bridge components.
+   */
+  selfId?: string
 }) {
+  const session = useSession()
+  const selfId =
+    selfIdProp ?? (session.status === 'authenticated' ? session.user.id : '')
   const [members, setMembers] = useState<TeamMember[]>([])
   const [invites, setInvites] = useState<Invite[]>([])
   const [email, setEmail] = useState('')

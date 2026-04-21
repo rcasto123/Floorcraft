@@ -124,10 +124,18 @@ export function ProjectShell() {
       // modal link, TopBar name) keeps working. The full `Project` shape
       // still predates the team/office split; we fill the minimum the UI
       // actually reads at runtime.
+      //
+      // Critical: `teamId` and `isPrivate` must be present so the
+      // `ShareModal` can resolve permissions and show the correct initial
+      // visibility without a second round-trip. `listPermissions` needs
+      // the team id to enumerate team members; the visibility radio reads
+      // `isPrivate` to select the default option.
       const projectFacade = {
         id: office.id,
         name: office.name,
         slug: office.slug,
+        teamId: office.team_id,
+        isPrivate: office.is_private,
       } as unknown as Project
       useProjectStore.setState({
         currentProject: projectFacade,
