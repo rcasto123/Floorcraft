@@ -12,7 +12,7 @@ vi.mock('../lib/offices/officeRepository', () => ({
   createOffice: (...a: unknown[]) => createOffice(...a),
 }))
 const { fromMock } = vi.hoisted(() => ({
-  fromMock: vi.fn(() => ({
+  fromMock: vi.fn((_table: string) => ({
     select: () => ({
       eq: () => ({
         single: () => Promise.resolve({ data: { id: 't1', slug: 'acme', name: 'Acme' }, error: null }),
@@ -20,7 +20,9 @@ const { fromMock } = vi.hoisted(() => ({
     }),
   })),
 }))
-vi.mock('../lib/supabase', () => ({ supabase: { from: (...a: unknown[]) => fromMock(...a) } }))
+vi.mock('../lib/supabase', () => ({
+  supabase: { from: (table: string) => fromMock(table) },
+}))
 vi.mock('../lib/auth/session', () => ({
   useSession: () => ({ status: 'authenticated', user: { id: 'u1', email: 'a@b.c' } }),
 }))

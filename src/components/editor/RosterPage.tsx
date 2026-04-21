@@ -457,7 +457,7 @@ export function RosterPage() {
 
   const jumpToSeat = useCallback(
     (emp: Employee) => {
-      if (!slug) return
+      if (!teamSlug || !officeSlug) return
       // Re-read the employee in case the row was edited between click and
       // here (unlikely but cheap). Bail out silently if floor/seat got
       // cleared or the floor has since been deleted.

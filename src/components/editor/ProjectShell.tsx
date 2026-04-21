@@ -110,9 +110,15 @@ export function ProjectShell() {
         employees: migratedEmployees,
         departmentColors: (p.departmentColors ?? {}) as Record<string, string>,
       })
+      // `activeFloorId` is modelled as a required `string` in the store
+      // even though legacy payloads (and brand-new offices) may legitimately
+      // have nothing selected yet. Keep the store happy by coercing null
+      // or missing values to the empty string — every consumer already
+      // falls back to the first floor when the id doesn't match anything.
+      const rawActiveFloor = p.activeFloorId
       useFloorStore.setState({
         floors: (p.floors ?? []) as ReturnType<typeof useFloorStore.getState>['floors'],
-        activeFloorId: (p.activeFloorId ?? null) as string | null,
+        activeFloorId: typeof rawActiveFloor === 'string' ? rawActiveFloor : '',
       })
       if (p.settings) {
         useCanvasStore.setState({

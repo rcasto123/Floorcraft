@@ -19,20 +19,24 @@ export async function listTeamMembers(teamId: string): Promise<TeamMember[]> {
     .select('team_id, user_id, role, joined_at, profiles!inner(email,name)')
     .eq('team_id', teamId)
   if (error) throw error
-  return (data ?? []).map((row: {
-    team_id: string
-    user_id: string
-    role: 'admin' | 'member'
-    joined_at: string
-    profiles: { email: string; name: string | null }
-  }) => ({
-    team_id: row.team_id,
-    user_id: row.user_id,
-    role: row.role,
-    joined_at: row.joined_at,
-    email: row.profiles.email,
-    name: row.profiles.name ?? undefined,
-  })) as TeamMember[]
+  // Supabase's generated types treat `profiles!inner(...)` as a relation
+  // and can model it as an array OR a single object depending on the
+  // foreign-key cardinality it infers. Our FK is user_id 1-1 with
+  // auth.users.id, so it's always a single row at runtime, but we widen
+  // through `unknown` so the compiler accepts the shape we know we get.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rows = (data ?? []) as any[]
+  return rows.map((row) => {
+    const profile = Array.isArray(row.profiles) ? row.profiles[0] : row.profiles
+    return {
+      team_id: row.team_id as string,
+      user_id: row.user_id as string,
+      role: row.role as 'admin' | 'member',
+      joined_at: row.joined_at as string,
+      email: profile?.email as string,
+      name: (profile?.name as string | null) ?? undefined,
+    }
+  }) as TeamMember[]
 }
 
 export async function listInvites(teamId: string): Promise<Invite[]> {
