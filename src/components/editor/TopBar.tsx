@@ -18,7 +18,15 @@ export function TopBar() {
   const updateName = useProjectStore((s) => s.updateProjectName)
   const saveState = useProjectStore((s) => s.saveState)
   const lastSavedAt = useProjectStore((s) => s.lastSavedAt)
-  const { slug } = useParams<{ slug: string }>()
+  // Transitional: Phase 4 rewires the editor around team/office slugs,
+  // but Phase 6 is what actually updates the router. During the window
+  // between those phases the route tree still mounts us at
+  // `/project/:slug/*`, so we read BOTH shapes and prefer the new one
+  // when present. Once Phase 6 lands, the legacy `slug` branch is dead
+  // code and gets removed with the route-tree rewrite.
+  const params = useParams<{ slug?: string; teamSlug?: string; officeSlug?: string }>()
+  const teamSlug = params.teamSlug
+  const officeSlug = params.officeSlug ?? params.slug
   const { stageScale, zoomIn, zoomOut, resetZoom } = useCanvasStore(useShallow((s) => ({ stageScale: s.stageScale, zoomIn: s.zoomIn, zoomOut: s.zoomOut, resetZoom: s.resetZoom })))
   const { rightSidebarOpen, setRightSidebarOpen, setShareModalOpen, setExportDialogOpen, setPresentationMode, presentationMode, selectedIds, clearSelection } = useUIStore(useShallow((s) => ({ rightSidebarOpen: s.rightSidebarOpen, setRightSidebarOpen: s.setRightSidebarOpen, setShareModalOpen: s.setShareModalOpen, setExportDialogOpen: s.setExportDialogOpen, setPresentationMode: s.setPresentationMode, presentationMode: s.presentationMode, selectedIds: s.selectedIds, clearSelection: s.clearSelection })))
   const undo = useElementsStore.temporal.getState().undo
@@ -113,11 +121,16 @@ export function TopBar() {
 
       {/* MAP / ROSTER view toggle — React Router owns the active state so we
           don't need UI-store bookkeeping. Hidden on routes without a slug
-          (shouldn't happen, but keeps the component resilient). */}
-      {slug && (
+          (shouldn't happen, but keeps the component resilient).
+
+          Builds the new `/t/:teamSlug/o/:officeSlug/...` path when the
+          team slug is known, and the legacy `/project/:slug/...` path
+          otherwise — keeps the editor navigable during the Phase 4→6
+          window where the router hasn't switched shapes yet. */}
+      {officeSlug && (
         <nav aria-label="Project views" className="flex items-center bg-gray-100 rounded-md p-0.5">
           <NavLink
-            to={`/project/${slug}/map`}
+            to={teamSlug ? `/t/${teamSlug}/o/${officeSlug}/map` : `/project/${officeSlug}/map`}
             className={({ isActive }) =>
               `px-3 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
                 isActive
@@ -129,7 +142,7 @@ export function TopBar() {
             Map
           </NavLink>
           <NavLink
-            to={`/project/${slug}/roster`}
+            to={teamSlug ? `/t/${teamSlug}/o/${officeSlug}/roster` : `/project/${officeSlug}/roster`}
             className={({ isActive }) =>
               `px-3 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
                 isActive
@@ -268,7 +281,7 @@ function SaveIndicator({
 }) {
   if (saveState === 'saving') {
     return (
-      <span className="flex items-center gap-1 text-xs text-gray-500" title="Saving to local storage">
+      <span className="flex items-center gap-1 text-xs text-gray-500" title="Saving to Supabase">
         <UploadCloud size={14} className="animate-pulse" />
         Saving…
       </span>
@@ -278,7 +291,7 @@ function SaveIndicator({
     return (
       <span
         className="flex items-center gap-1 text-xs text-red-600"
-        title="Autosave failed — check browser storage quota"
+        title="Save failed — we'll retry; check your connection if this persists"
       >
         <CloudOff size={14} />
         Save failed
@@ -288,7 +301,7 @@ function SaveIndicator({
   const relative = formatRelative(lastSavedAt)
   if (!relative) return null
   return (
-    <span className="flex items-center gap-1 text-xs text-gray-500" title={`Autosaved at ${lastSavedAt}`}>
+    <span className="flex items-center gap-1 text-xs text-gray-500" title={`Saved at ${lastSavedAt}`}>
       <Cloud size={14} />
       Saved {relative}
     </span>

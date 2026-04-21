@@ -9,7 +9,12 @@ import { isWallElement } from '../types/elements'
 
 export function useKeyboardShortcuts() {
   const navigate = useNavigate()
-  const { slug } = useParams<{ slug: string }>()
+  // Transitional: Phase 4→6 window. Prefer the new params, fall back
+  // to the legacy `:slug` so M/R hotkeys keep working until the route
+  // tree is rewritten.
+  const params = useParams<{ slug?: string; teamSlug?: string; officeSlug?: string }>()
+  const teamSlug = params.teamSlug
+  const officeSlug = params.officeSlug ?? params.slug
   const { selectedIds, clearSelection, setPresentationMode, presentationMode, setShortcutsOverlayOpen } = useUIStore(useShallow((s) => ({ selectedIds: s.selectedIds, clearSelection: s.clearSelection, setPresentationMode: s.setPresentationMode, presentationMode: s.presentationMode, setShortcutsOverlayOpen: s.setShortcutsOverlayOpen })))
   const { duplicateElements, moveElements, groupElements, ungroupElements } = useElementsStore(useShallow((s) => ({ duplicateElements: s.duplicateElements, moveElements: s.moveElements, groupElements: s.groupElements, ungroupElements: s.ungroupElements })))
   const elements = useElementsStore((s) => s.elements)
@@ -153,10 +158,19 @@ export function useKeyboardShortcuts() {
         if (e.key === 'p' || e.key === 'P') { setPresentationMode(!presentationMode); return }
         if (e.key === '?') { setShortcutsOverlayOpen(true); return }
         // M / R jump between the MAP and ROSTER views of the current project.
-        // Guarded on `slug` so the hotkeys are inert outside the project shell
-        // (and `navigate` is safe to call — we're inside the Router).
-        if ((e.key === 'm' || e.key === 'M') && slug) { e.preventDefault(); navigate(`/project/${slug}/map`); return }
-        if ((e.key === 'r' || e.key === 'R') && slug) { e.preventDefault(); navigate(`/project/${slug}/roster`); return }
+        // Guarded on `officeSlug` so the hotkeys are inert outside the
+        // project shell (and `navigate` is safe to call — we're inside
+        // the Router). Builds the new team-aware path when available.
+        if ((e.key === 'm' || e.key === 'M') && officeSlug) {
+          e.preventDefault()
+          navigate(teamSlug ? `/t/${teamSlug}/o/${officeSlug}/map` : `/project/${officeSlug}/map`)
+          return
+        }
+        if ((e.key === 'r' || e.key === 'R') && officeSlug) {
+          e.preventDefault()
+          navigate(teamSlug ? `/t/${teamSlug}/o/${officeSlug}/roster` : `/project/${officeSlug}/roster`)
+          return
+        }
       }
     }
 
@@ -170,6 +184,6 @@ export function useKeyboardShortcuts() {
     clearSelection, duplicateElements, moveElements,
     groupElements, ungroupElements, setActiveTool, toggleGrid,
     zoomIn, zoomOut, resetZoom, setPresentationMode, setShortcutsOverlayOpen,
-    undo, redo, navigate, slug,
+    undo, redo, navigate, teamSlug, officeSlug,
   ])
 }

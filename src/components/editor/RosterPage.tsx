@@ -121,7 +121,12 @@ export function RosterPage() {
   const setCsvImportOpen = useUIStore((s) => s.setCsvImportOpen)
 
   const navigate = useNavigate()
-  const { slug } = useParams<{ slug: string }>()
+  // Transitional: prefer the Phase-4 `teamSlug`/`officeSlug` params, fall
+  // back to the legacy `:slug` while Phase 6 catches up with the route
+  // tree. See ProjectShell for why this gap exists.
+  const params = useParams<{ slug?: string; teamSlug?: string; officeSlug?: string }>()
+  const teamSlug = params.teamSlug
+  const officeSlug = params.officeSlug ?? params.slug
   const [searchParams, setSearchParams] = useSearchParams()
 
   const q = searchParams.get('q') ?? ''
@@ -465,9 +470,12 @@ export function RosterPage() {
         : null
       if (floor) switchToFloor(floor.id)
       if (fresh.seatId) useUIStore.getState().setSelectedIds([fresh.seatId])
-      navigate(`/project/${slug}/map`)
+      const mapUrl = teamSlug && officeSlug
+        ? `/t/${teamSlug}/o/${officeSlug}/map`
+        : `/project/${officeSlug}/map`
+      navigate(mapUrl)
     },
-    [navigate, slug],
+    [navigate, teamSlug, officeSlug],
   )
 
   const handleBulkDelete = () => {
