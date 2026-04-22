@@ -2,6 +2,17 @@ import { useUIStore } from '../../../stores/uiStore'
 import { useElementsStore } from '../../../stores/elementsStore'
 import { useEmployeeStore } from '../../../stores/employeeStore'
 import { unassignEmployee, deleteElements } from '../../../lib/seatAssignment'
+import { alignElements, distributeElements } from '../../../lib/alignment'
+import {
+  AlignHorizontalJustifyStart,
+  AlignHorizontalJustifyCenter,
+  AlignHorizontalJustifyEnd,
+  AlignVerticalJustifyStart,
+  AlignVerticalJustifyCenter,
+  AlignVerticalJustifyEnd,
+  AlignHorizontalSpaceAround,
+  AlignVerticalSpaceAround,
+} from 'lucide-react'
 import {
   isTableElement,
   isDeskElement,
@@ -34,10 +45,62 @@ export function PropertiesPanel() {
     // acceptable simplification (common in pro editors like Figma).
     const firstWall = allWalls ? (selectedEls[0] as WallElement) : null
 
+    const alignBtn = (label: string, onClick: () => void, Icon: typeof AlignHorizontalJustifyStart) => (
+      <button
+        type="button"
+        aria-label={label}
+        title={label}
+        onClick={onClick}
+        className="p-1.5 rounded hover:bg-gray-100 text-gray-600 border border-gray-200"
+      >
+        <Icon size={16} />
+      </button>
+    )
+
     return (
       <div className="flex flex-col gap-4">
         <div className="text-sm text-gray-500 text-center py-4">
           {selectedIds.length} elements selected
+        </div>
+
+        {/* Alignment + distribution. Distribution needs ≥3 elements, so the
+            distribution buttons disable below that count but stay visible
+            so the toolbar layout doesn't jump. */}
+        <div>
+          <div className="text-xs font-medium text-gray-500 mb-1">Align</div>
+          <div className="flex items-center gap-1 flex-wrap">
+            {alignBtn('Align left', () => alignElements(selectedIds, 'left'), AlignHorizontalJustifyStart)}
+            {alignBtn('Align horizontal center', () => alignElements(selectedIds, 'h-center'), AlignHorizontalJustifyCenter)}
+            {alignBtn('Align right', () => alignElements(selectedIds, 'right'), AlignHorizontalJustifyEnd)}
+            {alignBtn('Align top', () => alignElements(selectedIds, 'top'), AlignVerticalJustifyStart)}
+            {alignBtn('Align vertical center', () => alignElements(selectedIds, 'v-center'), AlignVerticalJustifyCenter)}
+            {alignBtn('Align bottom', () => alignElements(selectedIds, 'bottom'), AlignVerticalJustifyEnd)}
+          </div>
+        </div>
+        <div>
+          <div className="text-xs font-medium text-gray-500 mb-1">Distribute</div>
+          <div className="flex items-center gap-1 flex-wrap">
+            <button
+              type="button"
+              aria-label="Distribute horizontally"
+              title="Distribute horizontally"
+              onClick={() => distributeElements(selectedIds, 'horizontal')}
+              disabled={selectedIds.length < 3}
+              className="p-1.5 rounded text-gray-600 border border-gray-200 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <AlignHorizontalSpaceAround size={16} />
+            </button>
+            <button
+              type="button"
+              aria-label="Distribute vertically"
+              title="Distribute vertically"
+              onClick={() => distributeElements(selectedIds, 'vertical')}
+              disabled={selectedIds.length < 3}
+              className="p-1.5 rounded text-gray-600 border border-gray-200 hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <AlignVerticalSpaceAround size={16} />
+            </button>
+          </div>
         </div>
 
         {allWalls && firstWall && (
