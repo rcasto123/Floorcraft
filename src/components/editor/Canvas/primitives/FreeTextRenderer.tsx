@@ -20,7 +20,7 @@ export function FreeTextRenderer({ element }: Props) {
   const isSelected = selectedIds.includes(element.id)
   const isEditing = editingLabelId === element.id
 
-  const handleDblClick = (e: Konva.KonvaEventObject<MouseEvent>) => {
+  const handleDblClick = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>) => {
     e.cancelBubble = true
     setEditingLabelId(element.id)
   }

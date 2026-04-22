@@ -205,6 +205,37 @@ export function LibraryPreview({ item }: Props) {
     )
   }
 
+  if (item.type === 'custom-svg' && item.svgSource) {
+    // Render the user's uploaded SVG inline at preview size. We can't
+    // guarantee its internal viewBox fills the 24×18 box, so we wrap it
+    // in a container that pin-fills using CSS (object-fit style).
+    // SECURITY: svgSource has already been sanitised at upload time
+    // (sanitizeSvg strips <script>, on* handlers, foreignObject). Any
+    // further exposure surface would be CSS / external resource refs,
+    // which are mitigated by `display:block; overflow:hidden` and the
+    // fact that the user uploaded this themselves.
+    return (
+      <span
+        aria-hidden
+        style={{
+          display: 'inline-block',
+          width: W,
+          height: H,
+          overflow: 'hidden',
+          lineHeight: 0,
+        }}
+        // svgSource is sanitised above (sanitizeSvg); inlining is intentional
+        // so the preview scales crisply with CSS instead of rasterising.
+        dangerouslySetInnerHTML={{
+          __html: item.svgSource.replace(
+            /<svg\b/i,
+            `<svg preserveAspectRatio="xMidYMid meet" width="${W}" height="${H}"`,
+          ),
+        }}
+      />
+    )
+  }
+
   // Default: proportional rect matching the element's natural w/h (so a
   // long conference table reads as long, a square desk as square).
   const { x, y, w, h } = bboxScale(d.width, d.height)

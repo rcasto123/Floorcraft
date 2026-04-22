@@ -1,10 +1,12 @@
-import { useMemo, useState } from 'react'
-import { ChevronDown, ChevronRight, Star } from 'lucide-react'
+import { useMemo, useRef, useState } from 'react'
+import { ChevronDown, ChevronRight, Star, Upload, X } from 'lucide-react'
 import { TABLE_SEAT_DEFAULTS, getDefaults } from '../../../lib/constants'
 import { LibraryPreview } from './LibraryPreview'
 import { useRecentLibraryItems } from '../../../hooks/useRecentLibraryItems'
 import { useLibraryCollapse } from '../../../hooks/useLibraryCollapse'
 import { useLibraryFavorites, favoriteKey } from '../../../hooks/useLibraryFavorites'
+import { useCustomShapes } from '../../../hooks/useCustomShapes'
+import { sanitizeSvg, MAX_SVG_BYTES } from '../../../lib/svgSanitize'
 import type {
   ElementType,
   TableType,
@@ -18,6 +20,7 @@ import type {
   CommonAreaElement,
   DecorElement,
   DecorShape,
+  CustomSvgElement,
 } from '../../../types/elements'
 import { useElementsStore } from '../../../stores/elementsStore'
 import { useCanvasStore } from '../../../stores/canvasStore'
@@ -29,6 +32,12 @@ export interface LibraryItem {
   label: string
   category: string
   shape?: string    // NEW — optional shape override
+  /** Only present when type === 'custom-svg'. Inline sanitised SVG source. */
+  svgSource?: string
+  /** Only present when type === 'custom-svg'. Stable id of the custom shape
+   *  so the library tile and the stored shape stay linked (used by the
+   *  "×" delete button on the tile). */
+  customShapeId?: string
 }
 
 /**
@@ -222,6 +231,15 @@ export function buildLibraryElement(
     return el
   }
 
+  if (item.type === 'custom-svg' && item.svgSource) {
+    const el: CustomSvgElement = {
+      ...baseProps,
+      type: 'custom-svg',
+      svgSource: item.svgSource,
+    }
+    return el
+  }
+
   // Default: generic BaseElement for chair, counter, divider, planter, custom-shape, text-label
   const element: BaseElement = {
     ...baseProps,
@@ -237,10 +255,13 @@ function itemKey(item: LibraryItem): string {
 interface LibraryTileProps {
   item: LibraryItem
   onClick: (item: LibraryItem) => void
-  onDragStart: (item: LibraryItem) => (e: React.DragEvent<HTMLButtonElement>) => void
+  onDragStart: (item: LibraryItem) => (e: React.DragEvent<HTMLElement>) => void
+  /** Present only for user-uploaded custom SVGs. Shows an "×" in place of
+   *  the star so the shape can be removed from the library. */
+  onDelete?: (item: LibraryItem) => void
 }
 
-function LibraryTile({ item, onClick, onDragStart }: LibraryTileProps) {
+function LibraryTile({ item, onClick, onDragStart, onDelete }: LibraryTileProps) {
   const isFavorite = useLibraryFavorites((s) => s.favorites.has(favoriteKey(item)))
   const toggleFavorite = useLibraryFavorites((s) => s.toggleFavorite)
 
@@ -248,6 +269,12 @@ function LibraryTile({ item, onClick, onDragStart }: LibraryTileProps) {
     e.preventDefault()
     e.stopPropagation()
     toggleFavorite(item)
+  }
+
+  const handleDeleteClick = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onDelete?.(item)
   }
 
   return (
@@ -268,24 +295,38 @@ function LibraryTile({ item, onClick, onDragStart }: LibraryTileProps) {
         <LibraryPreview item={item} />
         <span className="truncate">{item.label}</span>
       </button>
-      <button
-        type="button"
-        role="checkbox"
-        aria-checked={isFavorite}
-        aria-label={isFavorite ? `Unfavourite ${item.label}` : `Favourite ${item.label}`}
-        onClick={handleStarClick}
-        onKeyDown={(e) => {
-          if (e.key === ' ' || e.key === 'Enter') handleStarClick(e)
-        }}
-        className={`absolute top-0.5 right-0.5 p-0.5 rounded transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-blue-400 ${
-          isFavorite ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-        }`}
-      >
-        <Star
-          size={12}
-          className={isFavorite ? 'fill-amber-400 text-amber-400' : 'text-gray-400'}
-        />
-      </button>
+      {onDelete ? (
+        <button
+          type="button"
+          aria-label={`Remove ${item.label} from library`}
+          onClick={handleDeleteClick}
+          onKeyDown={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') handleDeleteClick(e)
+          }}
+          className="absolute top-0.5 right-0.5 p-0.5 rounded opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-red-400 hover:bg-red-50"
+        >
+          <X size={12} className="text-gray-400 hover:text-red-500" />
+        </button>
+      ) : (
+        <button
+          type="button"
+          role="checkbox"
+          aria-checked={isFavorite}
+          aria-label={isFavorite ? `Unfavourite ${item.label}` : `Favourite ${item.label}`}
+          onClick={handleStarClick}
+          onKeyDown={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') handleStarClick(e)
+          }}
+          className={`absolute top-0.5 right-0.5 p-0.5 rounded transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-blue-400 ${
+            isFavorite ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+          }`}
+        >
+          <Star
+            size={12}
+            className={isFavorite ? 'fill-amber-400 text-amber-400' : 'text-gray-400'}
+          />
+        </button>
+      )}
     </div>
   )
 }
@@ -298,11 +339,14 @@ interface LibrarySectionProps {
    *  result sections pass false so they always render. */
   collapsible?: boolean
   onClick: (item: LibraryItem) => void
-  onDragStart: (item: LibraryItem) => (e: React.DragEvent<HTMLButtonElement>) => void
+  onDragStart: (item: LibraryItem) => (e: React.DragEvent<HTMLElement>) => void
+  /** Per-tile delete handler; forwarded to LibraryTile's onDelete. Used by
+   *  "My Shapes" to let users remove uploaded custom SVGs. */
+  onDelete?: (item: LibraryItem) => void
 }
 
 function LibrarySection({
-  id, title, items, collapsible = true, onClick, onDragStart,
+  id, title, items, collapsible = true, onClick, onDragStart, onDelete,
 }: LibrarySectionProps) {
   const collapsed = useLibraryCollapse((s) => s.collapsed[id] ?? false)
   const toggle = useLibraryCollapse((s) => s.toggleCategory)
@@ -333,6 +377,7 @@ function LibrarySection({
               item={item}
               onClick={onClick}
               onDragStart={onDragStart}
+              onDelete={onDelete}
             />
           ))}
         </div>
@@ -350,7 +395,53 @@ export function ElementLibrary() {
   const recents = useRecentLibraryItems((s) => s.recents)
   const addRecent = useRecentLibraryItems((s) => s.addRecent)
   const favoriteSet = useLibraryFavorites((s) => s.favorites)
+  const customShapes = useCustomShapes((s) => s.shapes)
+  const addCustomShape = useCustomShapes((s) => s.addShape)
+  const removeCustomShape = useCustomShapes((s) => s.removeShape)
   const [query, setQuery] = useState('')
+  const [uploadError, setUploadError] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleUploadClick = () => {
+    setUploadError(null)
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    // Reset so the same file can be re-selected after a rejection.
+    e.target.value = ''
+    if (!file) return
+
+    if (file.size > MAX_SVG_BYTES) {
+      setUploadError(`File is too large (max ${Math.round(MAX_SVG_BYTES / 1024)}KB).`)
+      return
+    }
+
+    try {
+      const text = await file.text()
+      const result = sanitizeSvg(text)
+      if (!result.ok || !result.svg) {
+        const msg =
+          result.error === 'too-large' ? 'File is too large.'
+          : result.error === 'not-svg' ? 'File does not look like an SVG.'
+          : result.error === 'invalid-xml' ? 'SVG could not be parsed.'
+          : 'SVG is empty.'
+        setUploadError(msg)
+        return
+      }
+      // Strip extension for the label.
+      const name = file.name.replace(/\.svg$/i, '').slice(0, 32) || 'Custom Shape'
+      const shape = addCustomShape(name, result.svg)
+      if (!shape) {
+        setUploadError('Library full — delete a custom shape first.')
+        return
+      }
+      setUploadError(null)
+    } catch {
+      setUploadError('Could not read file.')
+    }
+  }
 
   const handleAddElement = (item: LibraryItem) => {
     // Click-to-add drops the element near the centre of the current
@@ -364,7 +455,7 @@ export function ElementLibrary() {
   // Drag-to-canvas: serialise the LibraryItem into the drag payload. The
   // CanvasStage drop handler reads this, translates the drop coords into
   // canvas space, and calls buildLibraryElement at the cursor.
-  const handleDragStart = (item: LibraryItem) => (e: React.DragEvent<HTMLButtonElement>) => {
+  const handleDragStart = (item: LibraryItem) => (e: React.DragEvent<HTMLElement>) => {
     e.dataTransfer.setData(LIBRARY_DRAG_MIME, JSON.stringify(item))
     e.dataTransfer.effectAllowed = 'copy'
   }
@@ -374,11 +465,34 @@ export function ElementLibrary() {
     [],
   )
 
+  // Project each persisted CustomShape into a LibraryItem so it flows through
+  // the same tile/drag/click pipeline as the built-in library entries.
+  const customShapeItems = useMemo<LibraryItem[]>(
+    () =>
+      customShapes.map((s) => ({
+        type: 'custom-svg' as const,
+        label: s.name,
+        category: 'My Shapes',
+        svgSource: s.svgSource,
+        customShapeId: s.id,
+      })),
+    [customShapes],
+  )
+
+  const handleDeleteCustom = (item: LibraryItem) => {
+    if (item.customShapeId) removeCustomShape(item.customShapeId)
+  }
+
   const q = query.trim().toLowerCase()
   const isSearching = q.length > 0
   const filtered = useMemo(
-    () => (isSearching ? LIBRARY_ITEMS.filter((i) => i.label.toLowerCase().includes(q)) : []),
-    [isSearching, q],
+    () =>
+      isSearching
+        ? [...LIBRARY_ITEMS, ...customShapeItems].filter((i) =>
+            i.label.toLowerCase().includes(q),
+          )
+        : [],
+    [isSearching, q, customShapeItems],
   )
   const favoriteItems = useMemo(
     () => LIBRARY_ITEMS.filter((i) => favoriteSet.has(favoriteKey(i))),
@@ -436,6 +550,43 @@ export function ElementLibrary() {
               onDragStart={handleDragStart}
             />
           ))}
+          {customShapeItems.length > 0 && (
+            <LibrarySection
+              id="my-shapes"
+              title="My Shapes"
+              items={customShapeItems}
+              collapsible={true}
+              onClick={handleAddElement}
+              onDragStart={handleDragStart}
+              onDelete={handleDeleteCustom}
+            />
+          )}
+          <div className="mt-2">
+            <button
+              type="button"
+              onClick={handleUploadClick}
+              className="w-full flex items-center justify-center gap-1.5 px-2 py-1.5 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded border border-dashed border-gray-300 hover:border-gray-400 transition-colors"
+            >
+              <Upload size={12} />
+              <span>Upload SVG</span>
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/svg+xml,.svg"
+              onChange={handleFileChange}
+              className="hidden"
+              aria-label="Upload SVG shape"
+            />
+            {uploadError && (
+              <div
+                role="alert"
+                className="mt-1 px-2 py-1 text-xs text-red-600 bg-red-50 border border-red-100 rounded"
+              >
+                {uploadError}
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
