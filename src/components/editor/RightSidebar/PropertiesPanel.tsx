@@ -9,9 +9,10 @@ import {
   isPrivateOfficeElement,
   isConferenceRoomElement,
   isCommonAreaElement,
+  isWallElement,
 } from '../../../types/elements'
 import { computeSeatPositions } from '../../../lib/seatLayout'
-import type { TableElement, DeskElement, WorkstationElement, PrivateOfficeElement, ConferenceRoomElement, CommonAreaElement } from '../../../types/elements'
+import type { TableElement, DeskElement, WorkstationElement, PrivateOfficeElement, ConferenceRoomElement, CommonAreaElement, WallElement } from '../../../types/elements'
 
 export function PropertiesPanel() {
   const selectedIds = useUIStore((s) => s.selectedIds)
@@ -24,11 +25,71 @@ export function PropertiesPanel() {
   }
 
   if (selectedIds.length > 1) {
+    const selectedEls = selectedIds
+      .map((id) => elements[id])
+      .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    const allWalls = selectedEls.length > 0 && selectedEls.every(isWallElement)
+    // For the shared controls we seed the inputs from the first wall; edits
+    // always broadcast to the full selection so a mixed-value display is an
+    // acceptable simplification (common in pro editors like Figma).
+    const firstWall = allWalls ? (selectedEls[0] as WallElement) : null
+
     return (
       <div className="flex flex-col gap-4">
         <div className="text-sm text-gray-500 text-center py-4">
           {selectedIds.length} elements selected
         </div>
+
+        {allWalls && firstWall && (
+          <>
+            <div>
+              <label className="text-xs font-medium text-gray-500 mb-1 block">Thickness</label>
+              <input
+                type="number"
+                min={2}
+                max={20}
+                step={1}
+                className="w-full text-sm border border-gray-200 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
+                value={firstWall.thickness}
+                onChange={(e) => {
+                  const t = Number(e.target.value)
+                  for (const id of selectedIds) updateElement(id, { thickness: t } as Partial<WallElement>)
+                }}
+              />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-gray-500 mb-1 block">Line style</label>
+              <select
+                className="w-full text-sm border border-gray-200 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
+                value={firstWall.dashStyle ?? 'solid'}
+                onChange={(e) => {
+                  const v = e.target.value as 'solid' | 'dashed' | 'dotted'
+                  for (const id of selectedIds) updateElement(id, { dashStyle: v } as Partial<WallElement>)
+                }}
+              >
+                <option value="solid">Solid</option>
+                <option value="dashed">Dashed</option>
+                <option value="dotted">Dotted</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-medium text-gray-500 mb-1 block">Stroke</label>
+              <input
+                type="color"
+                className="w-full h-8 border border-gray-200 rounded cursor-pointer"
+                value={firstWall.style.stroke}
+                onChange={(e) => {
+                  for (const id of selectedIds) {
+                    const el = elements[id]
+                    if (!el) continue
+                    updateElement(id, { style: { ...el.style, stroke: e.target.value } })
+                  }
+                }}
+              />
+            </div>
+          </>
+        )}
+
         <button
           type="button"
           onClick={() => {
@@ -120,16 +181,9 @@ export function PropertiesPanel() {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <label className="text-xs font-medium text-gray-500 mb-1 block">Fill</label>
-          <input
-            type="color"
-            className="w-full h-8 border border-gray-200 rounded cursor-pointer"
-            value={el.style.fill}
-            onChange={(e) => update({ style: { ...el.style, fill: e.target.value } })}
-          />
-        </div>
+      {isWallElement(el) ? (
+        // Walls don't fill — only the stroke is meaningful. Hiding Fill
+        // prevents users from setting a value with no visual effect.
         <div>
           <label className="text-xs font-medium text-gray-500 mb-1 block">Stroke</label>
           <input
@@ -139,7 +193,60 @@ export function PropertiesPanel() {
             onChange={(e) => update({ style: { ...el.style, stroke: e.target.value } })}
           />
         </div>
-      </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Fill</label>
+            <input
+              type="color"
+              className="w-full h-8 border border-gray-200 rounded cursor-pointer"
+              value={el.style.fill}
+              onChange={(e) => update({ style: { ...el.style, fill: e.target.value } })}
+            />
+          </div>
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Stroke</label>
+            <input
+              type="color"
+              className="w-full h-8 border border-gray-200 rounded cursor-pointer"
+              value={el.style.stroke}
+              onChange={(e) => update({ style: { ...el.style, stroke: e.target.value } })}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Wall-specific controls: thickness + dash pattern. */}
+      {isWallElement(el) && (
+        <>
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Thickness</label>
+            <input
+              type="number"
+              min={2}
+              max={20}
+              step={1}
+              className="w-full text-sm border border-gray-200 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
+              value={el.thickness}
+              onChange={(e) => update({ thickness: Number(e.target.value) } as Partial<WallElement>)}
+            />
+          </div>
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Line style</label>
+            <select
+              className="w-full text-sm border border-gray-200 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
+              value={el.dashStyle ?? 'solid'}
+              onChange={(e) =>
+                update({ dashStyle: e.target.value as 'solid' | 'dashed' | 'dotted' } as Partial<WallElement>)
+              }
+            >
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+            </select>
+          </div>
+        </>
+      )}
 
       {isTableElement(el) && (
         <div>
