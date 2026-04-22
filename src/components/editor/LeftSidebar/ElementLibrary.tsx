@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
-import { ChevronDown, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight, Star } from 'lucide-react'
 import { TABLE_SEAT_DEFAULTS, getDefaults } from '../../../lib/constants'
 import { LibraryPreview } from './LibraryPreview'
 import { useRecentLibraryItems } from '../../../hooks/useRecentLibraryItems'
 import { useLibraryCollapse } from '../../../hooks/useLibraryCollapse'
+import { useLibraryFavorites, favoriteKey } from '../../../hooks/useLibraryFavorites'
 import type {
   ElementType,
   TableType,
@@ -240,17 +241,52 @@ interface LibraryTileProps {
 }
 
 function LibraryTile({ item, onClick, onDragStart }: LibraryTileProps) {
+  const isFavorite = useLibraryFavorites((s) => s.favorites.has(favoriteKey(item)))
+  const toggleFavorite = useLibraryFavorites((s) => s.toggleFavorite)
+
+  const handleStarClick = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    toggleFavorite(item)
+  }
+
   return (
-    <button
-      onClick={() => onClick(item)}
+    <div
       draggable
       onDragStart={onDragStart(item)}
       title="Click to add to centre, or drag onto the canvas to place exactly"
-      className="flex items-center gap-1.5 px-2 py-1.5 text-xs text-gray-700 hover:bg-gray-100 rounded border border-gray-100 hover:border-gray-200 transition-colors cursor-grab active:cursor-grabbing"
+      // The wrapper owns the drag; the inner <button> handles click-to-add.
+      // The star sits above as a sibling with its own keyboard handler so
+      // Tab reaches it and Space/Enter toggles without placing the element.
+      className="group relative flex items-center gap-1.5 px-2 py-1.5 text-xs text-gray-700 hover:bg-gray-100 rounded border border-gray-100 hover:border-gray-200 transition-colors cursor-grab active:cursor-grabbing"
     >
-      <LibraryPreview item={item} />
-      <span className="truncate">{item.label}</span>
-    </button>
+      <button
+        type="button"
+        onClick={() => onClick(item)}
+        className="flex items-center gap-1.5 flex-1 text-left"
+      >
+        <LibraryPreview item={item} />
+        <span className="truncate">{item.label}</span>
+      </button>
+      <button
+        type="button"
+        role="checkbox"
+        aria-checked={isFavorite}
+        aria-label={isFavorite ? `Unfavourite ${item.label}` : `Favourite ${item.label}`}
+        onClick={handleStarClick}
+        onKeyDown={(e) => {
+          if (e.key === ' ' || e.key === 'Enter') handleStarClick(e)
+        }}
+        className={`absolute top-0.5 right-0.5 p-0.5 rounded transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-blue-400 ${
+          isFavorite ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+        }`}
+      >
+        <Star
+          size={12}
+          className={isFavorite ? 'fill-amber-400 text-amber-400' : 'text-gray-400'}
+        />
+      </button>
+    </div>
   )
 }
 
@@ -313,6 +349,7 @@ export function ElementLibrary() {
   const stageY = useCanvasStore((s) => s.stageY)
   const recents = useRecentLibraryItems((s) => s.recents)
   const addRecent = useRecentLibraryItems((s) => s.addRecent)
+  const favoriteSet = useLibraryFavorites((s) => s.favorites)
   const [query, setQuery] = useState('')
 
   const handleAddElement = (item: LibraryItem) => {
@@ -343,6 +380,10 @@ export function ElementLibrary() {
     () => (isSearching ? LIBRARY_ITEMS.filter((i) => i.label.toLowerCase().includes(q)) : []),
     [isSearching, q],
   )
+  const favoriteItems = useMemo(
+    () => LIBRARY_ITEMS.filter((i) => favoriteSet.has(favoriteKey(i))),
+    [favoriteSet],
+  )
 
   return (
     <div className="p-3 flex-1 overflow-y-auto">
@@ -365,6 +406,16 @@ export function ElementLibrary() {
         />
       ) : (
         <>
+          {favoriteItems.length > 0 && (
+            <LibrarySection
+              id="favorites"
+              title="Favorites"
+              items={favoriteItems}
+              collapsible={false}
+              onClick={handleAddElement}
+              onDragStart={handleDragStart}
+            />
+          )}
           {recents.length > 0 && (
             <LibrarySection
               id="recent"
