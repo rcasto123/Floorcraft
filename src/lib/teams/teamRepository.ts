@@ -1,7 +1,7 @@
 import { supabase } from '../supabase'
 import type { Team, TeamMember, Invite } from '../../types/team'
 
-export async function createTeam(name: string, _createdBy: string): Promise<Team> {
+export async function createTeam(name: string): Promise<Team> {
   // Route team creation through the SECURITY DEFINER `create_team` RPC
   // rather than a plain INSERT. The direct insert was failing on
   // production with "new row violates row-level security policy for
@@ -10,10 +10,6 @@ export async function createTeam(name: string, _createdBy: string): Promise<Team
   // the client session believes is current. The RPC runs under the
   // server's view of identity and creates the team + admin member in
   // one transaction, so the class of failure disappears.
-  //
-  // `_createdBy` is retained in the signature for call-site source
-  // compatibility; the RPC derives identity from `auth.uid()` and
-  // ignores whatever the caller passed.
   const { data, error } = await supabase.rpc('create_team', { p_name: name })
   if (error) throw error
   // SECURITY DEFINER function returns a SETOF row; supabase-js unwraps

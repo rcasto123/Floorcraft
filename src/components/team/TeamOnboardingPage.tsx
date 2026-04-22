@@ -19,7 +19,7 @@ export function TeamOnboardingPage() {
     setBusy(true)
     setError(null)
     try {
-      const team = await createTeam(name, session.user.id)
+      const team = await createTeam(name)
       navigate(`/t/${team.slug}`, { replace: true })
     } catch (err) {
       setError(humanizeError(err))
@@ -50,7 +50,7 @@ export function TeamOnboardingPage() {
           disabled={busy || !name.trim()}
           className="w-full bg-blue-600 text-white rounded py-2 text-sm font-medium disabled:opacity-50"
         >
-          {busy ? 'Creating…' : 'Create team'}
+          {busy ? 'Creating\u2026' : 'Create team'}
         </button>
       </form>
     </div>
