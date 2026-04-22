@@ -1,5 +1,9 @@
+import { useMemo, useState } from 'react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 import { TABLE_SEAT_DEFAULTS, getDefaults } from '../../../lib/constants'
 import { LibraryPreview } from './LibraryPreview'
+import { useRecentLibraryItems } from '../../../hooks/useRecentLibraryItems'
+import { useLibraryCollapse } from '../../../hooks/useLibraryCollapse'
 import type {
   ElementType,
   TableType,
@@ -225,12 +229,91 @@ export function buildLibraryElement(
   return element
 }
 
+function itemKey(item: LibraryItem): string {
+  return `${item.type}${item.shape ? `-${item.shape}` : ''}-${item.label}`
+}
+
+interface LibraryTileProps {
+  item: LibraryItem
+  onClick: (item: LibraryItem) => void
+  onDragStart: (item: LibraryItem) => (e: React.DragEvent<HTMLButtonElement>) => void
+}
+
+function LibraryTile({ item, onClick, onDragStart }: LibraryTileProps) {
+  return (
+    <button
+      onClick={() => onClick(item)}
+      draggable
+      onDragStart={onDragStart(item)}
+      title="Click to add to centre, or drag onto the canvas to place exactly"
+      className="flex items-center gap-1.5 px-2 py-1.5 text-xs text-gray-700 hover:bg-gray-100 rounded border border-gray-100 hover:border-gray-200 transition-colors cursor-grab active:cursor-grabbing"
+    >
+      <LibraryPreview item={item} />
+      <span className="truncate">{item.label}</span>
+    </button>
+  )
+}
+
+interface LibrarySectionProps {
+  id: string
+  title: string
+  items: LibraryItem[]
+  /** When true, a chevron toggles visibility. "Recent"/"Favorites"/search
+   *  result sections pass false so they always render. */
+  collapsible?: boolean
+  onClick: (item: LibraryItem) => void
+  onDragStart: (item: LibraryItem) => (e: React.DragEvent<HTMLButtonElement>) => void
+}
+
+function LibrarySection({
+  id, title, items, collapsible = true, onClick, onDragStart,
+}: LibrarySectionProps) {
+  const collapsed = useLibraryCollapse((s) => s.collapsed[id] ?? false)
+  const toggle = useLibraryCollapse((s) => s.toggleCategory)
+  const isCollapsed = collapsible && collapsed
+
+  if (items.length === 0) return null
+
+  return (
+    <div className="mb-3">
+      {collapsible ? (
+        <button
+          type="button"
+          onClick={() => toggle(id)}
+          className="w-full flex items-center gap-1 text-xs font-medium text-gray-400 hover:text-gray-600 mb-1"
+          aria-expanded={!isCollapsed}
+        >
+          {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
+          <span>{title}</span>
+        </button>
+      ) : (
+        <div className="text-xs font-medium text-gray-400 mb-1 px-1">{title}</div>
+      )}
+      {!isCollapsed && (
+        <div className="grid grid-cols-2 gap-1">
+          {items.map((item) => (
+            <LibraryTile
+              key={itemKey(item)}
+              item={item}
+              onClick={onClick}
+              onDragStart={onDragStart}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function ElementLibrary() {
   const addElement = useElementsStore((s) => s.addElement)
   const getMaxZIndex = useElementsStore((s) => s.getMaxZIndex)
   const stageScale = useCanvasStore((s) => s.stageScale)
   const stageX = useCanvasStore((s) => s.stageX)
   const stageY = useCanvasStore((s) => s.stageY)
+  const recents = useRecentLibraryItems((s) => s.recents)
+  const addRecent = useRecentLibraryItems((s) => s.addRecent)
+  const [query, setQuery] = useState('')
 
   const handleAddElement = (item: LibraryItem) => {
     // Click-to-add drops the element near the centre of the current
@@ -238,6 +321,7 @@ export function ElementLibrary() {
     const x = (-stageX + 400) / stageScale
     const y = (-stageY + 300) / stageScale
     addElement(buildLibraryElement(item, x, y, getMaxZIndex() + 1))
+    addRecent(item)
   }
 
   // Drag-to-canvas: serialise the LibraryItem into the drag payload. The
@@ -248,31 +332,61 @@ export function ElementLibrary() {
     e.dataTransfer.effectAllowed = 'copy'
   }
 
-  const categories = [...new Set(LIBRARY_ITEMS.map((i) => i.category))]
+  const categories = useMemo(
+    () => [...new Set(LIBRARY_ITEMS.map((i) => i.category))],
+    [],
+  )
+
+  const q = query.trim().toLowerCase()
+  const isSearching = q.length > 0
+  const filtered = useMemo(
+    () => (isSearching ? LIBRARY_ITEMS.filter((i) => i.label.toLowerCase().includes(q)) : []),
+    [isSearching, q],
+  )
 
   return (
     <div className="p-3 flex-1 overflow-y-auto">
       <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Elements</div>
-      {categories.map((cat) => (
-        <div key={cat} className="mb-3">
-          <div className="text-xs font-medium text-gray-400 mb-1">{cat}</div>
-          <div className="grid grid-cols-2 gap-1">
-            {LIBRARY_ITEMS.filter((i) => i.category === cat).map((item) => (
-              <button
-                key={`${item.type}${item.shape ? `-${item.shape}` : ''}-${item.label}`}
-                onClick={() => handleAddElement(item)}
-                draggable
-                onDragStart={handleDragStart(item)}
-                title={`Click to add to centre, or drag onto the canvas to place exactly`}
-                className="flex items-center gap-1.5 px-2 py-1.5 text-xs text-gray-700 hover:bg-gray-100 rounded border border-gray-100 hover:border-gray-200 transition-colors cursor-grab active:cursor-grabbing"
-              >
-                <LibraryPreview item={item} />
-                <span className="truncate">{item.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      ))}
+      <input
+        type="search"
+        placeholder="Search shapes…"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="w-full mb-3 px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+      />
+      {isSearching ? (
+        <LibrarySection
+          id="search-results"
+          title={`Results (${filtered.length})`}
+          items={filtered}
+          collapsible={false}
+          onClick={handleAddElement}
+          onDragStart={handleDragStart}
+        />
+      ) : (
+        <>
+          {recents.length > 0 && (
+            <LibrarySection
+              id="recent"
+              title="Recent"
+              items={recents}
+              collapsible={false}
+              onClick={handleAddElement}
+              onDragStart={handleDragStart}
+            />
+          )}
+          {categories.map((cat) => (
+            <LibrarySection
+              key={cat}
+              id={cat}
+              title={cat}
+              items={LIBRARY_ITEMS.filter((i) => i.category === cat)}
+              onClick={handleAddElement}
+              onDragStart={handleDragStart}
+            />
+          ))}
+        </>
+      )}
     </div>
   )
 }

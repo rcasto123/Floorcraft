@@ -36,6 +36,7 @@ import {
 } from '../../../lib/primitives/buildPrimitive'
 import { ShapeDrawingOverlay, type ShapeDrawingPreview } from './primitives/ShapeDrawingOverlay'
 import { FreeTextEditorOverlay } from './primitives/FreeTextEditorOverlay'
+import { useRecentLibraryItems } from '../../../hooks/useRecentLibraryItems'
 
 const PRIMITIVE_TOOLS = new Set(['rect-shape', 'ellipse', 'line-shape', 'arrow', 'free-text'])
 
@@ -539,6 +540,7 @@ export function CanvasStage() {
       const element = buildLibraryElement(item, pos.x, pos.y, elementsStore.getMaxZIndex() + 1)
       elementsStore.addElement(element)
       useUIStore.getState().setSelectedIds([element.id])
+      useRecentLibraryItems.getState().addRecent(item)
       return
     }
 
