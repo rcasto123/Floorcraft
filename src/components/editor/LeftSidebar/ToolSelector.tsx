@@ -1,4 +1,4 @@
-import { useCanvasStore, type ToolType } from '../../../stores/canvasStore'
+import { useCanvasStore, type ToolType, type WallDrawStyle } from '../../../stores/canvasStore'
 import {
   MousePointer2,
   Hand,
@@ -30,31 +30,65 @@ const tools: { id: ToolType; label: string; icon: React.ReactNode; shortcut: str
   { id: 'free-text', label: 'Text', icon: <Type size={18} />, shortcut: 'T' },
 ]
 
+const WALL_STYLES: { id: WallDrawStyle; label: string }[] = [
+  { id: 'solid', label: 'Solid' },
+  { id: 'dashed', label: 'Dashed' },
+  { id: 'dotted', label: 'Dotted' },
+]
+
 export function ToolSelector() {
   const activeTool = useCanvasStore((s) => s.activeTool)
   const setActiveTool = useCanvasStore((s) => s.setActiveTool)
+  const wallDrawStyle = useCanvasStore((s) => s.wallDrawStyle)
+  const setWallDrawStyle = useCanvasStore((s) => s.setWallDrawStyle)
 
   return (
     <div className="p-3">
       <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Tools</div>
       <div className="flex flex-col gap-0.5">
         {tools.map((tool) => (
-          <button
-            key={tool.id}
-            onClick={() => setActiveTool(tool.id)}
-            className={`flex items-center gap-2.5 px-2.5 py-2 rounded text-sm transition-colors ${
-              activeTool === tool.id
-                ? 'bg-blue-50 text-blue-700 font-medium'
-                : 'text-gray-700 hover:bg-gray-100'
-            }`}
-            title={tool.shortcut ? `${tool.label} (${tool.shortcut})` : tool.label}
-          >
-            {tool.icon}
-            <span>{tool.label}</span>
-            {tool.shortcut && (
-              <span className="ml-auto text-[10px] text-gray-400 font-mono">{tool.shortcut}</span>
+          <div key={tool.id}>
+            <button
+              onClick={() => setActiveTool(tool.id)}
+              className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded text-sm transition-colors ${
+                activeTool === tool.id
+                  ? 'bg-blue-50 text-blue-700 font-medium'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+              title={tool.shortcut ? `${tool.label} (${tool.shortcut})` : tool.label}
+            >
+              {tool.icon}
+              <span>{tool.label}</span>
+              {tool.shortcut && (
+                <span className="ml-auto text-[10px] text-gray-400 font-mono">{tool.shortcut}</span>
+              )}
+            </button>
+            {/* Wall-style presets. Only visible with the wall tool active so
+                the sidebar doesn't get noisy with options for inactive tools. */}
+            {tool.id === 'wall' && activeTool === 'wall' && (
+              <div
+                role="radiogroup"
+                aria-label="Wall line style"
+                className="flex gap-1 px-2.5 pb-1 pt-0.5"
+              >
+                {WALL_STYLES.map((s) => (
+                  <button
+                    key={s.id}
+                    role="radio"
+                    aria-checked={wallDrawStyle === s.id}
+                    onClick={() => setWallDrawStyle(s.id)}
+                    className={`flex-1 px-2 py-0.5 text-[11px] rounded-full border transition-colors ${
+                      wallDrawStyle === s.id
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
             )}
-          </button>
+          </div>
         ))}
       </div>
     </div>
