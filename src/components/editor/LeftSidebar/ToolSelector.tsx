@@ -1,12 +1,33 @@
 import { useCanvasStore, type ToolType } from '../../../stores/canvasStore'
-import { MousePointer2, Hand, Minus, DoorOpen, SquareIcon } from 'lucide-react'
+import {
+  MousePointer2,
+  Hand,
+  Minus,
+  DoorOpen,
+  SquareIcon,
+  Square,
+  Circle,
+  Slash,
+  ArrowRight,
+  Type,
+} from 'lucide-react'
 
 const tools: { id: ToolType; label: string; icon: React.ReactNode; shortcut: string }[] = [
   { id: 'select', label: 'Select', icon: <MousePointer2 size={18} />, shortcut: 'V' },
   { id: 'pan', label: 'Pan', icon: <Hand size={18} />, shortcut: 'Space' },
   { id: 'wall', label: 'Wall', icon: <Minus size={18} />, shortcut: 'W' },
-  { id: 'door', label: 'Door', icon: <DoorOpen size={18} />, shortcut: 'D' },
+  { id: 'door', label: 'Door', icon: <DoorOpen size={18} />, shortcut: '' },
   { id: 'window', label: 'Window', icon: <SquareIcon size={18} />, shortcut: '' },
+  // Drawing primitives. Shortcut picks:
+  //   R = rect, E = ellipse (C is already taken visually by "Circle" but we
+  //   avoid the D/G/M/R conflicts in useKeyboardShortcuts), L = line,
+  //   A = arrow, T = text. D is "toggle dimensions" and G is "toggle grid",
+  //   so we avoid those.
+  { id: 'rect-shape', label: 'Rectangle', icon: <Square size={18} />, shortcut: '⇧R' },
+  { id: 'ellipse', label: 'Ellipse', icon: <Circle size={18} />, shortcut: 'E' },
+  { id: 'line-shape', label: 'Line', icon: <Slash size={18} />, shortcut: 'L' },
+  { id: 'arrow', label: 'Arrow', icon: <ArrowRight size={18} />, shortcut: 'A' },
+  { id: 'free-text', label: 'Text', icon: <Type size={18} />, shortcut: 'T' },
 ]
 
 export function ToolSelector() {
