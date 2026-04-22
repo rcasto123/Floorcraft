@@ -76,6 +76,15 @@ function translateMessage(raw: string): string {
   // Common Supabase auth messages — minor cleanups so the user doesn't
   // see terminology from a backend they shouldn't need to know about.
   const lower = raw.toLowerCase()
+  if (
+    lower.includes('row-level security policy') ||
+    lower.includes('violates row-level security')
+  ) {
+    // RLS denial is almost always a session problem surfaced as a raw
+    // Postgres string. "You don't have permission to do that. Try signing
+    // out and back in." nudges the user to the common fix.
+    return "You don't have permission to do that. Try signing out and back in."
+  }
   if (lower.includes('invalid login credentials')) {
     return 'Email or password is incorrect.'
   }

@@ -3,10 +3,32 @@ import { slugFromName } from '../slug'
 import type { Team, TeamMember, Invite } from '../../types/team'
 
 export async function createTeam(name: string, createdBy: string): Promise<Team> {
+  // Re-read the session at call time rather than trusting the `createdBy`
+  // the caller closed over. If the session rolled over (refresh, re-login
+  // as a different user) between the page render and the click, a stale
+  // `session.user.id` would no longer match `auth.uid()` at the DB and
+  // the `teams_any_auth_insert` RLS policy would reject the row with a
+  // confusing "new row violates row-level security policy for table
+  // 'teams'" message. Resolving `created_by` from the live session
+  // eliminates that class of error and also lets us fail early with a
+  // clearer message if the session is gone entirely.
+  const { data: sessionData } = await supabase.auth.getSession()
+  const liveUserId = sessionData.session?.user?.id
+  if (!liveUserId) {
+    throw new Error('not_authenticated')
+  }
+  if (liveUserId !== createdBy) {
+    // The passed-in `createdBy` came from a stale React closure. Log and
+    // use the live value so the user doesn't see a baffling RLS error.
+    console.warn(
+      'createTeam: stale createdBy detected, using live session user id',
+      { passed: createdBy, live: liveUserId },
+    )
+  }
   const slug = slugFromName(name)
   const { data, error } = await supabase
     .from('teams')
-    .insert({ name, slug, created_by: createdBy })
+    .insert({ name, slug, created_by: liveUserId })
     .select('id, slug, name, created_by, created_at')
     .single()
   if (error) throw error
