@@ -14,6 +14,7 @@ import { WallDrawingOverlay } from './WallDrawingOverlay'
 import { WallEditOverlay } from './WallEditOverlay'
 import { AttachmentGhost } from './AttachmentGhost'
 import { MarqueeOverlay } from './MarqueeOverlay'
+import { DimensionLayer } from './DimensionLayer'
 import { OrgChartOverlay } from '../../reports/OrgChartOverlay'
 import { SeatMapColorMode } from '../../reports/SeatMapColorMode'
 import { useWallDrawing } from '../../../hooks/useWallDrawing'
@@ -500,6 +501,7 @@ export function CanvasStage() {
       >
         <GridLayer width={size.width} height={size.height} />
         <ElementRenderer />
+        <DimensionLayer />
         <SelectionOverlay />
         <WallEditOverlay />
         {orgChartOverlayEnabled && <OrgChartOverlay />}
