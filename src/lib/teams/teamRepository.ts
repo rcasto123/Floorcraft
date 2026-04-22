@@ -1,38 +1,26 @@
 import { supabase } from '../supabase'
-import { slugFromName } from '../slug'
 import type { Team, TeamMember, Invite } from '../../types/team'
 
-export async function createTeam(name: string, createdBy: string): Promise<Team> {
-  // Re-read the session at call time rather than trusting the `createdBy`
-  // the caller closed over. If the session rolled over (refresh, re-login
-  // as a different user) between the page render and the click, a stale
-  // `session.user.id` would no longer match `auth.uid()` at the DB and
-  // the `teams_any_auth_insert` RLS policy would reject the row with a
-  // confusing "new row violates row-level security policy for table
-  // 'teams'" message. Resolving `created_by` from the live session
-  // eliminates that class of error and also lets us fail early with a
-  // clearer message if the session is gone entirely.
-  const { data: sessionData } = await supabase.auth.getSession()
-  const liveUserId = sessionData.session?.user?.id
-  if (!liveUserId) {
-    throw new Error('not_authenticated')
-  }
-  if (liveUserId !== createdBy) {
-    // The passed-in `createdBy` came from a stale React closure. Log and
-    // use the live value so the user doesn't see a baffling RLS error.
-    console.warn(
-      'createTeam: stale createdBy detected, using live session user id',
-      { passed: createdBy, live: liveUserId },
-    )
-  }
-  const slug = slugFromName(name)
-  const { data, error } = await supabase
-    .from('teams')
-    .insert({ name, slug, created_by: liveUserId })
-    .select('id, slug, name, created_by, created_at')
-    .single()
+export async function createTeam(name: string, _createdBy: string): Promise<Team> {
+  // Route team creation through the SECURITY DEFINER `create_team` RPC
+  // rather than a plain INSERT. The direct insert was failing on
+  // production with "new row violates row-level security policy for
+  // table teams" even for authenticated users, because in some
+  // configurations the `auth.uid()` Postgres sees doesn't match what
+  // the client session believes is current. The RPC runs under the
+  // server's view of identity and creates the team + admin member in
+  // one transaction, so the class of failure disappears.
+  //
+  // `_createdBy` is retained in the signature for call-site source
+  // compatibility; the RPC derives identity from `auth.uid()` and
+  // ignores whatever the caller passed.
+  const { data, error } = await supabase.rpc('create_team', { p_name: name })
   if (error) throw error
-  return data as Team
+  // SECURITY DEFINER function returns a SETOF row; supabase-js unwraps
+  // it as an array, so we take the first (and only) element.
+  const row = Array.isArray(data) ? data[0] : data
+  if (!row) throw new Error('create_team: empty response')
+  return row as Team
 }
 
 export async function listTeamMembers(teamId: string): Promise<TeamMember[]> {
