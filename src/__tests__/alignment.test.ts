@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { alignElements, distributeElements } from '../lib/alignment'
 import { useElementsStore } from '../stores/elementsStore'

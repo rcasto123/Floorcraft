@@ -33,7 +33,6 @@ function alignableElements(ids: string[]): CanvasElement[] {
     out.push(el)
   }
   if (hadWall) {
-    // eslint-disable-next-line no-console
     console.warn('alignElements/distributeElements: walls are not supported and were skipped')
   }
   return out
