@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useSession } from '../../lib/auth/session'
 import { supabase } from '../../lib/supabase'
-import { listOffices, createOffice, type OfficeListItem } from '../../lib/offices/officeRepository'
+import {
+  listOffices,
+  createOffice,
+  saveOffice,
+  type OfficeListItem,
+} from '../../lib/offices/officeRepository'
+import { buildDemoOfficePayload } from '../../lib/demo/createDemoOffice'
 import { formatRelative } from '../../lib/time'
 import type { Team } from '../../types/team'
 
@@ -32,6 +38,39 @@ export function TeamHomePage() {
     navigate(`/t/${team.slug}/o/${created.slug}/map`)
   }
 
+  // "Demo office" is a quick-start that seeds a fully populated payload —
+  // ~18 employees across 4 departments, manager links, a seated-but-
+  // departed person (exercises the unassign cascade), a duplicate
+  // name+dept pair (exercises the "rehire?" badge), and a handful of
+  // end-dates inside the "Ending soon" window. Creates the row in
+  // Supabase, then saves the seeded payload as the very first version so
+  // the user can open it and see a live roster immediately.
+  async function onNewDemo() {
+    if (!team || session.status !== 'authenticated') return
+    setCreating(true)
+    try {
+      const created = await createOffice(team.id, 'Demo office')
+      const payload = buildDemoOfficePayload()
+      // `created.updated_at` is the version stamp the initial INSERT
+      // returned. Passing it back to `saveOffice` just makes the optimistic
+      // lock happy — there's no concurrent writer for a brand-new row.
+      const res = await saveOffice(
+        created.id,
+        payload as unknown as Record<string, unknown>,
+        created.updated_at,
+      )
+      if (!res.ok) {
+        // Swallow and navigate anyway — an empty office is still usable,
+        // and the autosave will retry from the editor. Logging so the
+        // failure doesn't vanish silently in dev.
+        console.warn('Demo office: initial seed save failed', res)
+      }
+      navigate(`/t/${team.slug}/o/${created.slug}/roster`)
+    } finally {
+      setCreating(false)
+    }
+  }
+
   if (!team) return <div className="p-6 text-sm text-gray-500">Loading\u2026</div>
   const visible = offices.filter((o) => o.name.toLowerCase().includes(q.trim().toLowerCase()))
 
@@ -46,6 +85,14 @@ export function TeamHomePage() {
             onChange={(e) => setQ(e.target.value)}
             className="border rounded px-2 py-1.5 text-sm w-56"
           />
+          <button
+            onClick={onNewDemo}
+            disabled={creating}
+            className="px-3 py-1.5 border border-blue-300 text-blue-700 bg-blue-50 rounded text-sm hover:bg-blue-100 disabled:opacity-50"
+            title="Pre-populated with ~18 demo employees to exercise the roster features"
+          >
+            Demo office
+          </button>
           <button
             onClick={onNew}
             disabled={creating}
