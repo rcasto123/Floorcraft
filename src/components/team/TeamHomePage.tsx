@@ -175,10 +175,11 @@ export function TeamHomePage() {
                   e.stopPropagation()
                   setPendingDelete(o)
                 }}
-                // Hidden by default, reveals on card hover or keyboard
-                // focus so the card stays clean at rest but the control
-                // is always reachable.
-                className="absolute top-2 right-2 p-1.5 rounded text-gray-400 hover:text-red-600 hover:bg-red-50 focus:outline-none focus:ring-1 focus:ring-red-400 focus:text-red-600 opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+                // Always visible (muted) so it's actually discoverable —
+                // the previous hover-to-reveal was slick but invisible
+                // until you knew to hover. Red-tints on hover/focus so
+                // the destructive intent is obvious.
+                className="absolute top-2 right-2 p-1.5 rounded text-gray-400 hover:text-red-600 hover:bg-red-50 focus:outline-none focus:ring-1 focus:ring-red-400 focus:text-red-600"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
