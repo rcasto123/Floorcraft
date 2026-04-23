@@ -190,10 +190,14 @@ export function CanvasStage() {
             if (floorId) {
               const overflow = consumeQueueAtElement(groupId, floorId)
               if (overflow >= 0) {
-                if (overflow > 0) {
+                // Toast off actual remaining queue (not the return value) so
+                // desk clicks that leave items in the queue still prompt the
+                // user to keep clicking rather than falsely declaring done.
+                const remaining = useUIStore.getState().assignmentQueue.length
+                if (remaining > 0) {
                   useToastStore.getState().push({
                     tone: 'warning',
-                    title: `${overflow} ${overflow === 1 ? 'employee' : 'employees'} not yet assigned`,
+                    title: `${remaining} ${remaining === 1 ? 'employee' : 'employees'} not yet assigned`,
                     body: 'Click another workstation or desk, or press Esc to cancel.',
                   })
                 } else {
