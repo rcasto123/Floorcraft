@@ -20,7 +20,9 @@ import { useInsightsStore } from '../../stores/insightsStore'
 import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts'
 import { supabase } from '../../lib/supabase'
 import { loadOffice } from '../../lib/offices/officeRepository'
+import { currentUserOfficeRole } from '../../lib/offices/currentUserOfficeRole'
 import { useOfficeSync } from '../../lib/offices/useOfficeSync'
+import { useSession } from '../../lib/auth/session'
 import { isEmployeeStatus, type Employee } from '../../types/employee'
 import type { Project } from '../../types/project'
 
@@ -47,6 +49,7 @@ export function ProjectShell() {
   const employeeDirectoryOpen = useUIStore((s) => s.employeeDirectoryOpen)
   const currentProject = useProjectStore((s) => s.currentProject)
   const conflict = useProjectStore((s) => s.conflict)
+  const session = useSession()
 
   useKeyboardShortcuts()
   const { overwrite } = useOfficeSync()
@@ -151,8 +154,25 @@ export function ProjectShell() {
         lastSavedAt: office.updated_at,
         saveState: 'saved',
         conflict: null,
+        currentOfficeRole: null,
       })
       useInsightsStore.getState().setCurrentProjectId(office.id)
+
+      // Resolve the viewer's role for this office. Fire-and-forget: the
+      // UI renders optimistically (no role = permissive) while the role
+      // lookup lands. If the session isn't authenticated we skip entirely
+      // and leave the role null — those users get the hosted-link path
+      // where we already fail open.
+      if (session.status === 'authenticated') {
+        const userId = session.user.id
+        void currentUserOfficeRole(office.id, userId).then((role) => {
+          // Guard against a stale response landing after the user
+          // navigated to a different office.
+          if (cancelled) return
+          if (useProjectStore.getState().officeId !== office.id) return
+          useProjectStore.setState({ currentOfficeRole: role })
+        })
+      }
 
       setShellState('ready')
     }
@@ -160,6 +180,10 @@ export function ProjectShell() {
     return () => {
       cancelled = true
     }
+    // `session` is read inside the effect but we intentionally don't
+    // re-run on auth changes — the route would redirect on logout, and
+    // RBAC state doesn't need to live-update within a session.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamSlug, officeSlug])
 
   if (shellState === 'loading') {
