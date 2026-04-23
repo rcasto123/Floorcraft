@@ -22,12 +22,8 @@ export function AuditLogPage() {
   const [actionFilter, setActionFilter] = useState('')
 
   useEffect(() => {
-    if (!canView || !teamId) {
-      setLoading(false)
-      return
-    }
+    if (!canView || !teamId) return
     let cancelled = false
-    setLoading(true)
     listEvents(teamId, {
       actorId: actorFilter || undefined,
       action: actionFilter || undefined,
@@ -48,6 +44,9 @@ export function AuditLogPage() {
 
   if (!canView) {
     return <div className="p-6 text-gray-600">Not authorized to view the audit log.</div>
+  }
+  if (!teamId) {
+    return <div className="p-6 text-gray-600">No team loaded.</div>
   }
 
   return (
