@@ -11,6 +11,8 @@ interface UIState {
   // Selection
   selectedIds: string[]
   hoveredId: string | null
+  flashingElementId: string | null
+  setFlashingElementId: (id: string | null) => void
 
   // Panels
   rightSidebarOpen: boolean
@@ -104,6 +106,8 @@ function createUIStore() {
   return create<UIState>((set) => ({
   selectedIds: [],
   hoveredId: null,
+  flashingElementId: null,
+  setFlashingElementId: (id) => set({ flashingElementId: id }),
   rightSidebarOpen: true,
   rightSidebarTab: 'properties',
   shareModalOpen: false,
