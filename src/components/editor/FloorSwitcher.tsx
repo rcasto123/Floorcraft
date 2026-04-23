@@ -2,7 +2,11 @@ import { useFloorStore } from '../../stores/floorStore'
 import { useElementsStore } from '../../stores/elementsStore'
 import { switchToFloor, deleteFloor } from '../../lib/seatAssignment'
 import { useCanEdit } from '../../hooks/useCanEdit'
-import { isAssignableElement, type CanvasElement } from '../../types/elements'
+import {
+  isAssignableElement,
+  isDeskElement,
+  type CanvasElement,
+} from '../../types/elements'
 import { ConfirmDialog } from './ConfirmDialog'
 import { Plus } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
@@ -18,7 +22,7 @@ function countSeatedEmployees(floorElements: Record<string, CanvasElement>): num
   let count = 0
   for (const el of Object.values(floorElements)) {
     if (!isAssignableElement(el)) continue
-    if (el.type === 'desk' || el.type === 'hot-desk') {
+    if (isDeskElement(el)) {
       if (el.assignedEmployeeId) count += 1
     } else {
       count += el.assignedEmployeeIds.length

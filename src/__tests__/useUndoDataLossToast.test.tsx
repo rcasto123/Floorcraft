@@ -12,7 +12,6 @@ function makeDesk(id: string, assignedEmployeeId: string | null = null): DeskEle
   return {
     id,
     type: 'desk',
-    floorId: 'f1',
     x: 0,
     y: 0,
     width: 60,
@@ -20,11 +19,14 @@ function makeDesk(id: string, assignedEmployeeId: string | null = null): DeskEle
     rotation: 0,
     label: '',
     locked: false,
+    groupId: null,
+    zIndex: 0,
+    visible: true,
     style: { fill: '#fff', stroke: '#000' },
     deskId: 'D-' + id,
     capacity: 1,
     assignedEmployeeId,
-  } as DeskElement
+  } as unknown as DeskElement
 }
 
 function makeEmployee(id: string, seatId: string | null): Employee {
@@ -48,7 +50,7 @@ function makeEmployee(id: string, seatId: string | null): Employee {
     seatId,
     floorId: seatId ? 'f1' : null,
     status: 'active',
-  } as Employee
+  } as unknown as Employee
 }
 
 beforeEach(() => {

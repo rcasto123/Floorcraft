@@ -33,11 +33,14 @@ export function validateDeskId(
     return null
   }
 
+  // `elements` is always scoped to a single floor (the elementsStore only
+  // holds the active floor's elements at any moment). The per-floor contract
+  // is enforced by the caller, not by a field on the element.
+  void subject
   const normalized = trimmed.toLowerCase()
   for (const [otherId, other] of Object.entries(elements)) {
     if (otherId === elementId) continue
     if (!isAssignableElement(other)) continue
-    if (other.floorId !== subject.floorId) continue
     if (other.deskId.trim().toLowerCase() === normalized) {
       return `Desk ID "${trimmed}" is already used on this floor`
     }

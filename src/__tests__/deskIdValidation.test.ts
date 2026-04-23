@@ -2,36 +2,44 @@ import { describe, it, expect } from 'vitest'
 import { validateDeskId } from '../lib/deskIdValidation'
 import type { CanvasElement } from '../types/elements'
 
-function desk(id: string, deskId: string, floorId = 'f1'): CanvasElement {
+function desk(id: string, deskId: string): CanvasElement {
   return {
     id,
     type: 'desk',
-    floorId,
     x: 0,
     y: 0,
     width: 60,
     height: 60,
     rotation: 0,
+    locked: false,
+    groupId: null,
+    zIndex: 0,
+    visible: true,
+    label: '',
     deskId,
     assignedEmployeeId: null,
     capacity: 1,
-  } as CanvasElement
+  } as unknown as CanvasElement
 }
 
-function workstation(id: string, deskId: string, floorId = 'f1'): CanvasElement {
+function workstation(id: string, deskId: string): CanvasElement {
   return {
     id,
     type: 'workstation',
-    floorId,
     x: 0,
     y: 0,
     width: 120,
     height: 60,
     rotation: 0,
+    locked: false,
+    groupId: null,
+    zIndex: 0,
+    visible: true,
+    label: '',
     deskId,
     positions: 4,
     assignedEmployeeIds: [],
-  } as CanvasElement
+  } as unknown as CanvasElement
 }
 
 describe('validateDeskId', () => {
@@ -61,15 +69,7 @@ describe('validateDeskId', () => {
     expect(validateDeskId('D-1', 'a', elements)).toBeNull()
   })
 
-  it('allows the same id on a different floor (desk ids are per-floor)', () => {
-    const elements = {
-      a: desk('a', 'D-1', 'floor-1'),
-      b: desk('b', 'D-1', 'floor-2'),
-    }
-    expect(validateDeskId('D-1', 'b', elements)).toBeNull()
-  })
-
-  it('detects collisions across desk + workstation + private-office on the same floor', () => {
+  it('detects collisions across desk + workstation on the same floor', () => {
     const elements = {
       a: desk('a', 'D-1'),
       w: workstation('w', 'W-1'),
@@ -96,11 +96,15 @@ describe('validateDeskId', () => {
       r: {
         id: 'r',
         type: 'conference-room',
-        floorId: 'f1',
         x: 0, y: 0, width: 100, height: 100, rotation: 0,
+        locked: false,
+        groupId: null,
+        zIndex: 0,
+        visible: true,
+        label: '',
         roomName: 'D-2',
         capacity: 6,
-      } as CanvasElement,
+      } as unknown as CanvasElement,
     }
     expect(validateDeskId('D-2', 'a', elements)).toBeNull()
   })

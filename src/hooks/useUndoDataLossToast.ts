@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useElementsStore } from '../stores/elementsStore'
 import { useEmployeeStore } from '../stores/employeeStore'
+import { useFloorStore } from '../stores/floorStore'
 import { useToastStore } from '../stores/toastStore'
 import { assignEmployee } from '../lib/seatAssignment'
 import {
@@ -95,9 +96,13 @@ function restoreOrphans(): void {
   const elements = useElementsStore.getState().elements
   const claimed = getClaimedEmployeeIds()
   for (const emp of Object.values(employees)) {
-    if (!emp.seatId || claimed.has(emp.id)) continue
-    const target = elements[emp.seatId]
-    if (!target) continue
-    assignEmployee(emp.id, emp.seatId, target.floorId)
+    if (!emp.seatId || !emp.floorId || claimed.has(emp.id)) continue
+    // The element may or may not be present in the active floor's elements
+    // map, but the employee's own `floorId` is the authoritative location
+    // because `assignEmployee` looks up the target on that floor either way.
+    // We still guard on the active-floor lookup to avoid a no-op restore
+    // when the element id is stale (e.g. the desk was deleted).
+    if (emp.floorId === useFloorStore.getState().activeFloorId && !elements[emp.seatId]) continue
+    assignEmployee(emp.id, emp.seatId, emp.floorId)
   }
 }
