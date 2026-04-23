@@ -27,6 +27,7 @@ import {
 import type { Employee, EmployeeStatus } from '../../types/employee'
 import { EMPLOYEE_STATUSES } from '../../types/employee'
 import { RosterDetailDrawer } from './RosterDetailDrawer'
+import { RosterBulkEditPopover } from './RosterBulkEditPopover'
 import { ConfirmDialog } from './ConfirmDialog'
 import { downloadCSV, employeesToCSV } from '../../lib/employeeCsv'
 
@@ -228,6 +229,7 @@ export function RosterPage() {
   const [sortColumn, setSortColumn] = useState<SortColumn>('name')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
   const [selected, setSelected] = useState<Set<string>>(new Set())
+  const [bulkEditOpen, setBulkEditOpen] = useState(false)
   const [drawerId, setDrawerId] = useState<string | null>(null)
   const [openMenuId, setOpenMenuId] = useState<string | null>(null)
   const [helpOpen, setHelpOpen] = useState(false)
@@ -498,6 +500,13 @@ export function RosterPage() {
       return changed ? next : prev
     })
   }, [allEmployeeIds])
+
+  // When the selection is cleared (either by the user or by employees
+  // falling out of view) the bulk-edit popover no longer has a target
+  // set, so close it. Avoids the popover lingering over an empty bar.
+  useEffect(() => {
+    if (selected.size === 0) setBulkEditOpen(false)
+  }, [selected.size])
 
   // Page-scoped keyboard shortcuts. Deliberately attached to `window` in
   // capture phase so the search input's own keydown (Escape clears) and
@@ -982,6 +991,22 @@ export function RosterPage() {
           </select>
 
           <span className="w-px h-4 bg-blue-200" />
+
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setBulkEditOpen((v) => !v)}
+              className="px-2 py-1 text-xs font-medium text-gray-700 hover:bg-white rounded border border-blue-200"
+            >
+              Edit…
+            </button>
+            {bulkEditOpen && (
+              <RosterBulkEditPopover
+                selectedIds={Array.from(selected)}
+                onClose={() => setBulkEditOpen(false)}
+              />
+            )}
+          </div>
 
           <button
             onClick={handleBulkUnassign}
