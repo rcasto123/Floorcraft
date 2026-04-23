@@ -56,6 +56,12 @@ interface UIState {
    */
   modalOpenCount: number
 
+  // Multi-seat assignment queue — ordered list of employee ids awaiting a
+  // click on the map to pop into a seat. Cleared on completion or Esc.
+  assignmentQueue: string[] // employee ids in order
+  setAssignmentQueue: (ids: string[]) => void
+  clearAssignmentQueue: () => void
+
   // Reports & overlays
   activeReport: string | null
   orgChartOverlayEnabled: boolean
@@ -126,6 +132,9 @@ function createUIStore() {
   employeeDirectoryOpen: false,
   drawingCancelTick: 0,
   modalOpenCount: 0,
+  assignmentQueue: [],
+  setAssignmentQueue: (ids) => set({ assignmentQueue: ids }),
+  clearAssignmentQueue: () => set({ assignmentQueue: [] }),
 
   setSelectedIds: (ids) => set({ selectedIds: ids }),
   addToSelection: (id) => set((s) => ({ selectedIds: [...s.selectedIds, id] })),

@@ -18,6 +18,7 @@ import {
 import { useEmployeeStore } from '../../stores/employeeStore'
 import { useFloorStore } from '../../stores/floorStore'
 import { useUIStore } from '../../stores/uiStore'
+import { useToastStore } from '../../stores/toastStore'
 import { useCanEdit } from '../../hooks/useCanEdit'
 import { deleteEmployee, unassignEmployee } from '../../lib/seatAssignment'
 import type { Employee, EmployeeStatus } from '../../types/employee'
@@ -1000,6 +1001,31 @@ export function RosterPage() {
               />
             )}
           </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              const employees = useEmployeeStore.getState().employees
+              const ordered = Array.from(selected)
+                .map((id) => employees[id])
+                .filter((e): e is Employee => !!e)
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((e) => e.id)
+              if (ordered.length === 0) return
+              useUIStore.getState().setAssignmentQueue(ordered)
+              useToastStore.getState().push({
+                tone: 'info',
+                title: `Click a workstation or desks to assign ${ordered.length}`,
+                body: 'Press Esc to cancel.',
+              })
+              if (teamSlug && officeSlug) {
+                navigate(`/t/${teamSlug}/o/${officeSlug}/map`)
+              }
+            }}
+            className="px-2 py-1 text-xs font-medium text-gray-700 hover:bg-white rounded border border-blue-200"
+          >
+            Assign to…
+          </button>
 
           <button
             onClick={handleBulkUnassign}
