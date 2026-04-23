@@ -18,6 +18,7 @@ import { useFloorStore } from '../../stores/floorStore'
 import { useEmployeeStore } from '../../stores/employeeStore'
 import { useInsightsStore } from '../../stores/insightsStore'
 import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts'
+import { useUndoDataLossToast } from '../../hooks/useUndoDataLossToast'
 import { supabase } from '../../lib/supabase'
 import { loadOffice } from '../../lib/offices/officeRepository'
 import { currentUserOfficeRole } from '../../lib/offices/currentUserOfficeRole'
@@ -52,6 +53,7 @@ export function ProjectShell() {
   const session = useSession()
 
   useKeyboardShortcuts()
+  useUndoDataLossToast()
   const { overwrite } = useOfficeSync()
 
   // Keep the browser tab title in sync with the project + view so users
