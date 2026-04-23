@@ -19,11 +19,7 @@ import { useEmployeeStore } from '../../stores/employeeStore'
 import { useFloorStore } from '../../stores/floorStore'
 import { useUIStore } from '../../stores/uiStore'
 import { useCanEdit } from '../../hooks/useCanEdit'
-import {
-  deleteEmployee,
-  switchToFloor,
-  unassignEmployee,
-} from '../../lib/seatAssignment'
+import { deleteEmployee, unassignEmployee } from '../../lib/seatAssignment'
 import type { Employee, EmployeeStatus } from '../../types/employee'
 import { EMPLOYEE_STATUSES } from '../../types/employee'
 import { RosterDetailDrawer } from './RosterDetailDrawer'
@@ -595,16 +591,13 @@ export function RosterPage() {
       if (!teamSlug || !officeSlug) return
       // Re-read the employee in case the row was edited between click and
       // here (unlikely but cheap). Bail out silently if floor/seat got
-      // cleared or the floor has since been deleted.
+      // cleared. Delegate focus/selection to MapView via URL params so the
+      // stage has a chance to mount before we try to pan it.
       const fresh = useEmployeeStore.getState().employees[emp.id] ?? emp
-      const floor = fresh.floorId
-        ? useFloorStore.getState().floors.find((f) => f.id === fresh.floorId)
-        : null
-      if (floor) switchToFloor(floor.id)
-      if (fresh.seatId) useUIStore.getState().setSelectedIds([fresh.seatId])
-      if (teamSlug && officeSlug) {
-        navigate(`/t/${teamSlug}/o/${officeSlug}/map`)
-      }
+      if (!fresh.seatId || !fresh.floorId) return
+      navigate(
+        `/t/${teamSlug}/o/${officeSlug}/map?floor=${fresh.floorId}&seat=${fresh.seatId}`,
+      )
     },
     [navigate, teamSlug, officeSlug],
   )
