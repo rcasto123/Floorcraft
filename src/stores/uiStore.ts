@@ -1,4 +1,11 @@
 import { create } from 'zustand'
+import type { ImportIssue } from '../lib/employeeCsv'
+
+export interface CSVImportSummary {
+  importedCount: number
+  skipped: ImportIssue[]
+  warnings: ImportIssue[]
+}
 
 interface UIState {
   // Selection
@@ -15,6 +22,7 @@ interface UIState {
   templatePickerOpen: boolean
   shortcutsOverlayOpen: boolean
   csvImportOpen: boolean
+  csvImportSummary: CSVImportSummary | null
 
   // Presentation
   presentationMode: boolean
@@ -67,6 +75,7 @@ interface UIState {
   setTemplatePickerOpen: (open: boolean) => void
   setShortcutsOverlayOpen: (open: boolean) => void
   setCsvImportOpen: (open: boolean) => void
+  setCsvImportSummary: (summary: CSVImportSummary | null) => void
   setPresentationMode: (mode: boolean) => void
   setContextMenu: (menu: UIState['contextMenu']) => void
   setEditingLabelId: (id: string | null) => void
@@ -93,6 +102,7 @@ export const useUIStore = create<UIState>((set) => ({
   templatePickerOpen: false,
   shortcutsOverlayOpen: false,
   csvImportOpen: false,
+  csvImportSummary: null,
   presentationMode: false,
   contextMenu: null,
   editingLabelId: null,
@@ -123,6 +133,7 @@ export const useUIStore = create<UIState>((set) => ({
   setTemplatePickerOpen: (open) => set({ templatePickerOpen: open }),
   setShortcutsOverlayOpen: (open) => set({ shortcutsOverlayOpen: open }),
   setCsvImportOpen: (open) => set({ csvImportOpen: open }),
+  setCsvImportSummary: (summary) => set({ csvImportSummary: summary }),
   setPresentationMode: (mode) => set({ presentationMode: mode }),
   setContextMenu: (menu) => set({ contextMenu: menu }),
   setEditingLabelId: (id) => set({ editingLabelId: id }),
