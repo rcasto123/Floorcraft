@@ -132,6 +132,13 @@ export function TeamHomePage() {
           >
             Settings
           </Link>
+          <Link
+            to="/help"
+            className="px-3 py-1.5 border rounded text-sm hover:bg-gray-50 text-gray-700"
+            title="User guide and FAQ"
+          >
+            Help
+          </Link>
         </div>
       </header>
       {visible.length === 0 ? (
