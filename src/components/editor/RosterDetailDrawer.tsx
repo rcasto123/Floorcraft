@@ -404,6 +404,17 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
                 disabled={!canEdit}
               />
             </Field>
+            <Field label="Departure date">
+              <input
+                type="date"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                defaultValue={employee.departureDate ?? ''}
+                onBlur={(e) =>
+                  updateEmployee(employee.id, { departureDate: e.target.value || null })
+                }
+                disabled={!canEdit}
+              />
+            </Field>
           </div>
 
           <Field label="Tags (comma-separated)">
