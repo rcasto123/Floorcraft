@@ -1,5 +1,10 @@
 import Papa from 'papaparse'
-import type { Employee, EmployeeImportRow } from '../types/employee'
+import {
+  isEmployeeStatus,
+  type Employee,
+  type EmployeeImportRow,
+  type EmployeeStatus,
+} from '../types/employee'
 
 /**
  * Round-trip-safe CSV export: column shape matches what `parseEmployeeCSV`
@@ -184,4 +189,258 @@ export function exportEmployeeCSV(
   }>,
 ): string {
   return Papa.unparse(employees)
+}
+
+export type ImportReason =
+  | 'blank_name'
+  | 'manager_unresolved'
+  | 'duplicate_email'
+  | 'invalid_status'
+  | 'invalid_start_date'
+
+export interface ImportIssue {
+  /** 1-based index into the parsed row list (post-header). */
+  rowIndex: number
+  reason: ImportReason
+  /** Original row as it appeared in the import, for the skipped-CSV download. */
+  raw: EmployeeImportRow
+  /** Human-readable message for the summary list. */
+  message: string
+}
+
+/**
+ * A row that passed validation, ready to be fed into the employee store.
+ * `managerName` is kept as a string because manager resolution against
+ * the full employee set (including same-import peers) happens in the
+ * importer, not the validator — it needs the post-add id list.
+ */
+export interface ValidImportRow {
+  name: string
+  email: string
+  department: string | null
+  team: string | null
+  title: string | null
+  managerName: string | null
+  employmentType: 'full-time' | 'contractor' | 'part-time' | 'intern'
+  status: EmployeeStatus
+  officeDays: string[]
+  startDate: string | null
+  endDate: string | null
+  equipmentNeeds: string[]
+  equipmentStatus: 'pending' | 'provisioned' | 'not-needed'
+  photoUrl: string | null
+  tags: string[]
+}
+
+export interface ValidationResult {
+  valid: ValidImportRow[]
+  skipped: ImportIssue[]
+  warnings: ImportIssue[]
+}
+
+/**
+ * Per-row validation that produces a ValidImportRow or an ImportIssue per
+ * problem found. Structural problems (blank name, duplicate email) skip
+ * the row entirely; soft problems (invalid status, bad date, unresolved
+ * manager) become warnings with safe fallbacks so the rest of the row
+ * still imports.
+ *
+ * Manager resolution only happens against `existing` here — same-import
+ * peer resolution is the caller's job because it needs the ids assigned
+ * on add.
+ */
+export function validateImportRows(
+  rows: EmployeeImportRow[],
+  existing: Record<string, { id: string; name: string; email: string | null }>,
+): ValidationResult {
+  const valid: ValidImportRow[] = []
+  const skipped: ImportIssue[] = []
+  const warnings: ImportIssue[] = []
+
+  // Pre-build a set of existing emails for O(1) lookup, plus a set of
+  // emails seen in this import so we can detect intra-import duplicates.
+  const existingEmails = new Set<string>()
+  for (const e of Object.values(existing)) {
+    if (e.email) existingEmails.add(e.email.trim().toLowerCase())
+  }
+  const seenEmails = new Set<string>()
+
+  // Build a manager-name index for soft resolution (case-insensitive).
+  // Same-import peers aren't in here — that's the caller's responsibility.
+  const managerNameIndex = new Set<string>()
+  for (const e of Object.values(existing)) {
+    managerNameIndex.add(e.name.trim().toLowerCase())
+  }
+  for (const r of rows) {
+    const n = r.name?.trim().toLowerCase()
+    if (n) managerNameIndex.add(n)
+  }
+
+  rows.forEach((r, idx) => {
+    const rowIndex = idx + 1
+
+    // 1. Blank name → structural skip (can't create a nameless employee).
+    const name = r.name?.trim() ?? ''
+    if (name === '') {
+      skipped.push({
+        rowIndex,
+        reason: 'blank_name',
+        raw: r,
+        message: 'Missing name',
+      })
+      return
+    }
+
+    // 2. Duplicate email → structural skip. We skip the LATER occurrence
+    //    (first-wins) because the user likely meant "update Bob's record"
+    //    but can't express that in the CSV format.
+    const email = r.email?.trim() ?? ''
+    const emailLower = email.toLowerCase()
+    if (emailLower) {
+      if (existingEmails.has(emailLower) || seenEmails.has(emailLower)) {
+        skipped.push({
+          rowIndex,
+          reason: 'duplicate_email',
+          raw: r,
+          message: `Email "${email}" already exists`,
+        })
+        return
+      }
+      seenEmails.add(emailLower)
+    }
+
+    // 3. Status → warn + fallback to 'active'.
+    let status: EmployeeStatus = 'active'
+    if (r.status !== undefined && r.status.trim() !== '') {
+      const lower = r.status.trim().toLowerCase()
+      if (isEmployeeStatus(lower)) {
+        status = lower
+      } else {
+        warnings.push({
+          rowIndex,
+          reason: 'invalid_status',
+          raw: r,
+          message: `Unknown status "${r.status}" — defaulting to active`,
+        })
+      }
+    }
+
+    // 4. start_date → warn + null if unparseable. Accept ISO (YYYY-MM-DD)
+    //    and US (M/D/YYYY). Everything else warns. We normalise to ISO so
+    //    the rest of the app has one date format.
+    let startDate: string | null = null
+    if (r.start_date !== undefined && r.start_date.trim() !== '') {
+      const normalised = normaliseDate(r.start_date)
+      if (normalised) {
+        startDate = normalised
+      } else {
+        warnings.push({
+          rowIndex,
+          reason: 'invalid_start_date',
+          raw: r,
+          message: `Unparseable start date "${r.start_date}"`,
+        })
+      }
+    }
+
+    // 5. Manager: soft lookup. Accept if present in existing or in this
+    //    import (case-insensitive match). Otherwise warn and keep the
+    //    name for the caller (in case the caller has extra resolution).
+    let managerName: string | null = null
+    if (r.manager !== undefined && r.manager.trim() !== '') {
+      managerName = r.manager.trim()
+      if (!managerNameIndex.has(managerName.toLowerCase())) {
+        warnings.push({
+          rowIndex,
+          reason: 'manager_unresolved',
+          raw: r,
+          message: `Manager "${managerName}" not found`,
+        })
+      }
+    }
+
+    // 6. end_date: same rules as start_date but NOT in the reason-code
+    //    set, so we silently null it when unparseable. Rationale: end_date
+    //    is almost always blank; the reason-code schema is already full
+    //    and adding a code per optional field leads to alert fatigue.
+    let endDate: string | null = null
+    if (r.end_date !== undefined && r.end_date.trim() !== '') {
+      endDate = normaliseDate(r.end_date) ?? null
+    }
+
+    // 7. Lists: split on comma, trim, drop empties.
+    const officeDays = splitList(r.office_days)
+    const tags = splitList(r.tags)
+    const equipmentNeeds = splitList(r.equipment_needs)
+
+    valid.push({
+      name,
+      email,
+      department: r.department?.trim() || null,
+      team: r.team?.trim() || null,
+      title: r.title?.trim() || null,
+      managerName,
+      employmentType: normaliseEmploymentType(r.type),
+      status,
+      officeDays,
+      startDate,
+      endDate,
+      equipmentNeeds,
+      equipmentStatus: normaliseEquipmentStatus(r.equipment_status),
+      photoUrl: r.photo_url?.trim() || null,
+      tags,
+    })
+  })
+
+  return { valid, skipped, warnings }
+}
+
+function splitList(v: string | undefined): string[] {
+  if (!v) return []
+  return v.split(',').map((t) => t.trim()).filter(Boolean)
+}
+
+function normaliseEmploymentType(
+  v: string | undefined,
+): 'full-time' | 'contractor' | 'part-time' | 'intern' {
+  const lower = v?.trim().toLowerCase()
+  if (lower === 'contractor' || lower === 'part-time' || lower === 'intern') {
+    return lower
+  }
+  return 'full-time'
+}
+
+function normaliseEquipmentStatus(
+  v: string | undefined,
+): 'pending' | 'provisioned' | 'not-needed' {
+  const lower = v?.trim().toLowerCase()
+  if (lower === 'pending' || lower === 'provisioned' || lower === 'not-needed') {
+    return lower
+  }
+  return 'not-needed'
+}
+
+/**
+ * Accept ISO (YYYY-MM-DD) or US (M/D/YYYY or MM/DD/YYYY). Return null on
+ * anything else — no heuristics, no string-of-month parsing. Spreadsheet
+ * exports use one of these two formats 99% of the time; everything else
+ * is user error and deserves a warning, not a guess.
+ */
+function normaliseDate(s: string): string | null {
+  const trimmed = s.trim()
+  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+    const d = new Date(trimmed + 'T00:00:00Z')
+    if (!Number.isNaN(d.getTime())) return trimmed
+    return null
+  }
+  const usMatch = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(trimmed)
+  if (usMatch) {
+    const [, m, d, y] = usMatch
+    const mm = m.padStart(2, '0')
+    const dd = d.padStart(2, '0')
+    const iso = `${y}-${mm}-${dd}`
+    const parsed = new Date(iso + 'T00:00:00Z')
+    if (!Number.isNaN(parsed.getTime())) return iso
+  }
+  return null
 }
