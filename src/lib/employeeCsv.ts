@@ -444,3 +444,101 @@ function normaliseDate(s: string): string | null {
   }
   return null
 }
+
+/**
+ * Shape of the store's `addEmployee` we depend on. Keeping it narrow so
+ * this module stays free of store types; the dialog passes the real
+ * function in.
+ */
+export interface ImportDeps {
+  valid: ValidImportRow[]
+  existing: Record<string, { id: string; name: string; email: string | null }>
+  addEmployee: (data: {
+    name: string
+    email: string
+    department: string | null
+    team: string | null
+    title: string | null
+    managerId: string | null
+    employmentType: ValidImportRow['employmentType']
+    status: ValidImportRow['status']
+    officeDays: string[]
+    startDate: string | null
+    endDate: string | null
+    equipmentNeeds: string[]
+    equipmentStatus: ValidImportRow['equipmentStatus']
+    photoUrl: string | null
+    tags: string[]
+    seatId: null
+    floorId: null
+  }) => string
+  updateEmployee: (id: string, updates: { managerId?: string | null }) => void
+}
+
+export interface ImportOutcome {
+  imported: Array<{ id: string; name: string; email: string }>
+}
+
+/**
+ * Two-pass add:
+ *
+ * Pass 1 — create each employee with managerId: null, remembering any
+ *          manager name the row referenced.
+ * Pass 2 — resolve manager names against the union of existing employees
+ *          and same-import peers (case-insensitive). A match updates
+ *          managerId; a miss leaves it null (the validator already
+ *          warned).
+ *
+ * Kept separate from validation because the caller wires the store
+ * mutations, which is where the "new ids assigned on add" information
+ * only becomes available.
+ */
+export function importEmployees(deps: ImportDeps): ImportOutcome {
+  const { valid, existing, addEmployee, updateEmployee } = deps
+  const imported: ImportOutcome['imported'] = []
+  const pending: Array<{ newId: string; managerName: string }> = []
+
+  for (const row of valid) {
+    const newId = addEmployee({
+      name: row.name,
+      email: row.email,
+      department: row.department,
+      team: row.team,
+      title: row.title,
+      managerId: null,
+      employmentType: row.employmentType,
+      status: row.status,
+      officeDays: row.officeDays,
+      startDate: row.startDate,
+      endDate: row.endDate,
+      equipmentNeeds: row.equipmentNeeds,
+      equipmentStatus: row.equipmentStatus,
+      photoUrl: row.photoUrl,
+      tags: row.tags,
+      seatId: null,
+      floorId: null,
+    })
+    imported.push({ id: newId, name: row.name, email: row.email })
+    if (row.managerName) {
+      pending.push({ newId, managerName: row.managerName })
+    }
+  }
+
+  // Build a name→id index from existing + just-added.
+  const byName = new Map<string, string>()
+  for (const e of Object.values(existing)) {
+    byName.set(e.name.trim().toLowerCase(), e.id)
+  }
+  for (const row of imported) {
+    byName.set(row.name.trim().toLowerCase(), row.id)
+  }
+
+  for (const { newId, managerName } of pending) {
+    const match = byName.get(managerName.trim().toLowerCase())
+    if (match && match !== newId) {
+      updateEmployee(newId, { managerId: match })
+    }
+  }
+
+  return { imported }
+}
