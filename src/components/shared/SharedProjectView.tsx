@@ -19,15 +19,14 @@ import type { Employee } from '../../types/employee'
  */
 export function SharedProjectView() {
   const { projectId, token } = useParams<{ projectId: string; token: string }>()
-  const [status, setStatus] = useState<'loading' | 'invalid' | 'ready'>('loading')
+  const [status, setStatus] = useState<'loading' | 'invalid' | 'ready'>(
+    projectId && token ? 'loading' : 'invalid',
+  )
   const [employees, setEmployees] = useState<Employee[]>([])
   const [floorCount, setFloorCount] = useState(0)
 
   useEffect(() => {
-    if (!projectId || !token) {
-      setStatus('invalid')
-      return
-    }
+    if (!projectId || !token) return
     let cancelled = false
     ;(async () => {
       const resolved = await resolveShareToken(token)
