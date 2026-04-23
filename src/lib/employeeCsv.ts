@@ -542,3 +542,59 @@ export function importEmployees(deps: ImportDeps): ImportOutcome {
 
   return { imported }
 }
+
+/**
+ * Column order must match `employeesToCSV` so users can copy the skipped
+ * rows straight back into their source sheet. We append `skip_reason` as
+ * the last column — `parseEmployeeCSV` ignores unknown columns, so a
+ * re-import just drops it.
+ */
+const SKIPPED_CSV_COLUMNS = [
+  'name',
+  'email',
+  'department',
+  'team',
+  'title',
+  'manager',
+  'type',
+  'status',
+  'office_days',
+  'start_date',
+  'end_date',
+  'equipment_needs',
+  'equipment_status',
+  'photo_url',
+  'tags',
+  'skip_reason',
+] as const
+
+export function skippedRowsToCSV(issues: ImportIssue[]): string {
+  const rows = issues.map((issue) => {
+    const r = issue.raw
+    return {
+      name: r.name ?? '',
+      email: r.email ?? '',
+      department: r.department ?? '',
+      team: r.team ?? '',
+      title: r.title ?? '',
+      manager: r.manager ?? '',
+      type: r.type ?? '',
+      status: r.status ?? '',
+      office_days: r.office_days ?? '',
+      start_date: r.start_date ?? '',
+      end_date: r.end_date ?? '',
+      equipment_needs: r.equipment_needs ?? '',
+      equipment_status: r.equipment_status ?? '',
+      photo_url: r.photo_url ?? '',
+      tags: r.tags ?? '',
+      skip_reason: issue.reason,
+    }
+  })
+  // Papa.unparse returns '' for an empty `rows` array even when `columns`
+  // is set, so we emit the header ourselves for that case. A header-only
+  // CSV is still useful as a template.
+  if (rows.length === 0) {
+    return SKIPPED_CSV_COLUMNS.join(',')
+  }
+  return Papa.unparse(rows, { header: true, columns: [...SKIPPED_CSV_COLUMNS] })
+}
