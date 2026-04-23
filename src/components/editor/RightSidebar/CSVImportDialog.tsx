@@ -1,6 +1,6 @@
 import { useUIStore } from '../../../stores/uiStore'
 import { useEmployeeStore } from '../../../stores/employeeStore'
-import { parseEmployeeCSV, CSVTooLargeError } from '../../../lib/csv'
+import { parseEmployeeCSV, CSVTooLargeError } from '../../../lib/employeeCsv'
 import { isEmployeeStatus } from '../../../types/employee'
 import { useState, useCallback, useEffect } from 'react'
 
