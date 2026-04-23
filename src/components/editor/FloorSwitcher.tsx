@@ -1,7 +1,7 @@
 import { useFloorStore } from '../../stores/floorStore'
 import { useElementsStore } from '../../stores/elementsStore'
 import { switchToFloor, deleteFloor } from '../../lib/seatAssignment'
-import { useCanEdit } from '../../hooks/useCanEdit'
+import { useCan } from '../../hooks/useCan'
 import {
   isAssignableElement,
   isDeskElement,
@@ -40,7 +40,7 @@ export function FloorSwitcher() {
   const getFloorElements = useFloorStore((s) => s.getFloorElements)
 
   const elements = useElementsStore((s) => s.elements)
-  const canEdit = useCanEdit()
+  const canEdit = useCan('editMap')
 
   const [contextMenuFloorId, setContextMenuFloorId] = useState<string | null>(null)
   const [contextMenuPos, setContextMenuPos] = useState({ x: 0, y: 0 })
