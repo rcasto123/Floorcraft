@@ -9,6 +9,7 @@ import { NewProjectModal } from '../dashboard/NewProjectModal'
 import { ShareModal } from './ShareModal'
 import { EmployeeDirectory } from '../reports/EmployeeDirectory'
 import { ConflictModal } from './ConflictModal'
+import { Toaster } from '../common/Toaster'
 import { useUIStore } from '../../stores/uiStore'
 import { useProjectStore } from '../../stores/projectStore'
 import { useElementsStore } from '../../stores/elementsStore'
@@ -179,6 +180,7 @@ export function ProjectShell() {
       <NewProjectModal />
       <ShareModal />
       {employeeDirectoryOpen && <EmployeeDirectory />}
+      <Toaster />
       {conflict && (
         <ConflictModal
           onReload={() => window.location.reload()}
