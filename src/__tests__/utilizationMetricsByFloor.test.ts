@@ -35,6 +35,7 @@ function emp(id: string, over: Partial<Employee> = {}): Employee {
     departureDate: null,
     accommodations: [],
     pendingStatusChanges: [],
+    sensitivityTags: [],
     ...over,
   }
 }
