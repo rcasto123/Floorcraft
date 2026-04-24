@@ -171,6 +171,40 @@ describe('analyzeAdjacency', () => {
     expect(result).toHaveLength(1)
   })
 
+  it('uses the redacted name projection in the title when fed an initials-only employee map', () => {
+    // Mirrors the real runtime path: `useVisibleEmployees` redacts
+    // names to initials ("Jane Doe" -> "J.D.") before the Insights
+    // Panel feeds employees into the analyzers. Passing initials in
+    // directly proves the title carries whatever name the analyzer
+    // received — no re-wiring needed to respect PII.
+    const d1 = makeDesk('d1', 0, 0)
+    const d2 = makeDesk('d2', 50, 0)
+    const employees = [
+      makeEmployee({
+        id: 'a',
+        name: 'J.D.',
+        seatId: 'd1',
+        floorId: 'f1',
+        sensitivityTags: ['audit'],
+      }),
+      makeEmployee({
+        id: 'b',
+        name: 'B.S.',
+        seatId: 'd2',
+        floorId: 'f1',
+        sensitivityTags: ['audit'],
+      }),
+    ]
+
+    const result = analyzeAdjacency({ elements: [d1, d2], employees, zones: new Map() })
+    expect(result).toHaveLength(1)
+    expect(result[0].title).toContain('J.D.')
+    expect(result[0].title).toContain('B.S.')
+    // A redacted projection must never accidentally embed the full name.
+    expect(result[0].title).not.toContain('Jane')
+    expect(result[0].title).not.toContain('Bob')
+  })
+
   it('ignores employees without a seat', () => {
     const d1 = makeDesk('d1', 0, 0)
     const employees = [
