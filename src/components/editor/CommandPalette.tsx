@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUIStore } from '../../stores/uiStore'
 import { useFloorStore } from '../../stores/floorStore'
@@ -28,9 +28,20 @@ const MAX_PEOPLE_RESULTS = 8
  * a thin header label and keyboard navigation treats the list as one
  * continuous sequence (Arrow-Up / Arrow-Down across sections, Tab jumps
  * to the next section's first item).
+ *
+ * The component is split into an outer gate + inner body so that the
+ * per-open state (query, highlight) initializes naturally via `useState`
+ * when the palette mounts, rather than being reset in an effect. Keeping
+ * the body mounted-only-while-open also means the hooks inside it don't
+ * need to branch on `open`, which keeps the React Compiler happy.
  */
 export function CommandPalette() {
   const open = useUIStore((s) => s.commandPaletteOpen)
+  if (!open) return null
+  return <CommandPaletteBody />
+}
+
+function CommandPaletteBody() {
   const setOpen = useUIStore((s) => s.setCommandPaletteOpen)
   const registerModalOpen = useUIStore((s) => s.registerModalOpen)
   const registerModalClose = useUIStore((s) => s.registerModalClose)
@@ -56,32 +67,24 @@ export function CommandPalette() {
   // Cmd+A, etc) stand down while the palette owns the keyboard. Mirrors
   // the pattern in CalibrateScaleModal / RosterDetailDrawer.
   useEffect(() => {
-    if (!open) return
     registerModalOpen()
     return () => registerModalClose()
-  }, [open, registerModalOpen, registerModalClose])
+  }, [registerModalOpen, registerModalClose])
 
-  // Reset the query + highlight every time the palette opens, and focus
-  // the input so typing just works. Without the reset, the next open
-  // would briefly show the previous query.
+  // Focus the search input on mount. `requestAnimationFrame` so the
+  // input has actually mounted before we try to focus it (focus before
+  // paint can race in jsdom).
   useEffect(() => {
-    if (!open) return
-    setQuery('')
-    setHighlightIndex(0)
-    // `requestAnimationFrame` so the input has actually mounted before
-    // we try to focus it (the `open` branch renders the dialog in the
-    // same tick, but focus before paint can race in jsdom).
     const id = requestAnimationFrame(() => inputRef.current?.focus())
     return () => cancelAnimationFrame(id)
-  }, [open])
+  }, [])
 
-  const close = () => setOpen(false)
+  const close = useCallback(() => setOpen(false), [setOpen])
 
-  // Build the full item catalogue. Rebuilt on every render while open;
-  // the dependency set is small and the cost is dominated by the People
+  // Build the full item catalogue. Rebuilt on every render; the
+  // dependency set is small and the cost is dominated by the People
   // slice which we cap via `MAX_PEOPLE_RESULTS` below.
   const items = useMemo<CommandItem[]>(() => {
-    if (!open) return []
     const next: CommandItem[] = []
     const basePath = teamSlug && officeSlug ? `/t/${teamSlug}/o/${officeSlug}` : null
 
@@ -205,7 +208,6 @@ export function CommandPalette() {
 
     return next
   }, [
-    open,
     teamSlug,
     officeSlug,
     employees,
@@ -216,18 +218,20 @@ export function CommandPalette() {
     setPresentationMode,
     presentationMode,
     query,
+    close,
   ])
 
   const filtered = useMemo(() => filterCommandItems(items, query), [items, query])
 
-  // Clamp the highlight to the filtered range. When the query changes
-  // and the highlighted row falls outside the new list, reset to the top
-  // — users expect the first match to be selected after typing.
-  useEffect(() => {
-    if (highlightIndex >= filtered.length) setHighlightIndex(0)
-  }, [filtered.length, highlightIndex])
-
-  if (!open) return null
+  // Clamp the highlight to the filtered range inline rather than in an
+  // effect. When the query changes and the highlighted row falls outside
+  // the new list, we show index 0 as active — users expect the first
+  // match to be selected after typing. Keyboard nav still updates
+  // `highlightIndex` directly, and because the effective value is
+  // derived each render we never need to setState in response to a
+  // derived value.
+  const effectiveHighlight =
+    highlightIndex >= filtered.length ? 0 : highlightIndex
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -237,20 +241,26 @@ export function CommandPalette() {
     }
     if (e.key === 'Enter') {
       e.preventDefault()
-      const item = filtered[highlightIndex]
+      const item = filtered[effectiveHighlight]
       if (item) item.run()
       return
     }
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      setHighlightIndex((i) => (filtered.length ? (i + 1) % filtered.length : 0))
+      setHighlightIndex((i) => {
+        const base = i >= filtered.length ? 0 : i
+        return filtered.length ? (base + 1) % filtered.length : 0
+      })
       return
     }
     if (e.key === 'ArrowUp') {
       e.preventDefault()
-      setHighlightIndex((i) =>
-        filtered.length ? (i - 1 + filtered.length) % filtered.length : 0,
-      )
+      setHighlightIndex((i) => {
+        const base = i >= filtered.length ? 0 : i
+        return filtered.length
+          ? (base - 1 + filtered.length) % filtered.length
+          : 0
+      })
       return
     }
     if (e.key === 'Tab') {
@@ -258,12 +268,12 @@ export function CommandPalette() {
       // No-op when everything is in one section.
       e.preventDefault()
       if (filtered.length === 0) return
-      const currentSection = filtered[highlightIndex]?.section
+      const currentSection = filtered[effectiveHighlight]?.section
       // Walk forward from the current highlight until we hit a different
       // section. If we hit the end, wrap to index 0.
-      let idx = highlightIndex
+      let idx = effectiveHighlight
       for (let i = 1; i <= filtered.length; i++) {
-        const candidate = (highlightIndex + i) % filtered.length
+        const candidate = (effectiveHighlight + i) % filtered.length
         if (filtered[candidate].section !== currentSection) {
           idx = candidate
           break
@@ -327,7 +337,7 @@ export function CommandPalette() {
               <ul>
                 {group.items.map((item) => {
                   const flatIndex = filtered.indexOf(item)
-                  const active = flatIndex === highlightIndex
+                  const active = flatIndex === effectiveHighlight
                   return (
                     <li key={item.id}>
                       <button
