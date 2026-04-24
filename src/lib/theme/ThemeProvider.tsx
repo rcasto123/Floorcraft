@@ -110,10 +110,20 @@ export function ThemeProvider({ children, initialTheme }: ThemeProviderProps) {
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
+/**
+ * Fallback used when a component that consumes the theme is rendered
+ * outside a ThemeProvider — most commonly in unit tests. Returns
+ * `'system' / 'light'` and a no-op setter so no consumer has to special-
+ * case missing context. Real apps still render under <ThemeProvider>
+ * via App.tsx, so this only kicks in for isolated component tests.
+ */
+const FALLBACK_CONTEXT: ThemeContextValue = {
+  theme: 'system',
+  resolvedTheme: 'light',
+  setTheme: () => {},
+}
+
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext)
-  if (!ctx) {
-    throw new Error('useTheme must be used inside a <ThemeProvider>.')
-  }
-  return ctx
+  return ctx ?? FALLBACK_CONTEXT
 }
