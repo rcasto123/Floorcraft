@@ -1292,7 +1292,7 @@ export function RosterPage() {
 
       {/* Table OR card grid, based on `view` URL param */}
       {viewMode === 'cards' ? (
-        <div className="flex-1 overflow-auto p-5 bg-gray-50 dark:bg-gray-800/50/50" data-testid="roster-cards">
+        <div className="flex-1 overflow-auto p-5 bg-gray-50/50 dark:bg-gray-800/50" data-testid="roster-cards">
           {/*
             Card view can't hang sort/select-all off <thead> the way the
             table does, so it gets a small toolbar. The sort <select>
@@ -1428,7 +1428,7 @@ export function RosterPage() {
             {sorted.map((emp) => {
               const isSelected = selected.has(emp.id)
               const rowBg = isSelected
-                ? 'bg-blue-50 dark:bg-blue-950/40/60 hover:bg-blue-50 dark:hover:bg-blue-950/40/80'
+                ? 'bg-blue-50/60 dark:bg-blue-950/40 hover:bg-blue-50/80 dark:hover:bg-blue-950/40'
                 : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
               // Mark the leftmost cell with a 2px accent stripe when the row
               // is selected — a Linear-style affordance that indicates
@@ -2058,7 +2058,7 @@ function StatsBar({
     !active.presetFilter
 
   return (
-    <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50/60 flex-shrink-0 overflow-x-auto whitespace-nowrap">
+    <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-100 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-800/50 flex-shrink-0 overflow-x-auto whitespace-nowrap">
       {chip('Total', stats.total, noChipFilter, onClearChipAxes, 'gray', 'All people (clears chip filters; leaves search/dept/floor alone)', Users)}
       {chip(
         'Active',
