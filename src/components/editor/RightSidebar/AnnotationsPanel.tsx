@@ -24,7 +24,12 @@ import type { Annotation } from '../../../types/annotations'
 export function AnnotationsPanel() {
   const annotations = useAnnotationsStore((s) => s.annotations)
   const setResolved = useAnnotationsStore((s) => s.setResolved)
-  const canEdit = useCan('editMap') || useCan('editRoster')
+  // Read both permissions unconditionally so the hook call order is stable —
+  // `useCan('a') || useCan('b')` would short-circuit and violate the
+  // rules-of-hooks lint rule.
+  const canEditMap = useCan('editMap')
+  const canEditRoster = useCan('editRoster')
+  const canEdit = canEditMap || canEditRoster
   const [showResolved, setShowResolved] = useState(false)
 
   const { open, resolved } = useMemo(() => {

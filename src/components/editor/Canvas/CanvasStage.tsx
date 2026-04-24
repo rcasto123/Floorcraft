@@ -75,7 +75,10 @@ export function CanvasStage() {
   const canEdit = useCan('editMap')
   // Annotations are explicitly `editMap || editRoster` — HR editors should
   // be able to leave notes on the map even though they can't move elements.
-  const canAnnotate = useCan('editMap') || useCan('editRoster')
+  // Read both permissions unconditionally so the hook call order is stable
+  // (`useCan('a') || useCan('b')` would short-circuit the second call).
+  const canEditRosterForAnnotations = useCan('editRoster')
+  const canAnnotate = canEdit || canEditRosterForAnnotations
   // Marquee (drag-rectangle) selection — only active when the select tool is
   // active, the user presses on empty stage space, and they start dragging.
   // `marqueeStartRef` holds the canvas-space anchor + whether shift was held

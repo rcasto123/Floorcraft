@@ -422,7 +422,10 @@ export function ElementLibrary() {
   // CanvasStage applies when the pin-tool click lands. HR editors can
   // leave notes on the map even though they can't move elements, so we
   // show the pin button when either permission grants access.
-  const canAnnotate = useCan('editMap') || useCan('editRoster')
+  // Read the second permission unconditionally so React-hooks rules stay
+  // happy (`useCan('a') || useCan('b')` would short-circuit).
+  const canEditRosterForAnnotations = useCan('editRoster')
+  const canAnnotate = canEdit || canEditRosterForAnnotations
   const activeTool = useCanvasStore((s) => s.activeTool)
   const setActiveTool = useCanvasStore((s) => s.setActiveTool)
   const addElement = useElementsStore((s) => s.addElement)

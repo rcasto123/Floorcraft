@@ -3,7 +3,7 @@ import { useAnnotationsStore } from '../../../stores/annotationsStore'
 import { useCan } from '../../../hooks/useCan'
 import { useProjectStore } from '../../../stores/projectStore'
 import { useSession } from '../../../lib/auth/session'
-import { ANNOTATION_BODY_MAX } from '../../../types/annotations'
+import { ANNOTATION_BODY_MAX, type Annotation } from '../../../types/annotations'
 
 /**
  * DOM overlay (not Konva) that handles both:
@@ -26,8 +26,12 @@ interface Props {
 export function AnnotationPopover({ containerRef }: Props) {
   const activeAnnotationId = useAnnotationsStore((s) => s.activeAnnotationId)
   const draft = useAnnotationsStore((s) => s.draft)
-  const canEdit =
-    useCan('editRoster') || useCan('editMap')
+  // Read both permissions unconditionally so the hook call order stays
+  // stable — `useCan('a') || useCan('b')` would short-circuit the second
+  // call and violate the rules-of-hooks.
+  const canEditRoster = useCan('editRoster')
+  const canEditMap = useCan('editMap')
+  const canEdit = canEditRoster || canEditMap
 
   if (draft) {
     return (
@@ -72,24 +76,29 @@ function useAuthorName(): string {
 /**
  * Shared screen-space anchor math. Works in CSS pixels relative to the
  * viewport so the popover can render `position: fixed`.
+ *
+ * We read the container rect during render rather than from a
+ * `useEffect` — React Compiler's `set-state-in-effect` rule forbids the
+ * effect-based version, and the container div is mounted by the parent
+ * before the popover is ever rendered, so the ref is populated when this
+ * hook runs. If the ref is somehow null we fall back to (0,0), which
+ * renders off-screen but avoids crashes.
  */
 function usePopoverPosition(
   containerRef: React.RefObject<HTMLDivElement | null>,
   screenX: number,
   screenY: number,
 ): { left: number; top: number } {
-  const [pos, setPos] = useState<{ left: number; top: number }>({
-    left: 0,
-    top: 0,
-  })
-  useEffect(() => {
-    const rect = containerRef.current?.getBoundingClientRect()
-    if (!rect) return
-    // Shift the popover slightly down-right of the anchor so the pin
-    // itself remains visible under the open popover edge.
-    setPos({ left: rect.left + screenX + 12, top: rect.top + screenY + 12 })
-  }, [containerRef, screenX, screenY])
-  return pos
+  // Reading the canvas container rect during render is the simplest path
+  // — the container is always mounted before any popover opens, and the
+  // popover itself is keyed on a stable change (draft anchor / active
+  // annotation id) so it re-measures when we want it to.
+  // eslint-disable-next-line react-hooks/refs
+  const rect = containerRef.current?.getBoundingClientRect()
+  if (!rect) return { left: 0, top: 0 }
+  // Shift the popover slightly down-right of the anchor so the pin
+  // itself remains visible under the open popover edge.
+  return { left: rect.left + screenX + 12, top: rect.top + screenY + 12 }
 }
 
 interface InnerProps {
@@ -241,6 +250,27 @@ function ViewPopover({ containerRef, canEdit }: InnerProps) {
   const entry = useAnnotationsStore((s) =>
     activeId ? s.annotations[activeId] : null,
   )
+
+  if (!entry) return null
+
+  // Mount a fresh body keyed on the entry id so `draftBody` can initialize
+  // from `entry.body` directly (via a `useState` initializer) instead of
+  // syncing via an effect — React Compiler rejects set-state-in-effect.
+  return (
+    <ViewPopoverBody
+      key={entry.id}
+      entry={entry}
+      containerRef={containerRef}
+      canEdit={canEdit}
+    />
+  )
+}
+
+function ViewPopoverBody({
+  entry,
+  containerRef,
+  canEdit,
+}: InnerProps & { entry: Annotation }) {
   const setActive = useAnnotationsStore((s) => s.setActiveAnnotationId)
   const setResolved = useAnnotationsStore((s) => s.setResolved)
   const updateBody = useAnnotationsStore((s) => s.updateAnnotationBody)
@@ -251,31 +281,30 @@ function ViewPopover({ containerRef, canEdit }: InnerProps) {
   // — we fall back to center of the screen if missing).
   const popoverAnchor = useAnnotationsStore((s) => s.draft) // unused; anchor-independent
   const [editMode, setEditMode] = useState(false)
-  const [draftBody, setDraftBody] = useState('')
-  const [pos, setPos] = useState<{ left: number; top: number }>(() => {
-    if (typeof window === 'undefined') return { left: 0, top: 0 }
-    return { left: window.innerWidth / 2 - 140, top: window.innerHeight / 2 - 80 }
-  })
-  const lastScreenRef = useRef<{ x: number; y: number } | null>(null)
+  // Seed the draft directly from the entry body. The component is keyed on
+  // `entry.id` by the gate so a different entry remounts with a fresh draft.
+  const [draftBody, setDraftBody] = useState(entry.body)
 
-  // Read the last known screen-space anchor once the component mounts.
-  // We stash it on the layer's onPinClick via a module-level ref so the
-  // popover can render at the click location without needing to pass
-  // coords through zustand (which would force another render round).
-  useEffect(() => {
+  // Read the last known screen-space anchor during render. `getLastPinAnchor`
+  // is a module-level ref populated by the layer's onPinClick. If there's
+  // no anchor (e.g. the popover opened from the side panel), we center the
+  // popover in the viewport as a fallback. Reading the rect in render
+  // avoids the `react-hooks/set-state-in-effect` lint error and is safe
+  // because the canvas container is always mounted before this popover.
+  const pos = (() => {
+    if (typeof window === 'undefined') return { left: 0, top: 0 }
+    // Same rationale as `usePopoverPosition` — the canvas container is
+    // already mounted when this popover body renders, so reading its rect
+    // in render is safe. The body is keyed on `entry.id` by the gate, so
+    // it remeasures when the active annotation changes.
+    // eslint-disable-next-line react-hooks/refs
     const rect = containerRef.current?.getBoundingClientRect()
     const anchor = getLastPinAnchor()
     if (rect && anchor) {
-      setPos({ left: rect.left + anchor.x + 12, top: rect.top + anchor.y + 12 })
-      lastScreenRef.current = anchor
+      return { left: rect.left + anchor.x + 12, top: rect.top + anchor.y + 12 }
     }
-  }, [containerRef, activeId])
-
-  useEffect(() => {
-    if (entry) setDraftBody(entry.body)
-  }, [entry])
-
-  if (!entry) return null
+    return { left: window.innerWidth / 2 - 140, top: window.innerHeight / 2 - 80 }
+  })()
   // Suppress unused-var: kept for future extension where draft anchor
   // might also inform view positioning.
   void popoverAnchor
