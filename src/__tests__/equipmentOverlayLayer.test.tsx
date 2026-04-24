@@ -2,10 +2,8 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { render } from '@testing-library/react'
 import { Stage } from 'react-konva'
-import {
-  EquipmentOverlayLayer,
-  computeRects,
-} from '../components/editor/Canvas/EquipmentOverlayLayer'
+import { EquipmentOverlayLayer } from '../components/editor/Canvas/EquipmentOverlayLayer'
+import { computeRects } from '../lib/equipmentOverlayRects'
 import { useElementsStore } from '../stores/elementsStore'
 import { useEmployeeStore } from '../stores/employeeStore'
 import type { CanvasElement, DeskElement } from '../types/elements'
