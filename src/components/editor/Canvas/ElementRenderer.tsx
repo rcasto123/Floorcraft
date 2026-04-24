@@ -54,7 +54,7 @@ import { snapToGrid, getSnappedPosition } from '../../../lib/geometry'
 import { elementBounds } from '../../../lib/elementBounds'
 import { ALIGNMENT_THRESHOLD } from '../../../lib/constants'
 import { isBookableRoom } from '../../../lib/roomBookings'
-import { useRoomBookingDialogStore } from './RoomBookingDialog'
+import { useRoomBookingDialogStore } from '../../../lib/roomBookingDialogStore'
 
 export function ElementRenderer() {
   const elements = useElementsStore((s) => s.elements)

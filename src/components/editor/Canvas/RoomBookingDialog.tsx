@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { create } from 'zustand'
 import { useRoomBookingsStore } from '../../../stores/roomBookingsStore'
 import { useUIStore } from '../../../stores/uiStore'
 import { useElementsStore } from '../../../stores/elementsStore'
@@ -7,25 +6,7 @@ import { useFloorStore } from '../../../stores/floorStore'
 import { useProjectStore } from '../../../stores/projectStore'
 import { useEmployeeStore } from '../../../stores/employeeStore'
 import { formatMinutes, todayIso, type BookingError } from '../../../lib/roomBookings'
-
-/**
- * Tiny ambient store for the room-booking dialog. Modeled like
- * `calibrateScaleStore`: one boolean-ish status + the element id
- * currently being booked, driven by canvas click handlers and the
- * context menu. Kept at the component-module level (not a full
- * top-level store file) because no consumer outside this dialog cares.
- */
-interface RoomBookingDialogState {
-  elementId: string | null
-  open: (elementId: string) => void
-  close: () => void
-}
-
-export const useRoomBookingDialogStore = create<RoomBookingDialogState>((set) => ({
-  elementId: null,
-  open: (elementId) => set({ elementId }),
-  close: () => set({ elementId: null }),
-}))
+import { useRoomBookingDialogStore } from '../../../lib/roomBookingDialogStore'
 
 /**
  * Half-hour step hour-range picker + note. Date defaults to today but
