@@ -32,7 +32,12 @@ export function ReservationsPage() {
   const create = useReservationsStore((s) => s.create)
   const cancel = useReservationsStore((s) => s.cancel)
   const pushToast = useToastStore((s) => s.push)
-  const canEdit = useCan('editRoster') || useCan('editMap')
+  // Read both permission flags unconditionally so the hook order is stable —
+  // `useCan('a') || useCan('b')` short-circuits the second call and breaks
+  // `react-hooks/rules-of-hooks` (both useCan calls must run every render).
+  const canEditRoster = useCan('editRoster')
+  const canEditMap = useCan('editMap')
+  const canEdit = canEditRoster || canEditMap
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<string>('')
 
