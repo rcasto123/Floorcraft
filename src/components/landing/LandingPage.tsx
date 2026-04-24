@@ -127,6 +127,24 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* Secondary CTA band */}
+      <section className="bg-gradient-to-r from-blue-600 to-indigo-700">
+        <div className="max-w-4xl mx-auto px-6 py-16 sm:py-20 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+            Start planning today.
+          </h2>
+          <p className="text-lg text-blue-100 mb-8">
+            Free for small teams. No credit card.
+          </p>
+          <Link
+            to="/signup"
+            className="inline-block px-8 py-3 bg-white text-blue-700 text-lg font-medium rounded-xl hover:bg-blue-50 shadow-lg transition-all"
+          >
+            Create your first office
+          </Link>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-gray-100 py-6 text-center text-sm text-gray-400">
         Floorcraft — Office layout &amp; seat management
