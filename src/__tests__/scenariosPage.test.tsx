@@ -22,7 +22,7 @@ function mkEmployee(over: Partial<Employee>): Employee {
     leaveNotes: null, departureDate: null, equipmentNeeds: [],
     equipmentStatus: 'not-needed', photoUrl: null, tags: [],
     accommodations: [], seatId: null, floorId: null,
-    pendingStatusChanges: [], createdAt: new Date().toISOString(),
+    pendingStatusChanges: [], sensitivityTags: [], createdAt: new Date().toISOString(),
     ...over,
   }
 }
