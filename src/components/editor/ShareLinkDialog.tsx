@@ -29,13 +29,17 @@ export function ShareLinkDialog({ open, onClose }: Props) {
   const [ttlSeconds, setTtlSeconds] = useState<number>(SHARE_LINK_TTL_OPTIONS[1].seconds)
   const [label, setLabel] = useState('')
   const [justCopied, setJustCopied] = useState<string | null>(null)
-  const [, forceTick] = useState(0)
+  // Track the current wall-clock time in state so expiry countdowns can be
+  // computed from a stable value in render (React Compiler's `impure-call`
+  // rule forbids `Date.now()` inside the render body). The interval below
+  // refreshes this every 15s while the dialog is open.
+  const [nowMs, setNowMs] = useState<number>(() => Date.now())
 
   // Countdown re-render tick. Only runs while the dialog is open — no
   // reason to wake the tab up when the user isn't looking at expiry.
   useEffect(() => {
     if (!open) return
-    const id = setInterval(() => forceTick((n) => n + 1), 15_000)
+    const id = setInterval(() => setNowMs(Date.now()), 15_000)
     return () => clearInterval(id)
   }, [open])
 
@@ -136,7 +140,7 @@ export function ShareLinkDialog({ open, onClose }: Props) {
           <ul className="space-y-2">
             {activeLinks.map((l) => {
               const url = buildShareUrl(slug, l.token)
-              const expiresMs = new Date(l.expiresAt).getTime() - Date.now()
+              const expiresMs = new Date(l.expiresAt).getTime() - nowMs
               const expired = expiresMs <= 0
               const status = l.revokedAt
                 ? 'Revoked'

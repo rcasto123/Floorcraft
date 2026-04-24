@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { parseShareToken } from '../../lib/shareLinkUrl'
 import { useShareLinksStore } from '../../stores/shareLinksStore'
@@ -27,25 +27,25 @@ export function ShareView() {
   const [searchParams] = useSearchParams()
   const token = parseShareToken(searchParams)
 
+  // Subscribe to `links` so the component re-renders when store contents
+  // change (e.g. a concurrent revoke); the derivation below reads the
+  // current snapshot via `isTokenValid`.
   const links = useShareLinksStore((s) => s.links)
   const isTokenValid = useShareLinksStore((s) => s.isTokenValid)
+  void links
   const employees = useEmployeeStore((s) => s.employees)
   const floors = useFloorStore((s) => s.floors)
   const elements = useElementsStore((s) => s.elements)
 
-  const [validity, setValidity] = useState<'checking' | 'valid' | 'invalid'>('checking')
-
-  // Resolve the token against the store. We do this in an effect (not a
-  // render-time branch) so switching from invalid → valid via hot reload
-  // in dev doesn't stall on a stale state.
-  useEffect(() => {
-    if (!token) {
-      setValidity('invalid')
-      return
-    }
-    const ok = isTokenValid(token)
-    setValidity(ok ? 'valid' : 'invalid')
-  }, [token, isTokenValid, links])
+  // Derive validity directly from the token + store instead of routing it
+  // through `useState` + an effect. That keeps the render pure and avoids
+  // the `set-state-in-effect` lint (per the codebase precedent in
+  // `AnnotationPopover`: compute on render, re-subscribe to inputs via the
+  // `links` selector so store updates re-run the derivation).
+  const validity: 'valid' | 'invalid' = useMemo(() => {
+    if (!token) return 'invalid'
+    return isTokenValid(token) ? 'valid' : 'invalid'
+  }, [token, isTokenValid])
 
   // Install the `shareViewer` role on successful validation — every
   // `useCan(...)` gate downstream then denies writes and PII. We also
@@ -69,9 +69,6 @@ export function ShareView() {
 
   const redacted = useMemo(() => redactEmployeeMap(employees), [employees])
 
-  if (validity === 'checking') {
-    return <div className="p-6 text-sm text-gray-500">Checking link…</div>
-  }
   if (validity === 'invalid') {
     return (
       <div className="p-6 text-sm" role="alert">
