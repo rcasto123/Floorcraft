@@ -31,6 +31,7 @@ function emp(id: string, over: Partial<Employee> = {}): Employee {
     photoUrl: null,
     tags: [],
     accommodations: [],
+    sensitivityTags: [],
     pendingStatusChanges: [],
     seatId: null,
     floorId: null,
