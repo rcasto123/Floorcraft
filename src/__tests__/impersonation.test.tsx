@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach } from 'vitest'
-import { renderHook, act } from '@testing-library/react'
+import { render, renderHook, act, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { useCan } from '../hooks/useCan'
 import { useProjectStore } from '../stores/projectStore'
+import { ViewAsMenu } from '../components/editor/ViewAsMenu'
 
 /**
  * Owner-only "view as role" impersonation is a client-side UI gating
@@ -104,5 +106,33 @@ describe('setImpersonatedRole owner guard', () => {
       useProjectStore.getState().setCurrentOfficeRole('editor')
     })
     expect(useProjectStore.getState().impersonatedRole).toBeNull()
+  })
+})
+
+describe('ViewAsMenu visibility', () => {
+  function mount() {
+    return render(
+      <MemoryRouter>
+        <ViewAsMenu />
+      </MemoryRouter>,
+    )
+  }
+
+  it('owner sees the "View as…" trigger', () => {
+    useProjectStore.setState({ currentOfficeRole: 'owner', impersonatedRole: null } as any)
+    mount()
+    expect(screen.getByRole('button', { name: /view as/i })).toBeInTheDocument()
+  })
+
+  it('editor does not see the trigger (owner-only)', () => {
+    useProjectStore.setState({ currentOfficeRole: 'editor', impersonatedRole: null } as any)
+    const { container } = mount()
+    expect(container.firstChild).toBeNull()
+  })
+
+  it('viewer does not see the trigger (owner-only)', () => {
+    useProjectStore.setState({ currentOfficeRole: 'viewer', impersonatedRole: null } as any)
+    const { container } = mount()
+    expect(container.firstChild).toBeNull()
   })
 })
