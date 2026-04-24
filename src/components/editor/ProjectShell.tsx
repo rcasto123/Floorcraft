@@ -8,6 +8,7 @@ import { CSVImportSummaryModal } from './CSVImportSummaryModal'
 import { ExportDialog } from './ExportDialog'
 import { NewProjectModal } from '../dashboard/NewProjectModal'
 import { ShareModal } from './ShareModal'
+import { CalibrateScaleModal } from './CalibrateScaleModal'
 import { EmployeeDirectory } from '../reports/EmployeeDirectory'
 import { ConflictModal } from './ConflictModal'
 import { Toaster } from '../common/Toaster'
@@ -248,6 +249,7 @@ export function ProjectShell() {
       <ExportDialog />
       <NewProjectModal />
       <ShareModal />
+      <CalibrateScaleModal />
       {employeeDirectoryOpen && <EmployeeDirectory />}
       <Toaster />
       {conflict && (
