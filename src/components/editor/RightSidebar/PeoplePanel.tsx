@@ -6,6 +6,9 @@ import { useVisibleEmployees } from '../../../hooks/useVisibleEmployees'
 import { redactEmployee } from '../../../lib/redactEmployee'
 import { useState } from 'react'
 import { Search, Plus, Upload, Users, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
+
+const INPUT_CLASS =
+  'w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400 disabled:bg-gray-50 disabled:text-gray-500 bg-white dark:bg-gray-900'
 import { useShallow } from 'zustand/react/shallow'
 import { Link, useParams } from 'react-router-dom'
 
@@ -109,10 +112,10 @@ export function PeoplePanel() {
   return (
     <div className="flex flex-col h-full">
       {/* Header actions */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between pb-2.5 border-b border-gray-100 dark:border-gray-800 mb-3">
         <div className="flex items-center gap-2">
-          <Users size={14} className="text-gray-500 dark:text-gray-400" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{totalCount} people</span>
+          <Users size={16} className="text-gray-500 dark:text-gray-400" />
+          <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{totalCount} people</span>
           {rosterHref && (
             <Link
               to={rosterHref}
@@ -127,14 +130,14 @@ export function PeoplePanel() {
         <div className="flex gap-1">
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="flex items-center gap-1 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
             <Plus size={12} />
             Add
           </button>
           <button
             onClick={() => setCsvImportOpen(true)}
-            className="flex items-center gap-1 px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-800 rounded hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50"
           >
             <Upload size={12} />
             CSV
@@ -144,9 +147,9 @@ export function PeoplePanel() {
 
       {/* Inline add form */}
       {showAddForm && (
-        <div className="flex flex-col gap-1.5 mb-3 p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+        <div className="rounded-lg border border-gray-200 dark:border-gray-800 p-3 bg-gray-50 dark:bg-gray-900/50 mb-3 flex flex-col gap-2">
           <input
-            className="w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
+            className={INPUT_CLASS}
             placeholder="Name"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
@@ -156,7 +159,7 @@ export function PeoplePanel() {
             autoFocus
           />
           <input
-            className="w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
+            className={INPUT_CLASS}
             placeholder="Email"
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
@@ -164,31 +167,44 @@ export function PeoplePanel() {
               if (e.key === 'Enter') handleAddEmployee()
             }}
           />
-          <div className="flex gap-1">
-            <input
-              className="flex-1 text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400"
-              placeholder="Department"
-              value={newDepartment}
-              onChange={(e) => setNewDepartment(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleAddEmployee()
+          <input
+            className={INPUT_CLASS}
+            placeholder="Department"
+            value={newDepartment}
+            onChange={(e) => setNewDepartment(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleAddEmployee()
+            }}
+          />
+          <div className="flex items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setShowAddForm(false)
+                setNewName('')
+                setNewEmail('')
+                setNewDepartment('')
               }}
-            />
+              className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:underline"
+            >
+              Cancel
+            </button>
             <button
               onClick={handleAddEmployee}
               disabled={!newName.trim()}
-              className="p-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-40"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-40"
               title="Add employee"
               aria-label="Add employee"
             >
               <Plus size={14} />
+              Add
             </button>
           </div>
         </div>
       )}
 
       {/* Search bar */}
-      <div className="relative mb-2">
+      <div className="relative mb-3">
         <Search size={14} className="absolute left-2.5 top-2.5 text-gray-400 dark:text-gray-500" />
         <input
           className="w-full pl-8 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:border-blue-400"
@@ -202,7 +218,7 @@ export function PeoplePanel() {
       <div className="flex gap-1.5 mb-3 flex-wrap">
         <button
           onClick={() => setFilterBy('all')}
-          className={`px-2.5 py-1 text-xs rounded-full font-medium transition-colors ${
+          className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'all'
               ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
               : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -212,7 +228,7 @@ export function PeoplePanel() {
         </button>
         <button
           onClick={() => setFilterBy('unassigned')}
-          className={`px-2.5 py-1 text-xs rounded-full font-medium transition-colors ${
+          className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'unassigned'
               ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300'
               : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -222,7 +238,7 @@ export function PeoplePanel() {
         </button>
         <button
           onClick={() => setFilterBy('new-hires')}
-          className={`px-2.5 py-1 text-xs rounded-full font-medium transition-colors ${
+          className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'new-hires'
               ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
               : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
