@@ -8,8 +8,32 @@ import {
   type AnnotationAnchor,
 } from '../types/annotations'
 
+/**
+ * A pending-create session lives here while the user is filling out the
+ * popover. It's kept on the store (rather than as component state on
+ * CanvasStage) so the popover component can render as a root-level
+ * overlay without prop-drilling a callback into ten deep call sites.
+ */
+export interface AnnotationDraft {
+  anchor: AnnotationAnchor
+  /** Screen-space anchor coords (px) — where the popover should render. */
+  screenX: number
+  screenY: number
+}
+
 interface AnnotationsState {
   annotations: Record<string, Annotation>
+
+  /**
+   * Id of the annotation whose popover is open (click-to-view). `null`
+   * when nothing is open. Not tracked by temporal/partialize — pure UI.
+   */
+  activeAnnotationId: string | null
+  /**
+   * In-flight create session. Set by CanvasStage on pin-tool click (or by
+   * the element context-menu entry); cleared on save / cancel.
+   */
+  draft: AnnotationDraft | null
 
   /**
    * Insert an annotation from pre-built parts. Returns the new id. The
@@ -40,6 +64,10 @@ interface AnnotationsState {
   setAnnotations: (next: Record<string, Annotation>) => void
 
   clearAll: () => void
+
+  // UI state (transient, not undoable)
+  setActiveAnnotationId: (id: string | null) => void
+  setDraft: (draft: AnnotationDraft | null) => void
 }
 
 function clampBody(body: string): string {
@@ -61,6 +89,8 @@ export const useAnnotationsStore = create<AnnotationsState>()(
   temporal(
     (set) => ({
       annotations: {},
+      activeAnnotationId: null,
+      draft: null,
 
       addAnnotation: ({ body, authorName, anchor, createdAt }) => {
         const id = nanoid()
@@ -128,7 +158,11 @@ export const useAnnotationsStore = create<AnnotationsState>()(
 
       setAnnotations: (next) => set({ annotations: next }),
 
-      clearAll: () => set({ annotations: {} }),
+      clearAll: () =>
+        set({ annotations: {}, activeAnnotationId: null, draft: null }),
+
+      setActiveAnnotationId: (id) => set({ activeAnnotationId: id }),
+      setDraft: (draft) => set({ draft }),
     }),
     {
       limit: UNDO_LIMIT,
