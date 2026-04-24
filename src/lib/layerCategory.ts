@@ -69,6 +69,13 @@ export function categoryForElement(el: CanvasElement): LayerCategory {
     case 'counter':
     case 'divider':
     case 'planter':
+    // Furniture catalog — decorative/context props. See
+    // `src/types/elements.ts`. Grouped under the "furniture" toggle so
+    // hiding furniture also hides these.
+    case 'sofa':
+    case 'plant':
+    case 'printer':
+    case 'whiteboard':
       return 'furniture'
 
     default:
