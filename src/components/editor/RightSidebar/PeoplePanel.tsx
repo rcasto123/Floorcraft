@@ -251,8 +251,22 @@ export function PeoplePanel() {
       {/* Employee list grouped by department */}
       <div className="flex-1 overflow-y-auto -mx-3 px-3">
         {filteredEmployees.length === 0 ? (
-          <div className="text-center text-gray-400 dark:text-gray-500 text-sm py-8">
-            No people found. Add manually or import CSV.
+          <div className="flex flex-col items-center justify-center py-10 px-4 text-center">
+            <div aria-hidden className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-3">
+              <Users size={20} className="text-gray-400 dark:text-gray-500" />
+            </div>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">No people found</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4 max-w-[200px]">
+              {searchQuery ? 'Try a different search term, or import a CSV to get started.' : 'Add a teammate manually or bulk-import from CSV.'}
+            </p>
+            <div className="flex gap-2">
+              <button onClick={() => setShowAddForm(true)} className="px-3 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Add person
+              </button>
+              <button onClick={() => setCsvImportOpen(true)} className="px-3 py-1.5 text-xs font-medium border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                Import CSV
+              </button>
+            </div>
           </div>
         ) : (
           <div className="flex flex-col gap-1">
