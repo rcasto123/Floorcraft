@@ -286,7 +286,7 @@ export function PeoplePanel() {
                         return (
                           <div
                             key={employee.id}
-                            className={`flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 group ${canEdit ? 'cursor-grab' : 'cursor-default'}`}
+                            className={`flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 group ${canEdit ? 'cursor-grab' : 'cursor-default'}`}
                             draggable={canEdit}
                             title={!canEdit ? 'Read-only access. Contact an editor to make changes.' : undefined}
                             onDragStart={(e) => {
@@ -306,7 +306,7 @@ export function PeoplePanel() {
                           >
                             {/* Avatar */}
                             <div
-                              className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
+                              className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
                               style={{ backgroundColor: deptColor }}
                             >
                               {getInitials(employee.name)}
@@ -317,26 +317,29 @@ export function PeoplePanel() {
                                 {employee.name}
                               </div>
                               {employee.title && (
-                                <div className="text-[10px] text-gray-400 dark:text-gray-500 truncate">
+                                <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
                                   {employee.title}
                                 </div>
                               )}
                             </div>
-                            {/* Assignment status */}
-                            <div className="flex items-center gap-1 flex-shrink-0">
-                              <div
-                                className={`w-1.5 h-1.5 rounded-full ${
-                                  employee.seatId ? 'bg-green-500' : 'bg-red-400'
-                                }`}
-                              />
+                            {/* Assignment status pill */}
+                            {employee.seatId ? (
                               <span
-                                className={`text-[10px] ${
-                                  employee.seatId ? 'text-green-600 dark:text-green-400' : 'text-red-500'
-                                }`}
+                                title={employee.seatId}
+                                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-300 flex-shrink-0"
                               >
-                                {employee.seatId || 'Unassigned'}
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
+                                <span className="truncate max-w-[80px]">{employee.seatId}</span>
                               </span>
-                            </div>
+                            ) : (
+                              <span
+                                title="Unassigned"
+                                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 flex-shrink-0"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0" />
+                                <span className="truncate max-w-[80px]">Unassigned</span>
+                              </span>
+                            )}
                           </div>
                         )
                       })}
