@@ -1,14 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUIStore } from '../../stores/uiStore'
 import { useFloorStore } from '../../stores/floorStore'
 import { useVisibleEmployees } from '../../hooks/useVisibleEmployees'
 import { useAllOfficesIndex } from '../../hooks/useAllOfficesIndex'
 import { searchAllOffices, type CrossOfficeResult } from '../../lib/crossOfficeSearch'
-import {
-  CrossOfficeResultsGroup,
-  crossOfficeRowKey,
-} from './CommandPalette/CrossOfficeResultsGroup'
+import { crossOfficeNavPath, crossOfficeRowKey } from '../../lib/crossOfficePaletteNav'
+import { CrossOfficeResultsGroup } from './CommandPalette/CrossOfficeResultsGroup'
 import {
   filterCommandItems,
   SECTION_LABELS,
@@ -17,27 +15,8 @@ import {
   type CommandSection,
 } from '../../lib/commandPaletteFilter'
 
-/** Delay (ms) before a keystroke triggers cross-office search. */
-const CROSS_OFFICE_DEBOUNCE_MS = 150
 /** Cap on cross-office result rows — keeps the palette from unbounded growth. */
 const MAX_CROSS_OFFICE_RESULTS = 30
-
-/**
- * Build the navigation target for a cross-office match. Employees go to
- * the destination office's roster with `?employee=<id>`; elements and
- * neighborhoods go to the map with `?focus=<id>` so the target view can
- * pan/zoom to the entity on mount (see `MapView`'s focus effect).
- * Selecting another office itself just navigates to its map.
- */
-export function crossOfficeNavPath(
-  teamSlug: string,
-  result: CrossOfficeResult,
-): string {
-  const base = `/t/${teamSlug}/o/${result.officeSlug}`
-  if (result.kind === 'employee') return `${base}/roster?employee=${result.id}`
-  if (result.kind === 'office') return `${base}/map`
-  return `${base}/map?focus=${result.id}`
-}
 
 /** People section is capped so a 2000-employee roster doesn't flood the DOM. */
 const MAX_PEOPLE_RESULTS = 8
@@ -92,28 +71,21 @@ function CommandPaletteBody() {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [crossHighlightKey, setCrossHighlightKey] = useState<string | null>(null)
 
-  // Debounced query drives the cross-office search. Re-running the
-  // substring scan on every keystroke is cheap in absolute terms, but a
-  // 150ms guard still shields against sustained typing bursts on low-end
-  // hardware — matches the spec's "keydown-debounced" perf guardrail.
-  const [debouncedQuery, setDebouncedQuery] = useState('')
-  useEffect(() => {
-    if (query.length < 2) {
-      setDebouncedQuery('')
-      return
-    }
-    const t = setTimeout(() => setDebouncedQuery(query), CROSS_OFFICE_DEBOUNCE_MS)
-    return () => clearTimeout(t)
-  }, [query])
+  // Deferred query drives the cross-office search. `useDeferredValue`
+  // lets React schedule the heavier cross-office scan at a lower priority
+  // than the input's visual update, so sustained typing bursts never
+  // block the keystroke — matches the spec's "keydown-debounced" perf
+  // guardrail without the setState-in-effect dance.
+  const deferredQuery = useDeferredValue(query)
 
   const allOfficesIndex = useAllOfficesIndex(teamSlug)
   const crossResults = useMemo<CrossOfficeResult[]>(() => {
-    if (debouncedQuery.length < 2) return []
-    return searchAllOffices(debouncedQuery, allOfficesIndex).slice(
+    if (deferredQuery.length < 2) return []
+    return searchAllOffices(deferredQuery, allOfficesIndex).slice(
       0,
       MAX_CROSS_OFFICE_RESULTS,
     )
-  }, [debouncedQuery, allOfficesIndex])
+  }, [deferredQuery, allOfficesIndex])
 
   // Bump the modal ref-count so other global hotkeys (arrow nudges,
   // Cmd+A, etc) stand down while the palette owns the keyboard. Mirrors

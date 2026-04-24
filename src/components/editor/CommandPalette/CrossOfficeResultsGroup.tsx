@@ -1,4 +1,5 @@
 import type { CrossOfficeKind, CrossOfficeResult } from '../../../lib/crossOfficeSearch'
+import { crossOfficeRowKey } from '../../../lib/crossOfficePaletteNav'
 
 interface Props {
   results: CrossOfficeResult[]
@@ -63,7 +64,7 @@ export function CrossOfficeResultsGroup({ results, highlightedId, onHover, onPic
           </div>
           <ul>
             {group.items.map((item) => {
-              const rowKey = `${item.officeId}:${item.kind}:${item.id}`
+              const rowKey = crossOfficeRowKey(item)
               const active = highlightedId === rowKey
               return (
                 <li key={rowKey}>
@@ -102,9 +103,4 @@ export function CrossOfficeResultsGroup({ results, highlightedId, onHover, onPic
       ))}
     </li>
   )
-}
-
-/** Stable row key — mirrors what CommandPalette uses for navigation. */
-export function crossOfficeRowKey(r: CrossOfficeResult): string {
-  return `${r.officeId}:${r.kind}:${r.id}`
 }
