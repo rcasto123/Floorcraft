@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { useRef } from 'react'
 import { SeatDetailPopover } from '../components/editor/Canvas/SeatDetailPopover'
 import { useSeatDetailStore } from '../stores/seatDragStore'
@@ -41,7 +41,6 @@ function NavigateProbe({ onNavigate }: { onNavigate: (path: string) => void }) {
   // react-router-dom v6 doesn't expose the current location via a ref
   // — we probe via a component that reports on every render. The test
   // only cares about the last reported path.
-  const { useLocation } = require('react-router-dom') as typeof import('react-router-dom')
   const loc = useLocation()
   onNavigate(loc.pathname + loc.search)
   return null
