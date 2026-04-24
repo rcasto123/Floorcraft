@@ -260,14 +260,22 @@ export function PeoplePanel() {
               const deptEmployees = grouped.get(dept)!
               const isCollapsed = collapsedDepts.has(dept)
               return (
-                <div key={dept}>
+                <div key={dept} className="border-t border-gray-100 dark:border-gray-800 first:border-t-0 pt-2 mt-2 first:mt-0 first:pt-0">
                   <button
                     onClick={() => toggleDept(dept)}
-                    className="flex items-center gap-1.5 w-full px-1 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded"
+                    className="flex items-center gap-1.5 w-full px-1 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded"
                   >
-                    {isCollapsed ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
-                    <span>{dept}</span>
-                    <span className="text-gray-400 dark:text-gray-500 font-normal">({deptEmployees.length})</span>
+                    {isCollapsed ? (
+                      <ChevronRight size={12} className="text-gray-500 dark:text-gray-400" />
+                    ) : (
+                      <ChevronDown size={12} className="text-gray-500 dark:text-gray-400" />
+                    )}
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                      {dept}
+                    </span>
+                    <span className="ml-auto px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-[10px] font-medium text-gray-600 dark:text-gray-300 tabular-nums">
+                      {deptEmployees.length}
+                    </span>
                   </button>
                   {!isCollapsed && (
                     <div className="flex flex-col gap-0.5 ml-1">
