@@ -144,7 +144,7 @@ export function LandingPage() {
           </p>
           <Link
             to="/signup"
-            className="inline-block px-8 py-3 bg-white text-blue-700 text-lg font-medium rounded-xl hover:bg-blue-50 shadow-lg transition-all"
+            className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-blue-700 dark:text-blue-300 text-lg font-medium rounded-xl hover:bg-blue-50 dark:hover:bg-blue-950/40 shadow-lg transition-all"
           >
             Create your first office
           </Link>

@@ -123,6 +123,11 @@ const FALLBACK_CONTEXT: ThemeContextValue = {
   setTheme: () => {},
 }
 
+// Co-locating `useTheme` with the provider is consistent with how
+// `AuthProvider`/`useSession` are structured in this codebase. Splitting
+// the hook into its own file would just churn imports for no runtime
+// benefit, so we silence the react-refresh rule here.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext)
   return ctx ?? FALLBACK_CONTEXT

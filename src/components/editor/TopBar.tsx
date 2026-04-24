@@ -250,7 +250,7 @@ export function TopBar() {
         <button
           onClick={() => undo()}
           disabled={!canUndo}
-          className={`p-1.5 rounded text-gray-600 dark:text-gray-400 ${canUndo ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
+          className={`p-1.5 rounded text-gray-600 dark:text-gray-300 dark:text-gray-400 ${canUndo ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
           title={canUndo ? 'Undo (Ctrl+Z)' : 'Nothing to undo'}
           aria-label="Undo"
         >
@@ -259,7 +259,7 @@ export function TopBar() {
         <button
           onClick={() => redo()}
           disabled={!canRedo}
-          className={`p-1.5 rounded text-gray-600 dark:text-gray-400 ${canRedo ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
+          className={`p-1.5 rounded text-gray-600 dark:text-gray-300 dark:text-gray-400 ${canRedo ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
           title={canRedo ? 'Redo (Ctrl+Shift+Z)' : 'Nothing to redo'}
           aria-label="Redo"
         >
