@@ -110,7 +110,7 @@ const shortcutGroups: ShortcutGroup[] = [
  * because `navigator.platform` is deprecated and increasingly
  * returns generic strings on modern browsers.
  */
-export function isMacPlatform(): boolean {
+function isMacPlatform(): boolean {
   if (typeof navigator === 'undefined') return false
   const platform = navigator.platform || ''
   if (/Mac|iPhone|iPad|iPod/i.test(platform)) return true
@@ -125,7 +125,7 @@ export function isMacPlatform(): boolean {
  * are returned verbatim as their own tokens so the renderer can
  * place a non-keycap glue character between pills.
  */
-export function formatKeys(combo: string, mac: boolean): Array<{ kind: 'key' | 'sep'; text: string }> {
+function formatKeys(combo: string, mac: boolean): Array<{ kind: 'key' | 'sep'; text: string }> {
   // Normalize an alternative-separator (`/`, ` or `, `,`) into a single
   // token type; the splitter below preserves both keycap segments
   // around it so the UI can render "Delete or Backspace" with two
@@ -200,6 +200,15 @@ function KeyCombo({ combo, mac }: { combo: string; mac: boolean }) {
 export function KeyboardShortcutsOverlay() {
   const open = useUIStore((s) => s.shortcutsOverlayOpen)
   const setOpen = useUIStore((s) => s.setShortcutsOverlayOpen)
+  // Mount the inner content lazily so query state is fresh on each
+  // open without needing a setState-in-effect to reset it. Closing
+  // the overlay unmounts the inner component, garbage-collecting
+  // the search query alongside it.
+  if (!open) return null
+  return <OverlayContent setOpen={setOpen} />
+}
+
+function OverlayContent({ setOpen }: { setOpen: (open: boolean) => void }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   // Detected per render. Cheap (a single regex on a short string),
@@ -209,26 +218,22 @@ export function KeyboardShortcutsOverlay() {
   // very first render saw.
   const mac = isMacPlatform()
 
-  // Auto-focus the search input when the overlay opens, and reset
-  // the query so each open starts from a clean slate.
+  // Auto-focus the search input on mount. requestAnimationFrame so
+  // the input exists in the DOM by the time we focus — useEffect
+  // runs after commit but jsdom + React 18 occasionally lose focus
+  // calls fired during the same tick.
   useEffect(() => {
-    if (!open) return
-    setQuery('')
-    // requestAnimationFrame so the input exists in the DOM by the
-    // time we focus — useEffect runs after commit but jsdom + React
-    // 18 occasionally lose focus calls fired during the same tick.
     const id = requestAnimationFrame(() => {
       inputRef.current?.focus()
     })
     return () => cancelAnimationFrame(id)
-  }, [open])
+  }, [])
 
   // Escape handler. The global `useKeyboardShortcuts` hook stands
   // down while a modal is open, so we own dismissal here. Bound to
   // window so it fires even if focus has moved off the input (e.g.
   // user clicked a kbd row).
   useEffect(() => {
-    if (!open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
@@ -238,7 +243,7 @@ export function KeyboardShortcutsOverlay() {
     }
     window.addEventListener('keydown', onKey, { capture: true })
     return () => window.removeEventListener('keydown', onKey, { capture: true } as EventListenerOptions)
-  }, [open, setOpen])
+  }, [setOpen])
 
   // Filter every group through the query, dropping any that have no
   // surviving rows so the layout stays tight.
@@ -252,8 +257,6 @@ export function KeyboardShortcutsOverlay() {
     () => filteredGroups.reduce((sum, g) => sum + g.rows.length, 0),
     [filteredGroups],
   )
-
-  if (!open) return null
 
   return (
     <div
