@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
+import { Pencil, Users, Share2 } from 'lucide-react'
 import { useSession } from '../../lib/auth/session'
 import { useMyTeams } from '../../lib/teams/useMyTeams'
 import { FloorPlanHero } from './FloorPlanHero'
 import { BrowserFrame } from './BrowserFrame'
+import { FeatureCard } from './FeatureCard'
 
 /**
  * Public landing page at `/`.
@@ -81,6 +83,30 @@ export function LandingPage() {
               <FloorPlanHero />
             </BrowserFrame>
           </div>
+        </div>
+      </section>
+
+      {/* Feature grid */}
+      <section className="max-w-5xl mx-auto px-6 pb-20 sm:pb-24">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 text-center mb-10">
+          What you can do
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          <FeatureCard
+            icon={Pencil}
+            title="Draw in minutes"
+            description="Drop walls, desks, and rooms on an infinite canvas. Snap-to-grid keeps everything clean without fighting alignment."
+          />
+          <FeatureCard
+            icon={Users}
+            title="Assign the whole team"
+            description="Drag employees onto seats, or import from CSV. Color-coded neighborhoods make it obvious who sits where."
+          />
+          <FeatureCard
+            icon={Share2}
+            title="Share a living plan"
+            description="One-click view-only links for stakeholders. Presentation mode for the all-hands."
+          />
         </div>
       </section>
 
