@@ -9,7 +9,7 @@ import { DEFAULT_CANVAS_SETTINGS } from '../types/project'
 // `useCan` proxies to the project store + permissions table. Mocking it
 // directly lets each test pin the `editMap` answer without reaching for
 // realistic role/membership setup. Same pattern as planHealthPill.test.tsx.
-const useCanMock = vi.fn(() => true)
+const useCanMock = vi.fn((_action: string): boolean => true)
 vi.mock('../hooks/useCan', () => ({
   useCan: (action: string) => useCanMock(action),
 }))
