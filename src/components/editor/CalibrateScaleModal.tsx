@@ -29,6 +29,15 @@ const CALIBRATION_UNITS: readonly LengthUnit[] = ['ft', 'in', 'm', 'cm'] as cons
 
 export function CalibrateScaleModal() {
   const status = useCalibrateScaleStore((s) => s.status)
+  const isOpen = status === 'awaiting-distance'
+  // Split into outer gate + inner body so each open is a fresh mount.
+  // That lets the inner component initialize state from `useState` directly
+  // (no setState-in-effect reset pattern, which the lint rule discourages).
+  if (!isOpen) return null
+  return <CalibrateScaleModalBody />
+}
+
+function CalibrateScaleModalBody() {
   const firstPoint = useCalibrateScaleStore((s) => s.firstPoint)
   const secondPoint = useCalibrateScaleStore((s) => s.secondPoint)
   const commit = useCalibrateScaleStore((s) => s.commit)
@@ -38,30 +47,16 @@ export function CalibrateScaleModal() {
   const [unit, setUnit] = useState<LengthUnit>('ft')
   const [error, setError] = useState<string | null>(null)
 
-  const isOpen = status === 'awaiting-distance'
-
-  // Modal ref-count: while open, global hotkeys (Cmd+A, nudges, etc.)
+  // Modal ref-count: while mounted, global hotkeys (Cmd+A, nudges, etc.)
   // should stand down so typing into the distance input feels normal.
   // The focus-guard in useKeyboardShortcuts catches INPUTs too, but this
   // belt-and-braces also covers Escape-close precedence.
   const registerModalOpen = useUIStore((s) => s.registerModalOpen)
   const registerModalClose = useUIStore((s) => s.registerModalClose)
   useEffect(() => {
-    if (!isOpen) return
     registerModalOpen()
     return () => registerModalClose()
-  }, [isOpen, registerModalOpen, registerModalClose])
-
-  // Reset the form whenever the modal is (re)opened so a previous
-  // aborted session doesn't pre-fill the input with a stale value.
-  useEffect(() => {
-    if (isOpen) {
-      setValue('')
-      setError(null)
-    }
-  }, [isOpen])
-
-  if (!isOpen) return null
+  }, [registerModalOpen, registerModalClose])
 
   const parsed = Number(value)
   const valid = value.trim() !== '' && Number.isFinite(parsed) && parsed > 0
