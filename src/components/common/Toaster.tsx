@@ -113,6 +113,11 @@ function ToastRow({ item, paused, reduced, onDismiss, onPauseStart, onPauseEnd }
   const [entered, setEntered] = useState(false)
   const [exiting, setExiting] = useState(false)
   const [dragX, setDragX] = useState(0)
+  // Dragging needs to drive inline styles (transform + transition) so
+  // it lives in state, not a ref, to satisfy the react-hooks/refs rule.
+  // A parallel ref mirrors it so synchronous pointer-move handlers read
+  // the latest value before React has re-rendered.
+  const [dragging, setDragging] = useState(false)
   const draggingRef = useRef(false)
   const startXRef = useRef(0)
   const pointerDownRef = useRef(false)
@@ -156,6 +161,7 @@ function ToastRow({ item, paused, reduced, onDismiss, onPauseStart, onPauseEnd }
     if (target.closest('button')) return
     pointerDownRef.current = true
     draggingRef.current = true
+    setDragging(true)
     startXRef.current = e.clientX
     onPauseStart()
     e.currentTarget.setPointerCapture(e.pointerId)
@@ -170,6 +176,7 @@ function ToastRow({ item, paused, reduced, onDismiss, onPauseStart, onPauseEnd }
   const finishDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (!draggingRef.current) return
     draggingRef.current = false
+    setDragging(false)
     pointerDownRef.current = false
     onPauseEnd()
     if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
@@ -186,7 +193,7 @@ function ToastRow({ item, paused, reduced, onDismiss, onPauseStart, onPauseEnd }
   // Compose the transform. Enter slides from +8px; exit slides to
   // +32px (further off-screen feel). Drag overrides both while active.
   let translateX = 0
-  if (draggingRef.current || dragX !== 0) {
+  if (dragging || dragX !== 0) {
     translateX = dragX
   } else if (exiting) {
     translateX = 32
@@ -201,7 +208,7 @@ function ToastRow({ item, paused, reduced, onDismiss, onPauseStart, onPauseEnd }
     transform: reduced ? undefined : `translateX(${translateX}px)`,
     // Only transition when NOT actively dragging — during drag we want
     // the toast to track the pointer 1:1, not ease toward it.
-    transition: draggingRef.current
+    transition: dragging
       ? 'none'
       : exiting
         ? `opacity ${EXIT_MS}ms ease-in${reduced ? '' : `, transform ${EXIT_MS}ms ease-in`}`
