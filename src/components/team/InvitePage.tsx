@@ -171,7 +171,7 @@ export function InvitePage() {
           <Button
             variant="primary"
             onClick={accept}
-            disabled={busy || inviteInvalid || !previewLoaded}
+            disabled={busy || inviteInvalid}
             className="w-full sm:w-auto justify-center"
           >
             {busy ? 'Joining…' : 'Accept invite'}
