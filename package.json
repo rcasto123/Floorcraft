@@ -19,7 +19,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@supabase/supabase-js": "^2.104.0",
-    "@tanstack/react-virtual": "^3.13.23",
+    "@tanstack/react-virtual": "^3.13.24",
     "@xyflow/react": "^12.10.2",
     "html-to-image": "^1.11.13",
     "jspdf": "^4.2.1",
