@@ -93,6 +93,26 @@ export function NetworkTopologyPage() {
     captureRef.current = fn
   }, [])
 
+  /**
+   * Resolve a `floorElementId` to a friendly "Label on Floor name"
+   * string for the PDF inventory's "Floor location" column. Mirrors
+   * the same lookup `TopologyCanvas` does for in-canvas tooltips, so
+   * what a user sees on screen is what lands in the export.
+   *
+   * Declared above the permission early-return so the hook order
+   * stays stable regardless of whether the user has `viewITLayer`.
+   */
+  const floorElementLabel = useCallback(
+    (elementId: string): string | null => {
+      for (const f of floors) {
+        const el = f.elements[elementId]
+        if (el) return `${el.label || el.id} on ${f.name}`
+      }
+      return null
+    },
+    [floors],
+  )
+
   // Belt-and-braces: ProjectShell hydrates the store, but if the user
   // navigates here on a brand-new office that the shell hasn't yet
   // back-filled, drop in an empty topology so the page renders without
@@ -234,23 +254,6 @@ export function NetworkTopologyPage() {
   const handleAutoArrange = () => {
     applyAutoLayout()
   }
-
-  /**
-   * Resolve a `floorElementId` to a friendly "Label on Floor name"
-   * string for the PDF inventory's "Floor location" column. Mirrors
-   * the same lookup `TopologyCanvas` does for in-canvas tooltips, so
-   * what a user sees on screen is what lands in the export.
-   */
-  const floorElementLabel = useCallback(
-    (elementId: string): string | null => {
-      for (const f of floors) {
-        const el = f.elements[elementId]
-        if (el) return `${el.label || el.id} on ${f.name}`
-      }
-      return null
-    },
-    [floors],
-  )
 
   /**
    * Export-PDF handler. Captures the diagram (best-effort) and hands
