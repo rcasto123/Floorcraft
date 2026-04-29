@@ -320,7 +320,7 @@ export function FloorSwitcher() {
   }
 
   return (
-    <div className="h-10 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 flex items-center px-4 gap-3">
+    <div className="h-10 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center px-4 gap-3">
       {/* ───── Left: office identity ─────
           Wave 15D moved the editable office name out of the TopBar
           and into this strip alongside the floor tabs. The

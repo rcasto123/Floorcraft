@@ -21,7 +21,7 @@ import { exportFloorAsPng } from '../../lib/pngExport'
 import { buildExportFilename } from '../../lib/exportFilename'
 import { getActiveStage } from '../../lib/stageRegistry'
 import { useState, useRef, useEffect } from 'react'
-import { NavLink, useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { useTemporalState } from '../../hooks/useTemporalState'
 import { formatRelative } from '../../lib/time'
 import { useCan } from '../../hooks/useCan'
@@ -291,7 +291,7 @@ export function TopBar() {
        off-screen. `overflow-x-clip` keeps narrow-viewport horizontal
        protection while preserving `overflow-y: visible`, so
        dropdowns paint cleanly outside the topbar's box. */
-    <div className="h-14 bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 flex-shrink-0 overflow-x-clip whitespace-nowrap">
+    <div className="h-14 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 flex-shrink-0 overflow-x-clip whitespace-nowrap">
       {/* Wave 20A: the TopBar packs identity + save state + viewport
           controls + view nav + account into a single row. Below `md`
           the editor canvas itself is gated, so on the OTHER editor
@@ -655,14 +655,17 @@ export function TopBar() {
           flips its open state via setShareLinkOpen. */}
       <ShareLinkDialog open={shareLinkOpen} onClose={() => setShareLinkOpen(false)} />
 
-      {/* MAP / ROSTER view toggle. React Router owns the active state so
-          we don't need UI-store bookkeeping. Moved to the action cluster
-          alongside Share/Export because jumping between Map and Roster is
-          a navigation action, not part of identity. Guarded on both
-          params so the hotkeys are inert outside the editor routes.
-          Below `md` we render a compact `<MobileViewNav>` (a styled
-          `<select>`) instead of the pill row — see that component for
-          the rationale. */}
+      {/* Wave 21A: Project view tabs (Map/Roster/Audit/Reports/Network/
+          OrgChart) moved out of the TopBar action cluster and into the
+          new 48-px PrimaryNavRail mounted by ProjectShell. The TopBar
+          now reads as document-level chrome only — identity, save
+          state, viewport controls, presentation, share, account.
+          MobileViewNav stays mounted here as the narrow-screen
+          fallback (the rail hides below `md` since the editor itself
+          is desktop-gated).
+
+          The unreachable JSX block below has been deleted; only the
+          mobile compatibility shim remains. */}
       {teamSlug && officeSlug && (
         <MobileViewNav
           teamSlug={teamSlug}
@@ -672,95 +675,6 @@ export function TopBar() {
           canViewITLayer={canViewITLayer}
         />
       )}
-      {teamSlug && officeSlug && (
-        <nav aria-label="Project views" className="hidden md:flex items-center bg-gray-100 dark:bg-gray-800 rounded-md p-0.5">
-          <NavLink
-            to={`/t/${teamSlug}/o/${officeSlug}/map`}
-            className={({ isActive }) =>
-              `px-2.5 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
-                isActive
-                  ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100'
-                  : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-              }`
-            }
-          >
-            Map
-          </NavLink>
-          <NavLink
-            to={`/t/${teamSlug}/o/${officeSlug}/roster`}
-            className={({ isActive }) =>
-              `px-2.5 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
-                isActive
-                  ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100'
-                  : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-              }`
-            }
-          >
-            Roster
-          </NavLink>
-          {canViewAudit && (
-            <NavLink
-              to={`/t/${teamSlug}/o/${officeSlug}/audit`}
-              className={({ isActive }) =>
-                `px-2.5 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
-                  isActive
-                    ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100'
-                    : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                }`
-              }
-            >
-              Audit
-            </NavLink>
-          )}
-          {canViewReports && (
-            <NavLink
-              to={`/t/${teamSlug}/o/${officeSlug}/reports`}
-              className={({ isActive }) =>
-                `px-2.5 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
-                  isActive
-                    ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100'
-                    : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                }`
-              }
-            >
-              Reports
-            </NavLink>
-          )}
-          {/* M6.1 — Network topology pill. Permission-gated on
-              `viewITLayer` so HR-editors and viewers don't see the
-              affordance; the page itself also self-gates so a typed
-              URL hits the same denial. */}
-          {canViewITLayer && (
-            <NavLink
-              to={`/t/${teamSlug}/o/${officeSlug}/network`}
-              className={({ isActive }) =>
-                `px-2.5 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
-                  isActive
-                    ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100'
-                    : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                }`
-              }
-            >
-              Network
-            </NavLink>
-          )}
-          {canViewReports && (
-            <NavLink
-              to={`/t/${teamSlug}/o/${officeSlug}/org-chart`}
-              className={({ isActive }) =>
-                `px-2.5 py-1 text-xs font-semibold uppercase tracking-wide rounded transition-colors ${
-                  isActive
-                    ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100'
-                    : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
-                }`
-              }
-            >
-              Org Chart
-            </NavLink>
-          )}
-        </nav>
-      )}
-
       {/* Wave 15D: the standalone Help link was removed — it duplicated
           the User-guide row already inside UserMenu. The standalone
           ThemeToggle was also removed for the same reason; theme now
