@@ -53,6 +53,29 @@
   --color-success-soft: #f0fdf4;       /* green-50                        */
   --color-warning: #d97706;            /* amber-600                       */
   --color-warning-soft: #fffbeb;       /* amber-50                        */
+
+  /*
+   * Drafting Studio palette (Wave 21A). Adds a warm-paper neutral and a
+   * blueprint-cyan accent the marketing surface and editor chrome opt
+   * into incrementally — existing components keep rendering against the
+   * blue-600 / gray-50 system above. Once a surface migrates, swap
+   * `bg-white`/`bg-slate-50` for `bg-paper` and `text-blue-600` for
+   * `text-blueprint`. The dark-mode overrides live in the `.dark` block
+   * below.
+   */
+  --color-paper: #FAFAF7;              /* warm off-white drafting paper   */
+  --color-paper-raised: #ffffff;       /* card on paper                   */
+  --color-paper-sunken: #F4F2EC;       /* recessed panel on paper         */
+  --color-paper-line: #E8E4D8;         /* hairline grid / divider on paper*/
+
+  --color-blueprint: #0E7490;          /* cyan-700 — primary accent       */
+  --color-blueprint-strong: #155E75;   /* cyan-800 — pressed / heading    */
+  --color-blueprint-soft: #ECFEFF;     /* cyan-50 — soft tint backgrounds */
+  --color-blueprint-line: #67E8F9;     /* cyan-300 — gridline accent      */
+
+  /* Mono font stack for measurements, coordinates, scale ratios. */
+  --font-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", "Menlo",
+    "Consolas", monospace;
 }
 
 /*
@@ -76,6 +99,19 @@
     --color-danger-soft: rgb(69 10 10 / 0.4); /* red-950 / 40%           */
     --color-success-soft: rgb(5 46 22 / 0.4); /* green-950 / 40%         */
     --color-warning-soft: rgb(69 26 3 / 0.4); /* amber-950 / 40%         */
+
+    /* Drafting Studio dark variants. Paper goes deep slate-blue (not
+       pure black) so the cyan accent still reads as architectural rather
+       than electric. */
+    --color-paper: #0B1220;            /* deep slate-blue                */
+    --color-paper-raised: #111A2B;     /* one step up                    */
+    --color-paper-sunken: #070C16;     /* recessed                       */
+    --color-paper-line: #1E2A40;       /* dark hairline                  */
+
+    --color-blueprint: #22D3EE;        /* cyan-400 — primary on dark     */
+    --color-blueprint-strong: #67E8F9; /* cyan-300 — emphasis on dark    */
+    --color-blueprint-soft: rgb(22 78 99 / 0.35); /* cyan-900 / 35%      */
+    --color-blueprint-line: #155E75;   /* cyan-800 — dim gridline        */
   }
 
   /* Native form widgets + scrollbars adopt the page theme. */
@@ -136,4 +172,33 @@
 
 .dropdown-enter {
   animation: dropdown-enter 120ms ease-out;
+}
+
+/*
+ * Blueprint grid background. A two-layer linear-gradient produces a
+ * graph-paper feel: an 8px hairline grid for the minor lines and a 48px
+ * heavier line for the major grid. Used by the landing-page hero and
+ * the editor canvas backdrop. The lines reference `--color-paper-line`
+ * so dark mode and warm-paper light mode both work without overrides.
+ */
+.bg-blueprint-grid {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(to right, var(--color-paper-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-paper-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--color-paper-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-paper-line) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 8px 8px, 8px 8px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+/* Subtler version — only the 8px minor grid, used inside cards and
+   inspector surfaces where a 48px major line would be too loud. */
+.bg-blueprint-grid-fine {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(to right, var(--color-paper-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-paper-line) 1px, transparent 1px);
+  background-size: 8px 8px;
+  background-position: -1px -1px;
 }

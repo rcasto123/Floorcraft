@@ -57,7 +57,7 @@ export function LandingFooter() {
   return (
     <footer
       aria-labelledby="landing-footer-heading"
-      className="border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950"
+      className="border-t border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper)] dark:bg-gray-950"
     >
       <h2 id="landing-footer-heading" className="sr-only">
         Footer
@@ -68,22 +68,28 @@ export function LandingFooter() {
         <div className="col-span-2 sm:col-span-1">
           <Link
             to="/"
-            className="flex items-center gap-2 font-semibold tracking-tight text-gray-900 dark:text-gray-100"
+            className="flex items-center gap-2.5 font-semibold tracking-tight text-gray-900 dark:text-gray-100"
           >
             <span
               aria-hidden="true"
-              className="inline-block h-5 w-5 rotate-45 rounded-sm bg-gradient-to-br from-blue-500 to-indigo-600"
-            />
+              className="relative inline-flex h-6 w-6 items-center justify-center"
+            >
+              <span className="absolute inset-0 rounded-md border border-[color:var(--color-blueprint)]" />
+              <span className="absolute inset-[5px] rotate-45 border border-[color:var(--color-blueprint)]" />
+            </span>
             <span>Floorcraft</span>
           </Link>
           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400 max-w-xs">
             Office layout &amp; seat management for hybrid teams.
           </p>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
+            A-101 · ISSUE 01
+          </p>
         </div>
 
         {COLUMNS.map((col) => (
           <div key={col.title}>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
+            <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-3">
               {col.title}
             </h3>
             <ul className="space-y-2 text-sm">
@@ -91,7 +97,7 @@ export function LandingFooter() {
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
+                    className="text-gray-600 hover:text-[color:var(--color-blueprint-strong)] dark:text-gray-300 dark:hover:text-[color:var(--color-blueprint)] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -102,9 +108,9 @@ export function LandingFooter() {
         ))}
       </div>
 
-      <div className="border-t border-gray-100 dark:border-gray-800">
+      <div className="border-t border-[color:var(--color-paper-line)] dark:border-gray-800">
         <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500 dark:text-gray-500">
-          <p className="tabular-nums">&copy; {year} Floorcraft. All rights reserved.</p>
+          <p className="font-mono tabular-nums">&copy; {year} Floorcraft</p>
           <p>Built for hybrid workplace teams.</p>
         </div>
       </div>
