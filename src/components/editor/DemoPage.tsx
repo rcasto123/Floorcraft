@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { CanvasStage } from './Canvas/CanvasStage'
@@ -47,7 +47,19 @@ import type { Project } from '../../types/project'
  * canvas, not the editor surface.
  */
 export function DemoPage() {
-  const [hydrated, setHydrated] = useState(false)
+  // Hydration runs in `useEffect`, not in the render body — calling
+  // Zustand setState during render mutates external state that
+  // sibling components (e.g. `NewVersionBanner`, which subscribes to
+  // `projectStore`) read in their own render passes, which React
+  // surfaces as "Cannot update a component while rendering a different
+  // component". Effect-time mutation is the right pattern for an
+  // external store; we accept the one-frame flash between mount and
+  // first effect run.
+  const previousRef = useRef<{
+    role: ReturnType<typeof useProjectStore.getState>['currentOfficeRole']
+    project: ReturnType<typeof useProjectStore.getState>['currentProject']
+    officeId: ReturnType<typeof useProjectStore.getState>['officeId']
+  } | null>(null)
 
   useEffect(() => {
     const payload = buildDemoOfficePayload()
@@ -82,7 +94,8 @@ export function DemoPage() {
       teamId: 'demo-team',
       isPrivate: false,
     } as unknown as Project
-    const prev = {
+
+    previousRef.current = {
       role: useProjectStore.getState().currentOfficeRole,
       project: useProjectStore.getState().currentProject,
       officeId: useProjectStore.getState().officeId,
@@ -98,12 +111,12 @@ export function DemoPage() {
       conflict: null,
     })
 
-    setHydrated(true)
-
     return () => {
       // Restore the previous editor session's project/role so a user
       // who jumped to /demo from inside their own office doesn't lose
       // their context on navigation back.
+      const prev = previousRef.current
+      if (!prev) return
       useProjectStore.setState({
         currentProject: prev.project,
         officeId: prev.officeId,
@@ -111,14 +124,6 @@ export function DemoPage() {
       })
     }
   }, [])
-
-  if (!hydrated) {
-    return (
-      <div className="flex items-center justify-center h-screen w-screen bg-[color:var(--color-paper)] text-sm text-gray-500">
-        Loading demo office…
-      </div>
-    )
-  }
 
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[color:var(--color-paper)] dark:bg-gray-950">
