@@ -41,6 +41,9 @@ const InvitePage = lazy(() =>
 const ProjectShell = lazy(() =>
   import('./components/editor/ProjectShell').then((m) => ({ default: m.ProjectShell })),
 )
+const DemoPage = lazy(() =>
+  import('./components/editor/DemoPage').then((m) => ({ default: m.DemoPage })),
+)
 const MapView = lazy(() =>
   import('./components/editor/MapView').then((m) => ({ default: m.MapView })),
 )
@@ -175,6 +178,11 @@ function App() {
                 the route is intentionally public so anonymous visitors
                 don't bounce through auth. */}
             <Route path="/share/:officeSlug" element={<ShareView />} />
+            {/* Public demo office. Hydrates the bundled demo seed into
+                the live stores and pins the viewer to the synthetic
+                `shareViewer` role so the canvas is structurally
+                read-only. Linked from the landing-page CTAs. */}
+            <Route path="/demo" element={<DemoPage />} />
             {/* Help is intentionally public — an unauth'd user can read
                 the guide before signing up, and an auth'd one doesn't
                 have to bounce through a team to get to it. */}
