@@ -4,9 +4,12 @@ import { ArrowRight } from 'lucide-react'
 import { CanvasStage } from './Canvas/CanvasStage'
 import { CanvasFinder } from './CanvasFinder'
 import { CanvasActionDock } from './Canvas/CanvasActionDock'
+import { CanvasScaleBar } from './Canvas/CanvasScaleBar'
+import { NorthArrow } from './Canvas/NorthArrow'
 import { Minimap } from './Minimap'
 import { StatusBar } from './StatusBar'
 import { FloorSwitcher } from './FloorSwitcher'
+import { ToolSelector } from './LeftSidebar/ToolSelector'
 import { buildDemoOfficePayload } from '../../lib/demo/createDemoOffice'
 import { useProjectStore } from '../../stores/projectStore'
 import { useElementsStore } from '../../stores/elementsStore'
@@ -121,11 +124,18 @@ export function DemoPage() {
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[color:var(--color-paper)] dark:bg-gray-950">
       <DemoBanner />
       <FloorSwitcher />
-      <div className="flex-1 relative overflow-hidden bg-[color:var(--color-paper)]">
-        <CanvasStage />
-        <StatusBar />
-        <Minimap />
-        <CanvasActionDock />
+      <div className="flex flex-1 overflow-hidden">
+        <div className="w-14 flex-shrink-0 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-r border-[color:var(--color-paper-line)] dark:border-gray-800 overflow-y-auto">
+          <ToolSelector />
+        </div>
+        <div className="flex-1 relative overflow-hidden bg-[color:var(--color-paper)]">
+          <CanvasStage />
+          <StatusBar />
+          <Minimap />
+          <CanvasActionDock />
+          <CanvasScaleBar />
+          <NorthArrow />
+        </div>
       </div>
       <CanvasFinder />
     </div>
