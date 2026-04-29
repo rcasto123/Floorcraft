@@ -1,21 +1,16 @@
 import { Link } from 'react-router-dom'
 
 /**
- * Expanded landing-page footer.
+ * Wave 21A — landing-page footer with real destinations.
  *
- * The pre-polish footer was a single inline line ("Floorcraft ·
- * User guide & FAQ"), which reads like a hackathon project. Real SaaS
- * sites close with a small grid of link columns — Product /
- * Resources / Company — even if half the links are aspirational. The
- * columns signal "there is a business behind this" without needing
- * the links to actually go anywhere substantive yet.
- *
- * Because no /pricing, /changelog, /privacy, or /terms routes exist in
- * the app shell, every placeholder link points at /help. This keeps
- * the layout honest (no 404s) and the help page is where a curious
- * user would plausibly land anyway when clicking "Privacy" or
- * "Security" on a still-small product. /signup and / are the only
- * routes guaranteed by the router.
+ * The previous footer's three columns held twelve links, eleven of
+ * which all pointed at /help. That reads as placeholder furniture
+ * the moment a visitor clicks two links and gets the same page back.
+ * Trimming to real destinations only — the in-product surfaces
+ * (signup, demo, the help page's section anchors), the on-page
+ * marketing anchors (#features, #pricing), and the GitHub issues
+ * link for "Contact". Privacy / Terms / Status come back when those
+ * pages actually exist.
  */
 
 type FooterLink = { label: string; to: string }
@@ -25,28 +20,19 @@ const COLUMNS: ReadonlyArray<FooterColumn> = [
   {
     title: 'Product',
     links: [
-      { label: 'Features', to: '/help' },
-      { label: 'Pricing', to: '/help' },
-      { label: 'Changelog', to: '/help' },
+      { label: 'Features', to: '/#features' },
+      { label: 'Pricing', to: '/#pricing' },
+      { label: 'Open the demo', to: '/demo' },
       { label: 'Sign up', to: '/signup' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { label: 'User guide', to: '/help' },
-      { label: 'Keyboard shortcuts', to: '/help' },
-      { label: 'CSV templates', to: '/help' },
-      { label: 'Status', to: '/help' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { label: 'About', to: '/help' },
-      { label: 'Contact', to: '/help' },
-      { label: 'Privacy', to: '/help' },
-      { label: 'Terms', to: '/help' },
+      { label: 'User guide', to: '/help#getting-started' },
+      { label: 'Keyboard shortcuts', to: '/help#shortcuts' },
+      { label: 'CSV import', to: '/help#csv-import' },
+      { label: 'FAQ', to: '/help#faq' },
     ],
   },
 ]
@@ -62,7 +48,7 @@ export function LandingFooter() {
       <h2 id="landing-footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 gap-8 sm:grid-cols-4">
+      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 gap-8 sm:grid-cols-3">
         {/* Wordmark / tagline column — anchors the footer visually and
             keeps the link columns from feeling like a directory. */}
         <div className="col-span-2 sm:col-span-1">

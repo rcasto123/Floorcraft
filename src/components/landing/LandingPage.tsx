@@ -127,8 +127,9 @@ export function LandingPage() {
           edge to telegraph that the cards are interactive without
           needing a button affordance. */}
       <section
+        id="features"
         aria-labelledby="features-heading"
-        className="max-w-6xl mx-auto px-6 py-20 lg:py-28"
+        className="max-w-6xl mx-auto px-6 py-20 lg:py-28 scroll-mt-16"
       >
         <div className="text-center mb-12">
           <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] mb-3">
