@@ -89,11 +89,11 @@ export function RightSidebar() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-stretch border-b border-gray-200 dark:border-gray-800">
+    <div className="flex flex-col h-full bg-[color:var(--color-paper-raised)] dark:bg-gray-900">
+      <div className="flex items-stretch border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
         {/* Collapse handle lives at the leftmost slot of the tablist
             row so it reads as part of the side panel, not part of the
-            top ribbon. The four content tabs follow to the right. */}
+            top ribbon. The content tabs follow to the right. */}
         <SidebarToggle variant="inline" />
         <div
           role="tablist"
@@ -102,8 +102,7 @@ export function RightSidebar() {
           // sidebar shell — without it, the tablist's intrinsic
           // min-width is its content's min-width and the row
           // visibly escapes the 320px sidebar by ~130px, hiding
-          // the Devices and Insights tabs entirely. Browser audit
-          // confirmed: tablist was 416px in a 319px parent.
+          // the Devices and Insights tabs entirely.
           className="flex flex-1 min-w-0"
           onKeyDown={onKeyDown}
         >
@@ -122,25 +121,23 @@ export function RightSidebar() {
               aria-controls={panelId(t.id)}
               tabIndex={selected ? 0 : -1}
               onClick={() => setTab(t.id)}
-              // `min-w-0` so the label can ellipsize when 5 tabs ("Properties",
-              // "People", "Reports", "Devices", "Insights") share a narrow
-              // sidebar — without it the longest label ("Properties") forces
-              // the row wider than its container at smaller viewports.
-              className={`flex-1 min-w-0 px-2 py-2.5 text-xs font-medium transition-colors relative flex items-center justify-center gap-1.5 ${
+              // Wave 21A — tab labels render as mono-uppercase section
+              // markers (matches the §02 / A-101 cadence of the
+              // landing surface). At narrow sidebar widths the labels
+              // truncate; at wider widths they read as a clean strip.
+              className={`flex-1 min-w-0 px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] font-medium transition-colors relative flex items-center justify-center gap-1.5 ${
                 selected
-                  ? 'text-blue-700 dark:text-blue-300 border-b-2 border-blue-700'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                  ? 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-b-2 border-[color:var(--color-blueprint)]'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 border-b-2 border-transparent'
               }`}
             >
               <span className="flex-shrink-0">{t.icon}</span>
               <span className="truncate min-w-0">{t.label}</span>
               {t.id === 'insights' && badgeCount > 0 && (
-                // The bare numeric badge reads as just a number to a
-                // screen reader. Wrapping it with an `aria-label` and
-                // a visually-hidden long form ("3 active insights")
-                // turns the chip into something a non-sighted user can
-                // act on, while sighted users still see the compact
-                // count.
+                // Bare numeric badge reads as just a number to a screen
+                // reader; wrapping with `aria-label` plus a hidden long
+                // form turns the chip into something non-sighted users
+                // can act on while sighted users still see the count.
                 <span
                   className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 flex items-center justify-center text-[9px] font-bold text-white bg-red-500 rounded-full"
                   aria-label={`${badgeCount} active ${badgeCount === 1 ? 'insight' : 'insights'}`}
