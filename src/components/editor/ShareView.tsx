@@ -126,7 +126,7 @@ export function ShareView() {
   if (isEmbed) {
     return (
       <div
-        className="fixed inset-0 w-screen h-screen bg-gray-100 dark:bg-gray-800 overflow-hidden"
+        className="fixed inset-0 w-screen h-screen bg-[color:var(--color-paper)] overflow-hidden"
         data-testid="share-view-embed"
       >
         <CanvasStage />
@@ -143,7 +143,7 @@ export function ShareView() {
         expiresAt={matchedLink?.expiresAt ?? null}
       />
       <FloorSwitcher />
-      <div className="flex-1 relative bg-gray-100 dark:bg-gray-800 overflow-hidden">
+      <div className="flex-1 relative bg-[color:var(--color-paper)] overflow-hidden">
         <CanvasStage />
         <StatusBar />
         <Minimap />

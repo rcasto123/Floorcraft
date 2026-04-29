@@ -121,7 +121,7 @@ export function DemoPage() {
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[color:var(--color-paper)] dark:bg-gray-950">
       <DemoBanner />
       <FloorSwitcher />
-      <div className="flex-1 relative overflow-hidden bg-[color:var(--color-paper-sunken)] dark:bg-gray-900">
+      <div className="flex-1 relative overflow-hidden bg-[color:var(--color-paper)]">
         <CanvasStage />
         <StatusBar />
         <Minimap />
