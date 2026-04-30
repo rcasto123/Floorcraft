@@ -66,7 +66,7 @@ export function TeamSettingsPage() {
   const pillClass = ({ isActive }: { isActive: boolean }) =>
     [
       'inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900',
       isActive
         ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-800 dark:text-gray-100'
         : 'text-gray-600 hover:text-gray-900 hover:bg-white/60 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800/60',
@@ -81,7 +81,7 @@ export function TeamSettingsPage() {
         <div className="mb-4">
           <Link
             to={`/t/${team.slug}`}
-            className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+            className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] rounded"
           >
             <ArrowLeft size={12} aria-hidden="true" />
             Back to team

@@ -240,7 +240,7 @@ export function OfficeSwitcher({
                   placeholder="Search offices"
                   aria-label="Search offices"
                   data-testid="office-switcher-search"
-                  className="w-full pl-6 pr-2 py-1 text-xs bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-700 dark:text-gray-200"
+                  className="w-full pl-6 pr-2 py-1 text-xs bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] text-gray-700 dark:text-gray-200"
                 />
               </div>
             </div>

@@ -527,7 +527,7 @@ function LibraryTile({
         // label working. `pr-5` reserves a 20px gutter for the absolute
         // star/× corner action (12px icon + p-1 = ~20px box at right-0.5)
         // so a long label's ellipsis tail never sits underneath the icon.
-        className="flex items-center gap-1.5 flex-1 min-w-0 pr-5 text-left rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        className="flex items-center gap-1.5 flex-1 min-w-0 pr-5 text-left rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
       >
         {/* Wrap the preview so the row's flex shrink targets the LABEL,
             not the icon — without this, the SVG compresses on tight rows
@@ -1137,7 +1137,7 @@ export function ElementLibrary() {
                   setConfirmingClearRecents(true)
                 }
               }}
-              className={`flex items-center gap-1 px-1 py-0.5 rounded text-[11px] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+              className={`flex items-center gap-1 px-1 py-0.5 rounded text-[11px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] ${
                 confirmingClearRecents
                   ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-950/60'
                   : 'text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'
@@ -1204,7 +1204,7 @@ export function ElementLibrary() {
                 setQuery('')
                 searchInputRef.current?.focus()
               }}
-              className="text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-1"
+              className="text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] rounded px-1"
             >
               Clear
             </button>

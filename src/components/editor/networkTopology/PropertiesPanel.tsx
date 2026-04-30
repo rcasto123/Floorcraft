@@ -258,7 +258,7 @@ function NodeForm({ node, onClose }: { node: TopologyNode; onClose: () => void }
                     : (v as TopologyNodeStatus),
               })
             }}
-            className="block w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="block w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
           >
             <option value="">— Unset —</option>
             {STATUS_OPTIONS.map((opt) => (
@@ -278,7 +278,7 @@ function NodeForm({ node, onClose }: { node: TopologyNode; onClose: () => void }
             onChange={(e) => setNotes(e.target.value)}
             onBlur={(e) => commit('notes', e.target.value)}
             rows={3}
-            className="block w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-1.5 text-sm placeholder:text-gray-400 dark:placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="block w-full rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-1.5 text-sm placeholder:text-gray-400 dark:placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
             placeholder="Anything contextual — VLANs, ports, runbook links…"
           />
         </Section>

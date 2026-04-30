@@ -172,7 +172,7 @@ function PageHeader({ rosterHref }: { rosterHref: string | null }) {
         {rosterHref && (
           <Link
             to={rosterHref}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
           >
             <ExternalLink size={14} aria-hidden="true" />
             Open in roster
@@ -381,7 +381,7 @@ function NodeCard({
       data-testid={`org-node-${node.id}`}
       role="treeitem"
       aria-label={`${e.name}${e.title ? `, ${e.title}` : ''}`}
-      className="text-left bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 hover:bg-gray-50/40 dark:hover:bg-gray-800/40 transition-all px-3 py-2 min-w-[180px] max-w-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+      className="text-left bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 hover:bg-gray-50/40 dark:hover:bg-gray-800/40 transition-all px-3 py-2 min-w-[180px] max-w-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
     >
       <div className="flex items-center gap-2">
         <span

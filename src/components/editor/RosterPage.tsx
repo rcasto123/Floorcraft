@@ -1301,7 +1301,7 @@ export function RosterPage() {
         {canEdit && (
           <button
             onClick={handleAdd}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] rounded"
             title="Add person (N)"
           >
             <Plus size={14} /> Add person
@@ -2232,7 +2232,7 @@ function StatsBar({
       green: isActive ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-gray-50 dark:bg-gray-800/50 text-emerald-700 border-gray-200 dark:border-gray-800 hover:bg-emerald-50',
       amber: isActive ? 'bg-amber-600 text-white border-amber-600' : 'bg-gray-50 dark:bg-gray-800/50 text-amber-700 dark:text-amber-300 border-gray-200 dark:border-gray-800 hover:bg-amber-50',
       red: isActive ? 'bg-red-600 text-white border-red-600' : 'bg-gray-50 dark:bg-gray-800/50 text-red-700 dark:text-red-300 border-gray-200 dark:border-gray-800 hover:bg-red-50 dark:hover:bg-red-950/40',
-      blue: isActive ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-50 dark:bg-gray-800/50 text-blue-700 dark:text-blue-300 border-gray-200 dark:border-gray-800 hover:bg-blue-50 dark:hover:bg-blue-950/40',
+      blue: isActive ? 'bg-[color:var(--color-blueprint)] text-white border-blue-600' : 'bg-gray-50 dark:bg-gray-800/50 text-blue-700 dark:text-blue-300 border-gray-200 dark:border-gray-800 hover:bg-blue-50 dark:hover:bg-blue-950/40',
     }[tone]
     return (
       <button
@@ -2407,9 +2407,9 @@ function WeeklyCapacity({
                 <div
                   className={`w-full rounded-sm transition-all ${
                     isActive
-                      ? 'bg-blue-600'
+                      ? 'bg-[color:var(--color-blueprint)]'
                       : isToday
-                        ? 'bg-blue-400'
+                        ? 'bg-[color:var(--color-blueprint-line)]'
                         : 'bg-gray-300 group-hover:bg-gray-400'
                   }`}
                   style={{ height: `${Math.max(pct, count > 0 ? 12 : 6)}%` }}
@@ -3148,7 +3148,7 @@ function RosterEmptyState({
               // Distinct label from the header's "Add person" button so
               // tests (and screen readers) can tell them apart; both
               // call the same handler.
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] rounded"
             >
               <Plus size={12} aria-hidden="true" /> Add your first teammate
             </button>
@@ -3200,7 +3200,7 @@ function QuickFilterPills({
     >
       {pills.map((p) => {
         const cls = p.isActive
-          ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'
+          ? 'bg-[color:var(--color-blueprint)] text-white border-blue-600 hover:bg-[color:var(--color-blueprint-strong)]'
           : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-100'
         return (
           <button
@@ -3357,7 +3357,7 @@ function BulkActionToolbar({
           aria-label={`Clear selection (${selectedCount} selected)`}
           title="Clear selection"
           data-testid="roster-bulk-clear"
-          className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 flex-shrink-0"
+          className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-[color:var(--color-blueprint)] text-white text-xs font-medium hover:bg-[color:var(--color-blueprint-strong)] flex-shrink-0"
         >
           <X size={12} aria-hidden />
           <span className="tabular-nums">{selectedCount}</span>

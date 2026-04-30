@@ -766,7 +766,7 @@ function MobileViewNav({
         const next = e.target.value
         navigate(`/t/${teamSlug}/o/${officeSlug}/${next}`)
       }}
-      className="md:hidden text-xs font-semibold uppercase tracking-wide bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+      className="md:hidden text-xs font-semibold uppercase tracking-wide bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
     >
       <option value="map">Map</option>
       <option value="roster">Roster</option>

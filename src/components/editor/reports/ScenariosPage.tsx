@@ -164,7 +164,7 @@ export function ScenariosPage() {
                     <button
                       type="button"
                       onClick={() => setActiveScenario(s.id)}
-                      className={`w-full text-left text-sm px-2 py-1.5 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                      className={`w-full text-left text-sm px-2 py-1.5 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] ${
                         s.id === activeId
                           ? 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 font-medium'
                           : 'hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -264,7 +264,7 @@ function PageHeader({ reportsHref }: { reportsHref: string | null }) {
         <div>
           <Link
             to={reportsHref}
-            className="inline-flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+            className="inline-flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] rounded"
           >
             <ArrowLeft size={12} aria-hidden="true" />
             Back to reports

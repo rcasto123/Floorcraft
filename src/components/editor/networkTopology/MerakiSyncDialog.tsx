@@ -173,7 +173,7 @@ function ConnectStep({ onLoadSample }: { onLoadSample: () => void }) {
             type="button"
             onClick={onLoadSample}
             data-testid="meraki-load-sample"
-            className="text-left rounded-lg border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 p-4 hover:bg-blue-50 dark:hover:bg-blue-950/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="text-left rounded-lg border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 p-4 hover:bg-blue-50 dark:hover:bg-blue-950/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
           >
             <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
               <Cloud size={16} aria-hidden="true" />

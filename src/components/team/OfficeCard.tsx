@@ -45,7 +45,7 @@ export function OfficeCard({ office, teamSlug, thumbnailElements, stats, avatars
     <div className="relative group">
       <Link
         to={`/t/${teamSlug}/o/${office.slug}/map`}
-        className="block bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:border-gray-300 hover:shadow-lg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+        className="block bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:border-gray-300 hover:shadow-lg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
       >
         <div className="w-full h-40 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
           <OfficeThumbnail elements={thumbnailElements} width="100%" height="100%" />
@@ -103,7 +103,7 @@ export function OfficeCard({ office, teamSlug, thumbnailElements, stats, avatars
           e.stopPropagation()
           onMenu(office)
         }}
-        className="absolute top-[10px] right-[10px] p-1.5 rounded-md text-gray-400 dark:text-gray-500 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+        className="absolute top-[10px] right-[10px] p-1.5 rounded-md text-gray-400 dark:text-gray-500 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
       >
         <MoreHorizontal size={16} aria-hidden="true" />
       </button>

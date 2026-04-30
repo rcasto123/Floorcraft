@@ -106,7 +106,7 @@ export function SeatSwapRequestDialog({
               setTargetId(null)
             }}
             placeholder="Type a name or email…"
-            className="mt-1 w-full px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="mt-1 w-full px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             aria-label="Target employee"
           />
           {!selected && query.length > 0 && suggestions.length === 0 && (
@@ -151,7 +151,7 @@ export function SeatSwapRequestDialog({
             onChange={(e) => setReason(e.target.value)}
             rows={3}
             placeholder="Why do you want to swap?"
-            className="mt-1 w-full px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="mt-1 w-full px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
           />
         </label>
       </ModalBody>

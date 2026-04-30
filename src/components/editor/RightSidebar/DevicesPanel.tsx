@@ -304,7 +304,7 @@ export function DevicesPanel() {
               aria-hidden="true"
             />
             <input
-              className="w-full pl-8 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-transparent"
+              className="w-full pl-8 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:border-transparent"
               placeholder="Search by model, serial, MAC, or IP"
               aria-label="Search devices"
               value={searchQuery}

@@ -189,7 +189,7 @@ function TemplateCard({
       data-testid={`templates-card-${template.id}`}
       aria-pressed={selected}
       className={[
-        'relative text-left rounded-lg border p-3 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+        'relative text-left rounded-lg border p-3 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]',
         selected
           ? 'border-blue-500 ring-2 ring-blue-500/40 bg-blue-50/60 dark:bg-blue-950/30'
           : 'border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-800 hover:bg-gray-50 dark:hover:bg-gray-900/40',
