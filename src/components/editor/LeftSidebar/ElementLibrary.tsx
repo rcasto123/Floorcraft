@@ -516,7 +516,7 @@ function LibraryTile({
       } ${
         isActive
           ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-[color:var(--color-blueprint)] dark:border-[color:var(--color-blueprint)]'
-          : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-800 hover:border-[color:var(--color-blueprint)] dark:hover:border-[color:var(--color-blueprint)]'
+          : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:border-[color:var(--color-blueprint)] dark:hover:border-[color:var(--color-blueprint)]'
       }`}
     >
       <button
@@ -646,7 +646,7 @@ function LibrarySection({
     'text-[11px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500'
 
   return (
-    <div className={`mb-3 ${showDivider ? 'pt-3 border-t border-gray-100 dark:border-gray-800/60' : ''}`}>
+    <div className={`mb-3 ${showDivider ? 'pt-3 border-t border-[color:var(--color-paper-line)] dark:border-gray-800/60' : ''}`}>
       {/* `min-w-0` on the row + truncate-aware children below let a long
           category title ("My Shapes · 47", or a localised label) degrade
           with an ellipsis instead of pushing the trailing action (e.g.
@@ -999,7 +999,7 @@ export function ElementLibrary() {
             className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-xs rounded border transition-colors ${
               activeTool === 'pin'
                 ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-800 border-amber-300'
-                : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:border-gray-300'
+                : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 hover:border-gray-300'
             }`}
           >
             <MessageSquarePlus size={14} aria-hidden="true" className="flex-shrink-0" />
@@ -1087,7 +1087,7 @@ export function ElementLibrary() {
           className={`w-full mb-3 flex items-center gap-2 px-2.5 py-1.5 text-xs rounded border transition-colors ${
             activeTool === 'pin'
               ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-800 border-amber-300'
-              : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:border-gray-300'
+              : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 hover:border-gray-300'
           }`}
         >
           <MessageSquarePlus size={14} aria-hidden="true" className="flex-shrink-0" />
@@ -1166,7 +1166,7 @@ export function ElementLibrary() {
       {visibleLibraryItems.length === 0 && customShapeItems.length === 0 ? (
         <div
           role="status"
-          className="flex flex-col items-center gap-2 py-8 px-3 text-xs text-gray-500 dark:text-gray-400 rounded-md border border-dashed border-gray-200 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-900/40 text-center"
+          className="flex flex-col items-center gap-2 py-8 px-3 text-xs text-gray-500 dark:text-gray-400 rounded-md border border-dashed border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)]/80 dark:bg-gray-900/40 text-center"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
             <Box size={18} aria-hidden="true" />
@@ -1187,7 +1187,7 @@ export function ElementLibrary() {
           // which token came back empty — typos are the most common cause.
           <div
             role="status"
-            className="flex flex-col items-center gap-2 py-6 text-xs text-gray-500 dark:text-gray-400 rounded-md border border-dashed border-gray-200 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-900/40"
+            className="flex flex-col items-center gap-2 py-6 text-xs text-gray-500 dark:text-gray-400 rounded-md border border-dashed border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)]/80 dark:bg-gray-900/40"
           >
             <SearchX size={20} aria-hidden="true" className="text-gray-400" />
             <div>No elements match</div>

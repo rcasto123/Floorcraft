@@ -204,7 +204,7 @@ export function ReportsPanel() {
                       className={`px-3 py-1.5 text-xs rounded border transition-colors ${
                         seatMapColorMode === mode
                           ? 'bg-[color:var(--color-blueprint-soft)] border-[color:var(--color-blueprint)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
-                          : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                          : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-[color:var(--color-paper-line)] dark:border-gray-800 text-gray-600 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
                       }`}
                     >
                       {mode === 'employment-type'
@@ -319,7 +319,7 @@ function ReportButton({
       className={`flex items-center gap-3 w-full p-3 border rounded-lg text-left transition-colors ${
         active
           ? 'bg-[color:var(--color-blueprint-soft)] border-[color:var(--color-blueprint)]/40 dark:border-[color:var(--color-blueprint)]/40 hover:bg-[color:var(--color-blueprint-soft)] dark:hover:bg-[color:var(--color-blueprint-soft)]'
-          : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:border-gray-300 dark:hover:border-gray-700'
+          : 'border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 hover:border-gray-300 dark:hover:border-gray-700'
       }`}
     >
       <div

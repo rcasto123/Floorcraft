@@ -97,7 +97,7 @@ export function TeamSettingsPage() {
               src={team.logo_url}
               alt=""
               aria-hidden="true"
-              className="w-10 h-10 rounded-lg object-cover border border-gray-200 dark:border-gray-800 shrink-0"
+              className="w-10 h-10 rounded-lg object-cover border border-[color:var(--color-paper-line)] dark:border-gray-800 shrink-0"
             />
           ) : (
             <div
@@ -123,7 +123,7 @@ export function TeamSettingsPage() {
         <nav
           role="tablist"
           aria-label="Team settings"
-          className="inline-flex items-center gap-1 p-1 mb-6 rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900/60"
+          className="inline-flex items-center gap-1 p-1 mb-6 rounded-lg border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-sunken)] dark:border-gray-800 dark:bg-gray-900/60"
         >
           <NavLink end to="." className={pillClass} role="tab">
             General

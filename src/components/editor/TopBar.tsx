@@ -381,7 +381,7 @@ export function TopBar() {
         {viewMenuOpen && (
           <div
             role="menu"
-            className="absolute left-0 mt-1 w-56 bg-white border border-gray-200 rounded shadow dark:bg-gray-900 dark:border-gray-700 dark:shadow-black/40 z-50 py-1"
+            className="absolute left-0 mt-1 w-56 bg-[color:var(--color-paper-raised)] border border-[color:var(--color-paper-line)] rounded shadow dark:bg-gray-900 dark:border-gray-700 dark:shadow-black/40 z-50 py-1"
           >
             <button
               role="menuitem"
@@ -389,7 +389,7 @@ export function TopBar() {
                 setViewMenuOpen(false)
                 zoomIn()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
             >
               <ZoomIn size={14} aria-hidden="true" />
               Zoom in
@@ -401,7 +401,7 @@ export function TopBar() {
                 setViewMenuOpen(false)
                 zoomOut()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
             >
               <ZoomOut size={14} aria-hidden="true" />
               Zoom out
@@ -413,7 +413,7 @@ export function TopBar() {
                 setViewMenuOpen(false)
                 resetZoom()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
             >
               <span className="inline-block w-[14px] text-center text-xs font-mono">
                 {Math.round(stageScale * 100)}
@@ -421,14 +421,14 @@ export function TopBar() {
               Reset zoom
               <kbd className="ml-auto text-[10px] text-gray-400 dark:text-gray-500 font-mono">0</kbd>
             </button>
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <button
               role="menuitem"
               onClick={() => {
                 setViewMenuOpen(false)
                 toggleGrid()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
               aria-pressed={settings.showGrid}
             >
               {settings.showGrid ? (
@@ -446,7 +446,7 @@ export function TopBar() {
                 setViewMenuOpen(false)
                 toggleDimensions()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
               aria-pressed={settings.showDimensions}
             >
               {settings.showDimensions ? (
@@ -464,7 +464,7 @@ export function TopBar() {
                 setViewMenuOpen(false)
                 toggleNorthArrow()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
               aria-pressed={settings.showNorthArrow ?? true}
             >
               {(settings.showNorthArrow ?? true) ? (
@@ -487,7 +487,7 @@ export function TopBar() {
                 setViewMenuOpen(false)
                 toggleDeskIds()
               }}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
               aria-pressed={settings.showDeskIds ?? false}
             >
               {(settings.showDeskIds ?? false) ? (
@@ -508,7 +508,7 @@ export function TopBar() {
                 reads consistently. */}
             {canViewITLayer && (
               <>
-                <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+                <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
                 {IT_LAYERS.map((layer) => {
                   const on = itLayerVisible[layer]
                   // Per-layer label + icon mapping. Kept inline because
@@ -530,7 +530,7 @@ export function TopBar() {
                         setViewMenuOpen(false)
                         toggleITLayer(layer)
                       }}
-                      className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800/50"
+                      className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800/50"
                       aria-pressed={on}
                       data-testid={`it-layer-toggle-${layer}`}
                     >
@@ -552,7 +552,7 @@ export function TopBar() {
                 preference, not a project property. The picker writes
                 through `setSettings` so the choice flows through the
                 existing autosave plumbing. */}
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <SeatLabelStylePicker
               value={settings.seatLabelStyle ?? 'pill'}
               onChange={(next) => setSettings({ seatLabelStyle: next })}
@@ -572,7 +572,7 @@ export function TopBar() {
         step={2}
         value={settings.gridSize}
         onChange={(e) => setSettings({ gridSize: Number(e.target.value) })}
-        className="hidden md:block w-[60px] text-xs bg-white text-gray-900 border border-gray-200 rounded px-1 py-1 focus:outline-none focus:border-[color:var(--color-blueprint)] dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700"
+        className="hidden md:block w-[60px] text-xs bg-[color:var(--color-paper-raised)] text-gray-900 border border-[color:var(--color-paper-line)] rounded px-1 py-1 focus:outline-none focus:border-[color:var(--color-blueprint)] dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700"
         title="Grid size"
         aria-label="Grid size"
       />
@@ -700,7 +700,7 @@ export function TopBar() {
           The avatar is the rightmost item, so any horizontal pressure
           (long save-state strings, selection chip, full project nav)
           ate into it and chopped the user's own avatar in half. */}
-      <div className="ml-1 pl-3 border-l border-gray-200 dark:border-gray-800 flex items-center flex-shrink-0">
+      <div className="ml-1 pl-3 border-l border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center flex-shrink-0">
         <UserMenu />
       </div>
     </div>
@@ -766,7 +766,7 @@ function MobileViewNav({
         const next = e.target.value
         navigate(`/t/${teamSlug}/o/${officeSlug}/${next}`)
       }}
-      className="md:hidden text-xs font-semibold uppercase tracking-wide bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+      className="md:hidden text-xs font-semibold uppercase tracking-wide bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-[color:var(--color-paper-line)] dark:border-gray-700 rounded-md px-2 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
     >
       <option value="map">Map</option>
       <option value="roster">Roster</option>

@@ -174,13 +174,13 @@ export function FileMenu({ groups, triggerId }: FileMenuProps) {
           role="menu"
           aria-label="File"
           onKeyDown={handleMenuKey}
-          className="absolute left-0 mt-1 w-64 bg-white border border-gray-200 rounded shadow dark:bg-gray-900 dark:border-gray-800 dark:shadow-black/40 z-50 py-1"
+          className="absolute left-0 mt-1 w-64 bg-[color:var(--color-paper-raised)] border border-[color:var(--color-paper-line)] rounded shadow dark:bg-gray-900 dark:border-gray-800 dark:shadow-black/40 z-50 py-1"
           data-testid="file-menu-panel"
         >
           {groups.map((group, gi) => (
             <div key={group.heading ?? `group-${gi}`}>
               {gi > 0 && (
-                <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+                <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
               )}
               {group.heading && (
                 <div

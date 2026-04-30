@@ -137,7 +137,7 @@ export function ShareView() {
   }
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-gray-50 dark:bg-gray-800/50">
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50">
       <ShareHeader
         officeName={officeSlug ?? ''}
         expiresAt={matchedLink?.expiresAt ?? null}
@@ -172,7 +172,7 @@ function ShareHeader({
   expiresAt: string | null
 }) {
   return (
-    <header className="flex items-center gap-4 px-6 py-3 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+    <header className="flex items-center gap-4 px-6 py-3 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 bg-white dark:bg-gray-950">
       <div className="flex items-center gap-2">
         <span
           aria-hidden
@@ -222,7 +222,7 @@ function EmbedStatusBar({ fullShareHref }: { fullShareHref: string }) {
       role="status"
       aria-label="Embed status"
       data-testid="share-view-embed-status"
-      className="absolute bottom-0 left-0 right-0 h-7 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-t border-gray-200 dark:border-gray-800 flex items-center px-3 text-[11px] text-gray-500 dark:text-gray-400"
+      className="absolute bottom-0 left-0 right-0 h-7 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-t border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center px-3 text-[11px] text-gray-500 dark:text-gray-400"
     >
       <span className="font-medium text-gray-700 dark:text-gray-200">
         Floorcraft

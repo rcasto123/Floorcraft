@@ -104,13 +104,13 @@ export function UserMenu() {
           role="menu"
           aria-label="Account"
           className={cn(
-            'absolute right-0 mt-1 w-64 bg-white border border-gray-200 rounded shadow dark:bg-gray-900 dark:border-gray-800 dark:shadow-black/40 z-50 py-1 origin-top-right',
+            'absolute right-0 mt-1 w-64 bg-[color:var(--color-paper-raised)] border border-[color:var(--color-paper-line)] rounded shadow dark:bg-gray-900 dark:border-gray-800 dark:shadow-black/40 z-50 py-1 origin-top-right',
             !reduceMotion && 'dropdown-enter',
           )}
           data-testid="user-menu-panel"
         >
           <div
-            className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 truncate border-b border-gray-100 dark:border-gray-800"
+            className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 truncate border-b border-[color:var(--color-paper-line)] dark:border-gray-800"
             title={email}
           >
             Signed in as <span className="font-medium text-gray-700 dark:text-gray-300">{email}</span>
@@ -143,7 +143,7 @@ export function UserMenu() {
           </div>
 
           <div>
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
               Help
             </div>
@@ -181,7 +181,7 @@ export function UserMenu() {
           </div>
 
           <div>
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <button
               ref={registerItemRef(signOutIdx)}
               role="menuitem"

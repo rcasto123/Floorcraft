@@ -102,7 +102,7 @@ export function TeamSettingsGeneral({ team, isAdmin }: { team: Team; isAdmin: bo
         >
           Team identity
         </h2>
-        <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900/60 p-5 space-y-4">
+        <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] dark:border-gray-800 dark:bg-gray-900/60 p-5 space-y-4">
           <label className="block">
             <span className="block mb-1 text-gray-700 dark:text-gray-300">
               Team name
@@ -208,7 +208,7 @@ export function TeamSettingsGeneral({ team, isAdmin }: { team: Team; isAdmin: bo
           onClick={closeConfirm}
         >
           <div
-            className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full space-y-4"
+            className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full space-y-4"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"

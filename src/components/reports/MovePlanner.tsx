@@ -101,12 +101,12 @@ export function MovePlanner() {
       </div>
 
       {/* Add Move form */}
-      <div className="flex flex-col gap-2 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-800">
+      <div className="flex flex-col gap-2 p-3 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 rounded-lg border border-[color:var(--color-paper-line)] dark:border-gray-800">
         <div className="text-xs font-medium text-gray-600 dark:text-gray-300">Add a move</div>
         <select
           value={selectedEmployeeId}
           onChange={(e) => setSelectedEmployeeId(e.target.value)}
-          className="w-full px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
+          className="w-full px-2 py-1.5 text-xs border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
         >
           <option value="">Select employee…</option>
           {allEmployees.map((emp) => (
@@ -122,7 +122,7 @@ export function MovePlanner() {
             setSelectedFloorId(e.target.value)
             setSelectedDeskId('')
           }}
-          className="w-full px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
+          className="w-full px-2 py-1.5 text-xs border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
         >
           <option value="">Target floor…</option>
           {floors.map((f) => (
@@ -133,7 +133,7 @@ export function MovePlanner() {
         <select
           value={selectedDeskId}
           onChange={(e) => setSelectedDeskId(e.target.value)}
-          className="w-full px-2 py-1.5 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
+          className="w-full px-2 py-1.5 text-xs border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
           disabled={!selectedFloorId}
         >
           <option value="">Target desk…</option>
@@ -172,7 +172,7 @@ export function MovePlanner() {
             return (
               <div
                 key={move.employeeId}
-                className="flex items-center gap-2 px-2.5 py-1.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded text-xs"
+                className="flex items-center gap-2 px-2.5 py-1.5 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded text-xs"
               >
                 <span className="font-medium text-gray-800 dark:text-gray-100 truncate flex-1">
                   {emp?.name || move.employeeId}

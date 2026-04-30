@@ -209,7 +209,7 @@ function FirstRunDemoSeeder() {
       // bottom-right; keeping this one top-right means a user who sees
       // BOTH (fresh empty office, tour not yet dismissed) can act on
       // either without either covering the other.
-      className={`absolute top-4 right-4 w-[340px] bg-white dark:bg-gray-900 shadow-xl rounded-xl border border-gray-200 dark:border-gray-800 p-4 z-40 ${
+      className={`absolute top-4 right-4 w-[340px] bg-[color:var(--color-paper-raised)] dark:bg-gray-900 shadow-xl rounded-xl border border-[color:var(--color-paper-line)] dark:border-gray-800 p-4 z-40 ${
         reducedMotion ? '' : 'animate-in fade-in slide-in-from-top-2 duration-300'
       }`}
     >
@@ -436,7 +436,7 @@ function FirstRunCoachTour() {
       // The per-step heading inside the body re-announces step copy as
       // the user advances; we don't shift the dialog's name itself.
       aria-labelledby="first-run-coach-title"
-      className="absolute bottom-12 right-4 w-[360px] bg-white dark:bg-gray-900 shadow-xl rounded-xl border border-gray-200 dark:border-gray-800 p-5 z-40"
+      className="absolute bottom-12 right-4 w-[360px] bg-[color:var(--color-paper-raised)] dark:bg-gray-900 shadow-xl rounded-xl border border-[color:var(--color-paper-line)] dark:border-gray-800 p-5 z-40"
     >
       <div className="flex items-start gap-3">
         <div
@@ -522,7 +522,7 @@ function FirstRunCoachTour() {
             <button
               type="button"
               onClick={handleBack}
-              className="px-3 py-1.5 text-sm font-medium rounded-md border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              className="px-3 py-1.5 text-sm font-medium rounded-md border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
             >
               Back
             </button>
@@ -536,7 +536,7 @@ function FirstRunCoachTour() {
               <button
                 type="button"
                 onClick={handleOpenPalette}
-                className="px-3 py-1.5 text-sm font-medium rounded-md border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                className="px-3 py-1.5 text-sm font-medium rounded-md border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-100 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
               >
                 Open palette
               </button>

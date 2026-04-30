@@ -132,11 +132,11 @@ export function ScenariosPage() {
         // doesn't feel cramped on a typical laptop screen, but capped
         // so it doesn't push the page footer below the viewport on
         // shorter monitors.
-        className="mt-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden"
+        className="mt-6 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg overflow-hidden"
       >
         <div className="flex min-h-[600px]">
           {/* Sidebar — list of scenarios. */}
-          <aside className="w-64 border-r border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 p-4 flex flex-col gap-3">
+          <aside className="w-64 border-r border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 p-4 flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <h2 className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Scenarios
@@ -166,7 +166,7 @@ export function ScenariosPage() {
                       onClick={() => setActiveScenario(s.id)}
                       className={`w-full text-left text-sm px-2 py-1.5 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] ${
                         s.id === activeId
-                          ? 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 font-medium'
+                          ? 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 font-medium'
                           : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
@@ -183,7 +183,7 @@ export function ScenariosPage() {
 
             {/* Snapshot footer — reassures the planner about what "today"
                 means in the projection. */}
-            <div className="mt-auto text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 pt-3">
+            <div className="mt-auto text-xs text-gray-500 dark:text-gray-400 border-t border-[color:var(--color-paper-line)] dark:border-gray-800 pt-3">
               <div className="font-semibold text-gray-600 dark:text-gray-300">Today</div>
               <div className="tabular-nums">
                 {currentSnapshot.activeEmployees} active · {currentSnapshot.totalSeats} seats
@@ -204,7 +204,7 @@ export function ScenariosPage() {
                     mental model. */}
                 <Tabs.List
                   aria-label="Scenario sections"
-                  className="flex items-center gap-1 border-b border-gray-200 dark:border-gray-800 px-6 pt-4 bg-white dark:bg-gray-900"
+                  className="flex items-center gap-1 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 px-6 pt-4 bg-[color:var(--color-paper-raised)] dark:bg-gray-900"
                 >
                   <Tabs.Trigger
                     value="edit"
@@ -331,7 +331,7 @@ function NoActiveScenarioState({
 
 function UnauthorizedState() {
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-10 text-center">
+    <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-10 text-center">
       <div
         aria-hidden="true"
         className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"

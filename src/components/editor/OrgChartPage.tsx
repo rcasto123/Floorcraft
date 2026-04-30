@@ -116,7 +116,7 @@ export function OrgChartPage() {
         <EmptyState rosterHref={rosterHref} />
       ) : (
         <section
-          className="mt-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4"
+          className="mt-6 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-4"
           aria-label="Reporting tree"
         >
           {/* The chart can be wider than the page column on a deep org —
@@ -172,7 +172,7 @@ function PageHeader({ rosterHref }: { rosterHref: string | null }) {
         {rosterHref && (
           <Link
             to={rosterHref}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
           >
             <ExternalLink size={14} aria-hidden="true" />
             Open in roster
@@ -246,7 +246,7 @@ function StatStrip({ stats }: { stats: OrgStats }) {
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-3">
+    <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-3">
       <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
         {label}
       </div>
@@ -341,7 +341,7 @@ function TreeBranch({
       />
       {node.children.length > 0 && (
         <div
-          className="flex items-start gap-6 mt-4 pl-2 border-l border-gray-200 dark:border-gray-800"
+          className="flex items-start gap-6 mt-4 pl-2 border-l border-[color:var(--color-paper-line)] dark:border-gray-800"
           role="group"
           aria-label={`Direct reports of ${node.employee.name}`}
         >
@@ -381,7 +381,7 @@ function NodeCard({
       data-testid={`org-node-${node.id}`}
       role="treeitem"
       aria-label={`${e.name}${e.title ? `, ${e.title}` : ''}`}
-      className="text-left bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm hover:shadow-md hover:border-[color:var(--color-blueprint)] hover:bg-gray-50/40 dark:hover:bg-gray-800/40 transition-all px-3 py-2 min-w-[180px] max-w-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+      className="text-left bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md shadow-sm hover:shadow-md hover:border-[color:var(--color-blueprint)] hover:bg-[color:var(--color-paper-sunken)]/60 dark:hover:bg-gray-800/40 transition-all px-3 py-2 min-w-[180px] max-w-[220px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
     >
       <div className="flex items-center gap-2">
         <span
@@ -409,7 +409,7 @@ function NodeCard({
  */
 function EmptyState({ rosterHref }: { rosterHref: string | null }) {
   return (
-    <div className="mt-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-10 text-center">
+    <div className="mt-6 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-10 text-center">
       <div
         aria-hidden="true"
         className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"
@@ -435,7 +435,7 @@ function EmptyState({ rosterHref }: { rosterHref: string | null }) {
 
 function UnauthorizedState() {
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-10 text-center">
+    <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-10 text-center">
       <div
         aria-hidden="true"
         className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"

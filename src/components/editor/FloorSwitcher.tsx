@@ -410,7 +410,7 @@ export function FloorSwitcher() {
                 className={`px-3 py-1.5 text-sm font-medium rounded-t cursor-pointer transition-colors ${
                   floor.id === activeFloorId
                     ? 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-b-2 border-[color:var(--color-blueprint)] bg-[color:var(--color-blueprint-soft)]'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
                 } ${draggingFloorId === floor.id ? 'opacity-50' : ''}`}
                 onClick={() => handleSwitchFloor(floor.id)}
                 onContextMenu={(e) => handleContextMenu(e, floor.id)}
@@ -453,7 +453,7 @@ export function FloorSwitcher() {
       {contextMenuFloorId && canEdit && (
         <div
           ref={contextMenuRef}
-          className="fixed bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-1 z-50 min-w-[120px]"
+          className="fixed bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg shadow-lg py-1 z-50 min-w-[120px]"
           style={{ left: contextMenuPos.x, top: contextMenuPos.y }}
         >
           <button

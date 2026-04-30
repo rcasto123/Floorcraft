@@ -60,7 +60,7 @@ export function PanelHeader({
   return (
     <div
       data-testid="panel-header"
-      className={`flex items-start justify-between gap-2 pb-2.5 border-b border-gray-100 dark:border-gray-800 mb-3 ${
+      className={`flex items-start justify-between gap-2 pb-2.5 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 mb-3 ${
         className ?? ''
       }`}
     >

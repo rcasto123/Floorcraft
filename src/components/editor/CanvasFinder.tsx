@@ -87,7 +87,7 @@ function CanvasFinderBody() {
       className="fixed top-4 left-1/2 -translate-x-1/2 z-30
                  flex items-center gap-2 px-3 py-2
                  rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur
-                 border border-gray-200 dark:border-gray-800
+                 border border-[color:var(--color-paper-line)] dark:border-gray-800
                  shadow-lg
                  min-w-[360px] max-w-[480px]"
       role="search"

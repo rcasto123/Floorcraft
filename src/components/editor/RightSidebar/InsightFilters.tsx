@@ -65,7 +65,7 @@ export function InsightFilters({
                 className={`px-2 py-0.5 text-[10px] rounded-full transition-colors ${
                   active
                     ? 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
-                    : 'bg-gray-50 dark:bg-gray-800/50 text-gray-400 dark:text-gray-500'
+                    : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-400 dark:text-gray-500'
                 }`}
               >
                 {label}

@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { Search, Plus, Upload, Users, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
 
 const INPUT_CLASS =
-  'w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500 bg-white dark:bg-gray-900'
+  'w-full text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-[color:var(--color-blueprint)] disabled:bg-[color:var(--color-paper-sunken)] disabled:text-gray-500 bg-[color:var(--color-paper-raised)] dark:bg-gray-900'
 import { useShallow } from 'zustand/react/shallow'
 import { Link, useParams } from 'react-router-dom'
 
@@ -112,7 +112,7 @@ export function PeoplePanel() {
   return (
     <div className="flex flex-col h-full">
       {/* Header actions */}
-      <div className="flex items-center justify-between pb-2.5 border-b border-gray-100 dark:border-gray-800 mb-3">
+      <div className="flex items-center justify-between pb-2.5 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 mb-3">
         <div className="flex items-center gap-2">
           <Users size={16} className="text-gray-500 dark:text-gray-400" />
           <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{totalCount} people</span>
@@ -148,7 +148,7 @@ export function PeoplePanel() {
           <button
             type="button"
             onClick={() => setCsvImportOpen(true)}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-900"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium border border-[color:var(--color-paper-line)] dark:border-gray-800 text-gray-700 dark:text-gray-200 rounded-md hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-900"
           >
             <Upload size={12} aria-hidden="true" />
             CSV
@@ -158,7 +158,7 @@ export function PeoplePanel() {
 
       {/* Inline add form */}
       {showAddForm && (
-        <div className="rounded-lg border border-gray-200 dark:border-gray-800 p-3 bg-gray-50 dark:bg-gray-900/50 mb-3 flex flex-col gap-2">
+        <div className="rounded-lg border border-[color:var(--color-paper-line)] dark:border-gray-800 p-3 bg-[color:var(--color-paper-sunken)] dark:bg-gray-900/50 mb-3 flex flex-col gap-2">
           <input
             className={INPUT_CLASS}
             placeholder="Jane Smith"
@@ -228,7 +228,7 @@ export function PeoplePanel() {
       <div className="relative mb-3">
         <Search size={14} className="absolute left-2.5 top-2.5 text-gray-400 dark:text-gray-500" aria-hidden="true" />
         <input
-          className="w-full pl-8 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:border-transparent"
+          className="w-full pl-8 pr-3 py-2 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:border-transparent"
           placeholder="Search people…"
           aria-label="Search people"
           value={searchQuery}
@@ -305,7 +305,7 @@ export function PeoplePanel() {
               <button onClick={() => setShowAddForm(true)} className="px-3 py-1.5 text-xs font-medium bg-[color:var(--color-blueprint)] text-white rounded-md hover:bg-[color:var(--color-blueprint-strong)]">
                 Add person
               </button>
-              <button onClick={() => setCsvImportOpen(true)} className="px-3 py-1.5 text-xs font-medium border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50">
+              <button onClick={() => setCsvImportOpen(true)} className="px-3 py-1.5 text-xs font-medium border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50">
                 Import CSV
               </button>
             </div>
@@ -316,10 +316,10 @@ export function PeoplePanel() {
               const deptEmployees = grouped.get(dept)!
               const isCollapsed = collapsedDepts.has(dept)
               return (
-                <div key={dept} className="border-t border-gray-100 dark:border-gray-800 first:border-t-0 pt-2 mt-2 first:mt-0 first:pt-0">
+                <div key={dept} className="border-t border-[color:var(--color-paper-line)] dark:border-gray-800 first:border-t-0 pt-2 mt-2 first:mt-0 first:pt-0">
                   <button
                     onClick={() => toggleDept(dept)}
-                    className="flex items-center gap-1.5 w-full px-1 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded"
+                    className="flex items-center gap-1.5 w-full px-1 py-1.5 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 rounded"
                   >
                     {isCollapsed ? (
                       <ChevronRight size={12} className="text-gray-500 dark:text-gray-400" />
@@ -342,7 +342,7 @@ export function PeoplePanel() {
                         return (
                           <div
                             key={employee.id}
-                            className={`flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 group ${canEdit ? 'cursor-grab' : 'cursor-default'}`}
+                            className={`flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 group ${canEdit ? 'cursor-grab' : 'cursor-default'}`}
                             draggable={canEdit}
                             title={!canEdit ? 'Read-only access. Contact an editor to make changes.' : undefined}
                             onDragStart={(e) => {

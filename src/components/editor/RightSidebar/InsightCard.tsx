@@ -23,7 +23,7 @@ interface InsightCardProps {
 export function InsightCard({ insight, onDismiss, onAction, onClick }: InsightCardProps) {
   return (
     <div
-      className={`relative border-l-4 ${BORDER_COLORS[insight.severity]} bg-white dark:bg-gray-900 rounded-r-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer`}
+      className={`relative border-l-4 ${BORDER_COLORS[insight.severity]} bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-r-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer`}
       onClick={() => onClick(insight)}
     >
       {/* Header */}
@@ -62,7 +62,7 @@ export function InsightCard({ insight, onDismiss, onAction, onClick }: InsightCa
                 e.stopPropagation()
                 onAction(insight.id, i)
               }}
-              className="px-2.5 py-1 text-xs font-medium border border-gray-200 dark:border-gray-800 rounded hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors text-gray-600 dark:text-gray-300"
+              className="px-2.5 py-1 text-xs font-medium border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 transition-colors text-gray-600 dark:text-gray-300"
             >
               {action.label}
             </button>

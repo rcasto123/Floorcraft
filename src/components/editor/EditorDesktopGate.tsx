@@ -59,7 +59,7 @@ export function EditorDesktopGate() {
           {teamSlug && (
             <Link
               to={`/t/${teamSlug}`}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
             >
               <ArrowLeft size={14} aria-hidden="true" />
               Back to team home

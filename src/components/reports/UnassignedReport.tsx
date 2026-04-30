@@ -114,7 +114,7 @@ export function UnassignedReport() {
                 className={`flex items-center gap-2 w-full px-2.5 py-1.5 rounded text-left text-xs transition-colors ${
                   highlightedEmpId === emp.id
                     ? 'bg-[color:var(--color-blueprint-soft)] border border-[color:var(--color-blueprint)]'
-                    : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                    : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
                 }`}
               >
                 <div className="flex-1 min-w-0">
@@ -161,7 +161,7 @@ export function UnassignedReport() {
                       className={`px-2 py-1 text-[11px] rounded border transition-colors ${
                         highlightedEmpId
                           ? 'border-[color:var(--color-blueprint)] bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-soft)] dark:hover:bg-[color:var(--color-blueprint-soft)] cursor-pointer'
-                          : 'border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 cursor-default'
+                          : 'border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 cursor-default'
                       }`}
                     >
                       {desk.label}

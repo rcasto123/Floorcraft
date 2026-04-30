@@ -37,7 +37,7 @@ export function FloorComparePage() {
         <div className="max-w-5xl mx-auto px-6 py-10">
           <div
             role="alert"
-            className="mx-auto max-w-md rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            className="mx-auto max-w-md rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] p-8 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900"
           >
             <div
               aria-hidden="true"
@@ -73,7 +73,7 @@ export function FloorComparePage() {
             the back-link idiom used elsewhere in the editor. */}
         <Link
           to={reportsHref}
-          className="inline-flex items-center gap-1 rounded-md border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800/50"
+          className="inline-flex items-center gap-1 rounded-md border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] px-2.5 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-[color:var(--color-paper-sunken)] dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800/50"
         >
           <ArrowLeft size={14} aria-hidden="true" />
           Back to reports
@@ -90,7 +90,7 @@ export function FloorComparePage() {
           </p>
         </header>
 
-        <section className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <section className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900">
           <FloorCompareTable />
         </section>
       </div>

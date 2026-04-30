@@ -54,7 +54,7 @@ export function ViewAsMenu() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-900 border rounded shadow z-30 py-1"
+          className="absolute right-0 mt-1 w-48 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border rounded shadow z-30 py-1"
         >
           <div className="px-3 py-1 text-[10px] uppercase tracking-wide text-gray-400 dark:text-gray-500">
             Preview as role
@@ -66,7 +66,7 @@ export function ViewAsMenu() {
               setImpersonatedRole(null)
               setOpen(false)
             }}
-            className="flex items-center justify-between w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            className="flex items-center justify-between w-full text-left px-3 py-1.5 text-sm hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
           >
             <span>None (owner)</span>
             {impersonatedRole === null && <Check size={14} className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]" />}
@@ -80,7 +80,7 @@ export function ViewAsMenu() {
                 setImpersonatedRole(role)
                 setOpen(false)
               }}
-              className="flex items-center justify-between w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              className="flex items-center justify-between w-full text-left px-3 py-1.5 text-sm hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
             >
               <span>{role}</span>
               {impersonatedRole === role && <Check size={14} className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]" />}

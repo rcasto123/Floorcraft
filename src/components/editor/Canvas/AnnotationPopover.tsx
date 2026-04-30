@@ -136,7 +136,7 @@ const DELETE_BTN_CLASS =
   'text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 ' +
   'px-3 py-1.5 text-xs rounded focus:outline-none focus:ring-2 focus:ring-red-400'
 const POPOVER_SHELL_CLASS =
-  'rounded-lg shadow-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-xs'
+  'rounded-lg shadow-xl bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 text-xs'
 
 /**
  * Trap focus inside the popover while it's open so Tab cycles through
@@ -190,7 +190,7 @@ function PopoverHeader({
   onClose: () => void
 }) {
   return (
-    <div className="sticky top-0 flex items-center gap-2 px-3 py-2 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 rounded-t-lg">
+    <div className="sticky top-0 flex items-center gap-2 px-3 py-2 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-t-lg">
       <MessageCircle
         size={14}
         aria-hidden="true"
@@ -305,7 +305,7 @@ function CreatePopover({ containerRef, canEdit }: InnerProps) {
             </span>
           </div>
         </section>
-        <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800">
+        <div className="flex items-center justify-between pt-2 border-t border-[color:var(--color-paper-line)] dark:border-gray-800">
           <div />
           <div className="flex gap-2">
             <button
@@ -521,7 +521,7 @@ function ViewPopoverBody({
           </span>
         </section>
 
-        <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800">
+        <div className="flex items-center justify-between pt-2 border-t border-[color:var(--color-paper-line)] dark:border-gray-800">
           <div>
             {canEdit && !editMode && (
               <button

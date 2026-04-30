@@ -346,7 +346,7 @@ function ProfileSection({
   return (
     <section aria-labelledby="profile-heading" className="space-y-3">
       <SectionHeading id="profile-heading">Profile</SectionHeading>
-      <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900/60 p-5">
+      <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] dark:border-gray-800 dark:bg-gray-900/60 p-5">
         <form onSubmit={onSubmit} className="space-y-4">
           <label className="block">
             <span className="block mb-1 text-gray-700 dark:text-gray-300">
@@ -443,7 +443,7 @@ function ChangeEmailInfoDialog({ onClose }: { onClose: () => void }) {
       data-testid="change-email-info-backdrop"
     >
       <div
-        className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full space-y-4"
+        className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full space-y-4"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -498,7 +498,7 @@ function SecuritySection({
   return (
     <section aria-labelledby="security-heading" className="space-y-3">
       <SectionHeading id="security-heading">Security</SectionHeading>
-      <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900/60 p-5">
+      <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] dark:border-gray-800 dark:bg-gray-900/60 p-5">
         <form onSubmit={onSubmit} className="space-y-4">
           <label className="block">
             <span className="block mb-1 text-gray-700 dark:text-gray-300">
@@ -614,7 +614,7 @@ function DataPrivacySection() {
   return (
     <section aria-labelledby="privacy-heading" className="space-y-3">
       <SectionHeading id="privacy-heading">Data &amp; privacy</SectionHeading>
-      <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900/60 p-5">
+      <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] dark:border-gray-800 dark:bg-gray-900/60 p-5">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div className="min-w-0">
             <div className="font-medium text-gray-900 dark:text-gray-100">
@@ -825,7 +825,7 @@ function DangerZoneSection({ onSignOut }: { onSignOut: () => void }) {
           data-testid="delete-account-backdrop"
         >
           <div
-            className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full space-y-4"
+            className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-xl shadow-2xl p-6 max-w-md w-full space-y-4"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"

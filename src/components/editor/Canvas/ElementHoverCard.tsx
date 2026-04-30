@@ -468,7 +468,7 @@ export function ElementHoverCard() {
         opacity: 1,
         transition: reduceMotion ? 'none' : 'opacity 120ms ease-out',
       }}
-      className="rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-xs max-w-[260px]"
+      className="rounded-md border border-[color:var(--color-paper-line)] dark:border-gray-700 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 shadow-md px-2.5 py-1.5 text-xs max-w-[260px]"
     >
       {card.kind === 'summary' ? (
         <SummaryBody card={card} />

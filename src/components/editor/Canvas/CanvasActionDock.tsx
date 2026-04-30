@@ -64,7 +64,7 @@ export function CanvasActionDock() {
 
   return (
     <div
-      className="absolute bottom-12 right-4 z-20 flex flex-col gap-0.5 p-1 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur border border-gray-200 dark:border-gray-800 shadow-lg"
+      className="absolute bottom-12 right-4 z-20 flex flex-col gap-0.5 p-1 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur border border-[color:var(--color-paper-line)] dark:border-gray-800 shadow-lg"
       data-testid="canvas-action-dock"
       role="toolbar"
       aria-label="Canvas controls"

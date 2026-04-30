@@ -236,7 +236,7 @@ function StatCard({
 }) {
   return (
     <div
-      className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-3"
+      className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-3"
       // Stat cards are read-only summary chrome — keep them out of the
       // tab order entirely so keyboard users don't have to click through
       // six non-actions to reach the search input.
@@ -256,14 +256,14 @@ function StatCard({
 function OfficeCardSkeleton() {
   return (
     <div
-      className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden animate-pulse"
+      className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-xl border border-[color:var(--color-paper-line)] dark:border-gray-800 overflow-hidden animate-pulse"
       aria-hidden="true"
     >
-      <div className="w-full h-40 bg-gray-100 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800" />
+      <div className="w-full h-40 bg-gray-100 dark:bg-gray-800 border-b border-[color:var(--color-paper-line)] dark:border-gray-800" />
       <div className="p-4 space-y-3">
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
         <div className="h-3 bg-gray-100 dark:bg-gray-800 rounded w-3/4" />
-        <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+        <div className="pt-3 border-t border-[color:var(--color-paper-line)] dark:border-gray-800">
           <div className="h-5 bg-gray-100 dark:bg-gray-800 rounded-full w-20" />
         </div>
       </div>
@@ -630,7 +630,7 @@ export function TeamHomePage() {
                 src={team.logo_url}
                 alt=""
                 aria-hidden="true"
-                className="w-10 h-10 rounded-lg object-cover border border-gray-200 dark:border-gray-800 shrink-0"
+                className="w-10 h-10 rounded-lg object-cover border border-[color:var(--color-paper-line)] dark:border-gray-800 shrink-0"
               />
             ) : (
               <div
@@ -666,7 +666,7 @@ export function TeamHomePage() {
                   onClick={onImport}
                   disabled={creating}
                   title="Create a new office and open the CSV import dialog"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
                 >
                   <Upload size={14} aria-hidden="true" />
                   Import
@@ -683,13 +683,13 @@ export function TeamHomePage() {
             )}
             <Link
               to={`/t/${team.slug}/settings`}
-              className="px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              className="px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
             >
               Settings
             </Link>
             <Link
               to="/help"
-              className="px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-200"
+              className="px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 text-gray-700 dark:text-gray-200"
               title="User guide and FAQ"
             >
               Help
@@ -971,7 +971,7 @@ function EmptyTeamState({
   onNewDemo: () => void
 }) {
   return (
-    <div className="mt-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-10 text-center max-w-xl mx-auto">
+    <div className="mt-10 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-xl p-10 text-center max-w-xl mx-auto">
       <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] mb-4">
         <Building2 size={28} aria-hidden="true" />
       </div>
@@ -997,7 +997,7 @@ function EmptyTeamState({
             type="button"
             onClick={onNewDemo}
             disabled={creating}
-            className="px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+            className="px-4 py-2 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
             title="Pre-populated with ~18 demo employees"
           >
             Try the sample office
@@ -1019,7 +1019,7 @@ function NoMatchesState({
 }) {
   return (
     <div
-      className="mt-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-10 text-center max-w-md mx-auto"
+      className="mt-6 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-xl p-10 text-center max-w-md mx-auto"
       role="status"
       aria-live="polite"
     >
@@ -1035,7 +1035,7 @@ function NoMatchesState({
       <button
         type="button"
         onClick={onReset}
-        className="mt-4 px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+        className="mt-4 px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
       >
         Clear search & filters
       </button>

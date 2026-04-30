@@ -172,7 +172,7 @@ function MemberRow({
 
   return (
     <li
-      className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800/40"
+      className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/40"
     >
       <Avatar seed={member.user_id} label={label} />
       <div className="min-w-0 flex-1">
@@ -212,7 +212,7 @@ function MemberRow({
             {menuOpen && (
               <div
                 role="menu"
-                className="absolute right-0 top-full mt-1 z-10 w-44 rounded-md border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900 py-1"
+                className="absolute right-0 top-full mt-1 z-10 w-44 rounded-md border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] shadow-lg dark:border-gray-800 dark:bg-gray-900 py-1"
               >
                 <button
                   role="menuitem"
@@ -221,7 +221,7 @@ function MemberRow({
                     setMenuOpen(false)
                     onChangeRole(member.role === 'admin' ? 'member' : 'admin')
                   }}
-                  className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800"
+                  className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800"
                 >
                   <Shield size={14} aria-hidden="true" />
                   {member.role === 'admin' ? 'Make member' : 'Make admin'}
@@ -291,7 +291,7 @@ function InviteRow({
       className={
         expired
           ? 'flex items-center gap-3 rounded-md px-3 py-2 opacity-60'
-          : 'flex items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800/40'
+          : 'flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/40'
       }
     >
       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400">
@@ -508,7 +508,7 @@ export function TeamSettingsMembers({
         >
           Members ({memberCount})
         </h2>
-        <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900/60">
+        <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] dark:border-gray-800 dark:bg-gray-900/60">
           {hasMembers ? (
             <ul className="divide-y divide-gray-100 dark:divide-gray-800/60 p-1">
               {members.map((m) => (
@@ -561,7 +561,7 @@ export function TeamSettingsMembers({
           >
             Pending invites ({invites.length})
           </h2>
-          <div className="rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900/60">
+          <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] dark:border-gray-800 dark:bg-gray-900/60">
             <ul className="divide-y divide-gray-100 dark:divide-gray-800/60 p-1">
               {invites.map((inv) => (
                 <InviteRow

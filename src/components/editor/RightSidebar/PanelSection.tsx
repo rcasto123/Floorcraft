@@ -76,7 +76,7 @@ export function PanelSection({
     .join(' ')
 
   const content = card ? (
-    <div className="rounded-md border border-gray-200 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-900/40 p-3">
+    <div className="rounded-md border border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)]/80 dark:bg-gray-900/40 p-3">
       {children}
     </div>
   ) : (

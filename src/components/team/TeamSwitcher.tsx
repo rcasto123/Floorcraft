@@ -125,13 +125,13 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
           role="menu"
           aria-label="Team switcher"
           className={cn(
-            'absolute left-0 mt-1 w-64 bg-white border border-gray-200 rounded shadow dark:bg-gray-900 dark:border-gray-800 dark:shadow-black/40 z-50 py-1 origin-top-left',
+            'absolute left-0 mt-1 w-64 bg-[color:var(--color-paper-raised)] border border-[color:var(--color-paper-line)] rounded shadow dark:bg-gray-900 dark:border-gray-800 dark:shadow-black/40 z-50 py-1 origin-top-left',
             !reduceMotion && 'dropdown-enter',
           )}
           data-testid="team-switcher-panel"
         >
           {showSearch && (
-            <div className="px-2 pt-1 pb-2 border-b border-gray-100 dark:border-gray-800">
+            <div className="px-2 pt-1 pb-2 border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
               <div className="relative">
                 <Search
                   size={12}
@@ -145,7 +145,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
                   placeholder="Search teams"
                   aria-label="Search teams"
                   data-testid="team-switcher-search"
-                  className="w-full pl-6 pr-2 py-1 text-xs bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] text-gray-700 dark:text-gray-200"
+                  className="w-full pl-6 pr-2 py-1 text-xs bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-700 rounded focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] text-gray-700 dark:text-gray-200"
                 />
               </div>
             </div>
@@ -198,7 +198,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
 
           {current && (
             <div>
-              <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+              <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
               <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
                 Manage
               </div>
@@ -219,7 +219,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
           )}
 
           <div>
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
               Help
             </div>
@@ -239,7 +239,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
           </div>
 
           <div>
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <button
               ref={registerItemRef(createIdx)}
               role="menuitem"

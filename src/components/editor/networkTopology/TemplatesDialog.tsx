@@ -192,7 +192,7 @@ function TemplateCard({
         'relative text-left rounded-lg border p-3 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]',
         selected
           ? 'border-[color:var(--color-blueprint)] ring-2 ring-[color:var(--color-blueprint)]/40 bg-[color:var(--color-blueprint-soft)]/60 dark:bg-[color:var(--color-blueprint-soft)]'
-          : 'border-gray-200 dark:border-gray-800 hover:border-[color:var(--color-blueprint)] dark:hover:border-[color:var(--color-blueprint)] hover:bg-gray-50 dark:hover:bg-gray-900/40',
+          : 'border-[color:var(--color-paper-line)] dark:border-gray-800 hover:border-[color:var(--color-blueprint)] dark:hover:border-[color:var(--color-blueprint)] hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-900/40',
       ].join(' ')}
     >
       <div className="flex items-center gap-2 text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">

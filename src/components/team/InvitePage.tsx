@@ -67,7 +67,7 @@ export function InvitePage() {
   if (session.status === 'loading') {
     return (
       <InviteShell>
-        <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
           <p className="text-sm text-gray-500 dark:text-gray-400">Loading…</p>
         </div>
       </InviteShell>
@@ -128,7 +128,7 @@ export function InvitePage() {
 
   return (
     <InviteShell>
-      <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
         {preview ? (
           <>
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
@@ -216,7 +216,7 @@ function InviteShell({ children }: { children: React.ReactNode }) {
 
 function InviteErrorCard({ title, body }: { title: string; body: string }) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900 text-center">
+    <div className="rounded-xl border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900 text-center">
       <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
         {title}
       </h1>

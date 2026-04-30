@@ -58,7 +58,7 @@ export function TopologyNodeCard({ data, selected }: NodeProps) {
   return (
     <div
       className={[
-        'relative w-[180px] rounded-lg border-2 bg-white dark:bg-gray-900 shadow-sm transition-all',
+        'relative w-[180px] rounded-lg border-2 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 shadow-sm transition-all',
         meta.accent,
         selected
           ? 'ring-2 ring-[color:var(--color-blueprint)] ring-offset-1 dark:ring-offset-gray-950'

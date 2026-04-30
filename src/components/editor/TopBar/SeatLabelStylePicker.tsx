@@ -82,7 +82,7 @@ export function SeatLabelStylePicker({ value, onChange }: SeatLabelStylePickerPr
             aria-checked={isChecked}
             onClick={() => onChange(opt.id)}
             title={opt.description}
-            className={`flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50 ${
+            className={`flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 ${
               isChecked
                 ? 'text-gray-900 dark:text-gray-50'
                 : 'text-gray-700 dark:text-gray-200'

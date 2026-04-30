@@ -153,11 +153,11 @@ export function EmployeeDirectory() {
     <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={handleClose}>
       <div className="absolute inset-0 bg-black/40" />
       <div
-        className="relative bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-6xl w-full mx-4 max-h-[85vh] flex flex-col"
+        className="relative bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-xl shadow-2xl max-w-6xl w-full mx-4 max-h-[85vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Employee directory</h2>
           <button
             onClick={handleClose}
@@ -168,13 +168,13 @@ export function EmployeeDirectory() {
         </div>
 
         {/* Search */}
-        <div className="px-6 py-3 border-b border-gray-100 dark:border-gray-800">
+        <div className="px-6 py-3 border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
           <input
             type="text"
             placeholder="Search by name, department, team, title, email, or tags…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] focus:border-transparent"
+            className="w-full px-3 py-2 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] focus:border-transparent"
             autoFocus
           />
         </div>
@@ -182,7 +182,7 @@ export function EmployeeDirectory() {
         {/* Table */}
         <div className="flex-1 overflow-auto">
           <table className="w-full text-sm">
-            <thead className="sticky top-0 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-800">
+            <thead className="sticky top-0 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
               <tr>
                 {columns.map((col) => (
                   <th
@@ -239,7 +239,7 @@ export function EmployeeDirectory() {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 border-t border-gray-200 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400">
+        <div className="px-6 py-3 border-t border-[color:var(--color-paper-line)] dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400">
           {sorted.length} employee{sorted.length !== 1 ? 's' : ''} shown
         </div>
       </div>

@@ -1008,7 +1008,7 @@ export function RosterPage() {
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-gray-900">
+    <div className="flex-1 flex flex-col overflow-hidden bg-[color:var(--color-paper-raised)] dark:bg-gray-900">
       {/* Redacted-mode notice. Explains why names read as initials and
           why email/office-days columns are empty — without it the UI
           looks broken to a viewer-role user seeing a colleague's roster
@@ -1016,7 +1016,7 @@ export function RosterPage() {
       {!canViewPII && (
         <div
           role="status"
-          className="px-5 py-2 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 text-xs text-gray-600 dark:text-gray-300 flex-shrink-0"
+          className="px-5 py-2 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-xs text-gray-600 dark:text-gray-300 flex-shrink-0"
           data-testid="pii-redaction-banner"
         >
           Viewing in redacted mode — personal details hidden.
@@ -1068,7 +1068,7 @@ export function RosterPage() {
         Everything else collapses behind a "More filters" popover, and a
         row of active-filter pills below makes narrowing explicit.
       */}
-      <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 flex-shrink-0">
         <div className="relative flex-1 max-w-md">
           <input
             ref={searchInputRef}
@@ -1086,7 +1086,7 @@ export function RosterPage() {
                 ;(e.target as HTMLInputElement).blur()
               }
             }}
-            className={`w-full px-3 py-1.5 ${q ? 'pr-8' : ''} text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]`}
+            className={`w-full px-3 py-1.5 ${q ? 'pr-8' : ''} text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]`}
           />
           {q && (
             <button
@@ -1109,7 +1109,7 @@ export function RosterPage() {
         <select
           value={statusFilter}
           onChange={(e) => setFilter('status', e.target.value)}
-          className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+          className="px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
           aria-label="Filter by status"
         >
           <option value="">All statuses</option>
@@ -1121,7 +1121,7 @@ export function RosterPage() {
         <select
           value={deptFilter}
           onChange={(e) => setFilter('dept', e.target.value)}
-          className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+          className="px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
           aria-label="Filter by department"
         >
           <option value="">All depts</option>
@@ -1143,7 +1143,7 @@ export function RosterPage() {
             className={`flex items-center gap-1.5 px-2 py-1.5 text-sm border rounded ${
               secondaryFilterCount > 0
                 ? 'border-[color:var(--color-blueprint)] bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:opacity-90'
-                : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                : 'border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
             }`}
             aria-haspopup="dialog"
             aria-expanded={moreFiltersOpen}
@@ -1157,7 +1157,7 @@ export function RosterPage() {
             <div
               role="dialog"
               aria-label="More filters"
-              className="fixed sm:absolute left-auto mt-1 w-[280px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded shadow-lg z-30 p-3"
+              className="fixed sm:absolute left-auto mt-1 w-[280px] bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded shadow-lg z-30 p-3"
               style={{ top: 'auto' }}
             >
               <div className="space-y-2">
@@ -1166,7 +1166,7 @@ export function RosterPage() {
                   <select
                     value={presetFilter}
                     onChange={(e) => setFilter('preset', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Preset view"
                     title={
                       presetFilter
@@ -1188,7 +1188,7 @@ export function RosterPage() {
                   <select
                     value={floorFilter}
                     onChange={(e) => setFilter('floor', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by floor"
                   >
                     <option value="">All floors</option>
@@ -1203,7 +1203,7 @@ export function RosterPage() {
                   <select
                     value={seatFilter}
                     onChange={(e) => setFilter('seat', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by seat assignment"
                   >
                     <option value="">All seats</option>
@@ -1217,7 +1217,7 @@ export function RosterPage() {
                   <select
                     value={dayFilter}
                     onChange={(e) => setFilter('day', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by office day"
                   >
                     <option value="">All days</option>
@@ -1232,7 +1232,7 @@ export function RosterPage() {
                   <select
                     value={equipFilter}
                     onChange={(e) => setFilter('equip', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+                    className="flex-1 px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by equipment status"
                   >
                     <option value="">All equipment</option>
@@ -1241,7 +1241,7 @@ export function RosterPage() {
                 </label>
               </div>
 
-              <div className="flex items-center justify-end pt-3 mt-2 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex items-center justify-end pt-3 mt-2 border-t border-[color:var(--color-paper-line)] dark:border-gray-800">
                 <button
                   type="button"
                   onClick={resetSecondaryFilters}
@@ -1264,7 +1264,7 @@ export function RosterPage() {
           without reading a label.
         */}
         <div
-          className="inline-flex items-center border border-gray-200 dark:border-gray-800 rounded overflow-hidden"
+          className="inline-flex items-center border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded overflow-hidden"
           role="group"
           aria-label="View mode"
         >
@@ -1273,7 +1273,7 @@ export function RosterPage() {
             className={`flex items-center gap-1 px-2 py-1.5 text-xs font-medium ${
               viewMode === 'list'
                 ? 'bg-gray-800 text-white'
-                : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
             }`}
             aria-pressed={viewMode === 'list'}
             aria-label="List view"
@@ -1284,10 +1284,10 @@ export function RosterPage() {
           </button>
           <button
             onClick={() => setFilter('view', 'cards')}
-            className={`flex items-center gap-1 px-2 py-1.5 text-xs font-medium border-l border-gray-200 dark:border-gray-800 ${
+            className={`flex items-center gap-1 px-2 py-1.5 text-xs font-medium border-l border-[color:var(--color-paper-line)] dark:border-gray-800 ${
               viewMode === 'cards'
                 ? 'bg-gray-800 text-white'
-                : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
             }`}
             aria-pressed={viewMode === 'cards'}
             aria-label="Card view"
@@ -1310,20 +1310,20 @@ export function RosterPage() {
         {canEdit && (
           <button
             onClick={() => setCsvImportOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
           >
             <Upload size={14} /> Import
           </button>
         )}
         <button
           onClick={handleExportAll}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
         >
           <Download size={14} /> Export CSV
         </button>
         <button
           onClick={() => setHelpOpen(true)}
-          className="flex items-center justify-center p-1.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded"
+          className="flex items-center justify-center p-1.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
           aria-label="Show keyboard shortcuts"
           title="Keyboard shortcuts (?)"
         >
@@ -1416,7 +1416,7 @@ export function RosterPage() {
               if (v === '__clear__') handleBulkClearDepartment()
               else handleBulkSetDepartment(v)
             }}
-            className="px-2 py-1 text-xs border border-[color:var(--color-blueprint)]/40 rounded bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+            className="px-2 py-1 text-xs border border-[color:var(--color-blueprint)]/40 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             aria-label="Set department on selected rows"
           >
             <option value="" disabled>
@@ -1437,7 +1437,7 @@ export function RosterPage() {
               const v = e.target.value as EmployeeStatus | ''
               if (v) handleBulkSetStatus(v)
             }}
-            className="px-2 py-1 text-xs border border-[color:var(--color-blueprint)]/40 rounded bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+            className="px-2 py-1 text-xs border border-[color:var(--color-blueprint)]/40 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             aria-label="Set status on selected rows"
           >
             <option value="" disabled>
@@ -1524,7 +1524,7 @@ export function RosterPage() {
               <select
                 value={sortColumn}
                 onChange={(e) => setSortColumn(e.target.value as SortColumn)}
-                className="px-1.5 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
+                className="px-1.5 py-1 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
                 aria-label="Sort column"
               >
                 <option value="name">Name</option>
@@ -1536,7 +1536,7 @@ export function RosterPage() {
             </label>
             <button
               onClick={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
-              className="px-2 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 flex items-center gap-1"
+              className="px-2 py-1 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-600 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 flex items-center gap-1"
               aria-label={`Sort direction ${sortDir}`}
               title={`Sort direction: ${sortDir}ending`}
             >
@@ -1585,7 +1585,7 @@ export function RosterPage() {
       ) : (
       <div className="flex-1 overflow-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-10">
+          <thead className="sticky top-0 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 z-10">
             <tr>
               {canEdit && (
                 <th className="px-4 py-2 w-8">
@@ -1612,7 +1612,7 @@ export function RosterPage() {
                   key={col.key}
                   onClick={() => col.sortable && handleSort(col.key as SortColumn)}
                   className={`px-4 py-2 text-left text-[11px] font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider select-none whitespace-nowrap ${
-                    col.sortable ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50' : ''
+                    col.sortable ? 'cursor-pointer hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50' : ''
                   }`}
                 >
                   <span className="inline-flex items-center gap-1">
@@ -1631,7 +1631,7 @@ export function RosterPage() {
               const isSelected = selected.has(emp.id)
               const rowBg = isSelected
                 ? 'bg-[color:var(--color-blueprint-soft)] hover:bg-[color:var(--color-blueprint-soft)]/80 dark:hover:bg-[color:var(--color-blueprint-soft)]'
-                : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                : 'hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
               // Mark the leftmost cell with a 2px accent stripe when the row
               // is selected — a Linear-style affordance that indicates
               // selection without relying on the whole-row tint alone.
@@ -1658,7 +1658,7 @@ export function RosterPage() {
                   ) return
                   setDrawerId(emp.id)
                 }}
-                className={`group transition-colors border-b border-gray-100 dark:border-gray-800 ${rowBg}`}
+                className={`group transition-colors border-b border-[color:var(--color-paper-line)] dark:border-gray-800 ${rowBg}`}
               >
                 {canEdit && (
                   <td className={`px-4 py-3 align-middle ${leftStripe}`}>
@@ -1796,7 +1796,7 @@ export function RosterPage() {
                           onChange={(e) =>
                             handleRowSetStatus(emp.id, e.target.value as EmployeeStatus)
                           }
-                          className="text-xs px-1.5 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
+                          className="text-xs px-1.5 py-1 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
                           aria-label={`Status for ${emp.name}`}
                         >
                           {EMPLOYEE_STATUSES.map((s) => (
@@ -1884,7 +1884,7 @@ export function RosterPage() {
       )}
 
       {/* Footer */}
-      <div className="px-5 py-2 border-t border-gray-200 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400 flex-shrink-0">
+      <div className="px-5 py-2 border-t border-[color:var(--color-paper-line)] dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400 flex-shrink-0">
         {sorted.length} of {allEmployees.length} people shown
       </div>
 
@@ -2094,7 +2094,7 @@ function InlineText({
             setEditing(false)
           }
         }}
-        className="w-full px-1.5 py-1 text-sm border border-[color:var(--color-blueprint)] rounded bg-white dark:bg-gray-900 focus:outline-none"
+        className="w-full px-1.5 py-1 text-sm border border-[color:var(--color-blueprint)] rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none"
       />
     )
   }
@@ -2228,11 +2228,11 @@ function StatsBar({
     // active state flips to a saturated fill so "this axis is narrowing the
     // list" is still obvious at a glance.
     const toneClasses = {
-      gray: isActive ? 'bg-gray-800 text-white border-gray-800' : 'bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800',
-      green: isActive ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-gray-50 dark:bg-gray-800/50 text-emerald-700 border-gray-200 dark:border-gray-800 hover:bg-emerald-50',
-      amber: isActive ? 'bg-amber-600 text-white border-amber-600' : 'bg-gray-50 dark:bg-gray-800/50 text-amber-700 dark:text-amber-300 border-gray-200 dark:border-gray-800 hover:bg-amber-50',
-      red: isActive ? 'bg-red-600 text-white border-red-600' : 'bg-gray-50 dark:bg-gray-800/50 text-red-700 dark:text-red-300 border-gray-200 dark:border-gray-800 hover:bg-red-50 dark:hover:bg-red-950/40',
-      blue: isActive ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]' : 'bg-gray-50 dark:bg-gray-800/50 text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-gray-200 dark:border-gray-800 hover:bg-[color:var(--color-blueprint-soft)]',
+      gray: isActive ? 'bg-gray-800 text-white border-gray-800' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-700 dark:text-gray-200 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800',
+      green: isActive ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-emerald-700 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-emerald-50',
+      amber: isActive ? 'bg-amber-600 text-white border-amber-600' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-amber-700 dark:text-amber-300 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-amber-50',
+      red: isActive ? 'bg-red-600 text-white border-red-600' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-red-700 dark:text-red-300 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-red-50 dark:hover:bg-red-950/40',
+      blue: isActive ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-blueprint-soft)]',
     }[tone]
     return (
       <button
@@ -2261,7 +2261,7 @@ function StatsBar({
     !active.presetFilter
 
   return (
-    <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-100 dark:border-gray-800 bg-gray-50/60 dark:bg-gray-800/50 flex-shrink-0 overflow-x-auto whitespace-nowrap">
+    <div className="flex items-center gap-2 px-5 py-3 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)]/80 dark:bg-gray-800/50 flex-shrink-0 overflow-x-auto whitespace-nowrap">
       {chip('Total', stats.total, noChipFilter, onClearChipAxes, 'gray', 'All people (clears chip filters; leaves search/dept/floor alone)', Users)}
       {chip(
         'Active',
@@ -2382,7 +2382,7 @@ function WeeklyCapacity({
   onSetFilter: (key: string, value: string) => void
 }) {
   return (
-    <div className="flex items-center gap-3 px-5 py-2 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 flex-shrink-0 overflow-x-auto">
+    <div className="flex items-center gap-3 px-5 py-2 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 flex-shrink-0 overflow-x-auto">
       <div className="text-[11px] font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider flex-shrink-0">
         Week in office
       </div>
@@ -2397,7 +2397,7 @@ function WeeklyCapacity({
               key={d}
               onClick={() => onSetFilter('day', isActive ? '' : d)}
               className={`group flex flex-col items-center gap-1 px-2 py-1 rounded transition-colors ${
-                isActive ? 'bg-[color:var(--color-blueprint-soft)]' : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                isActive ? 'bg-[color:var(--color-blueprint-soft)]' : 'hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
               }`}
               title={`${count} in office on ${d}${isActive ? ' — click again to clear' : ''}`}
               aria-pressed={isActive}
@@ -2442,7 +2442,7 @@ function DeptDot({ color }: { color: string | null }) {
     return (
       <span
         aria-hidden="true"
-        className="w-2.5 h-2.5 rounded-sm bg-gray-200 dark:bg-gray-700 border border-gray-200 dark:border-gray-800 flex-shrink-0"
+        className="w-2.5 h-2.5 rounded-sm bg-gray-200 dark:bg-gray-700 border border-[color:var(--color-paper-line)] dark:border-gray-800 flex-shrink-0"
       />
     )
   }
@@ -2479,7 +2479,7 @@ function OfficeDays({ days, todayLabel }: { days: string[]; todayLabel: string }
             className={`w-4 h-4 rounded-full text-[8px] font-bold leading-none flex items-center justify-center border ${
               on
                 ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]'
-                : 'bg-white dark:bg-gray-900 text-gray-400 dark:text-gray-500 border-gray-200 dark:border-gray-800'
+                : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-400 dark:text-gray-500 border-[color:var(--color-paper-line)] dark:border-gray-800'
             } ${isToday ? 'ring-2 ring-[color:var(--color-blueprint)] ring-offset-1 ring-offset-white' : ''}`}
           >
             {d[0]}
@@ -2721,8 +2721,8 @@ function PersonCardImpl({
         ) return
         onOpen(employee.id)
       }}
-      className={`group relative rounded-lg border bg-white dark:bg-gray-900 shadow-sm hover:shadow transition-shadow p-3 ${
-        isSelected ? 'border-[color:var(--color-blueprint)] ring-2 ring-[color:var(--color-blueprint)]/40' : 'border-gray-200 dark:border-gray-800'
+      className={`group relative rounded-lg border bg-[color:var(--color-paper-raised)] dark:bg-gray-900 shadow-sm hover:shadow transition-shadow p-3 ${
+        isSelected ? 'border-[color:var(--color-blueprint)] ring-2 ring-[color:var(--color-blueprint)]/40' : 'border-[color:var(--color-paper-line)] dark:border-gray-800'
       }`}
     >
       {/*
@@ -2889,7 +2889,7 @@ function RowActionMenu({
         aria-label="Close menu"
         tabIndex={-1}
       />
-      <div className="absolute right-2 top-full mt-1 z-40 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md shadow-lg py-1">
+      <div className="absolute right-2 top-full mt-1 z-40 w-48 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md shadow-lg py-1">
         {canEdit && (
           <button
             onClick={onEdit}
@@ -2960,7 +2960,7 @@ function RowActionMenu({
             >
               Unassign seat
             </button>
-            <div className="my-1 border-t border-gray-100 dark:border-gray-800" />
+            <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
             <button
               onClick={onDelete}
               className="w-full text-left px-3 py-1.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40"
@@ -3009,7 +3009,7 @@ function ShortcutsCheatSheet({ onClose }: { onClose: () => void }) {
         aria-label="Close shortcuts"
         tabIndex={-1}
       />
-      <div className="relative w-80 max-w-[90vw] bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-800 p-4">
+      <div className="relative w-80 max-w-[90vw] bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-lg shadow-xl border border-[color:var(--color-paper-line)] dark:border-gray-800 p-4">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100">Keyboard shortcuts</h2>
           <button
@@ -3025,7 +3025,7 @@ function ShortcutsCheatSheet({ onClose }: { onClose: () => void }) {
             <div key={key} className="flex items-center justify-between gap-3">
               <dt className="text-gray-600 dark:text-gray-300">{desc}</dt>
               <dd>
-                <kbd className="px-1.5 py-0.5 text-[11px] font-mono font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded">
+                <kbd className="px-1.5 py-0.5 text-[11px] font-mono font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded">
                   {key}
                 </kbd>
               </dd>
@@ -3158,7 +3158,7 @@ function RosterEmptyState({
               type="button"
               onClick={onImport}
               data-testid="roster-empty-import"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-800 rounded hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-200 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
             >
               <Upload size={12} aria-hidden="true" /> Import CSV
             </button>
@@ -3196,12 +3196,12 @@ function QuickFilterPills({
     <div
       role="group"
       aria-label="Quick filters"
-      className="flex items-center gap-1.5 px-5 py-2 flex-shrink-0 overflow-x-auto whitespace-nowrap border-b border-gray-100 dark:border-gray-800"
+      className="flex items-center gap-1.5 px-5 py-2 flex-shrink-0 overflow-x-auto whitespace-nowrap border-b border-[color:var(--color-paper-line)] dark:border-gray-800"
     >
       {pills.map((p) => {
         const cls = p.isActive
           ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)]'
-          : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-100'
+          : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-100'
         return (
           <button
             key={p.id}

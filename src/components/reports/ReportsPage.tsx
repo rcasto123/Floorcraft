@@ -133,7 +133,7 @@ export function ReportsPage() {
           {scenariosHref && (
             <Link
               to={scenariosHref}
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
             >
               Capacity scenarios →
             </Link>
@@ -141,7 +141,7 @@ export function ReportsPage() {
           {floorCompareHref && (
             <Link
               to={floorCompareHref}
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
             >
               <BarChart2 size={14} />
               Floor compare
@@ -158,7 +158,7 @@ export function ReportsPage() {
         role="tablist"
         aria-label="Reports sections"
         onKeyDown={onTablistKeyDown}
-        className="sticky top-0 z-10 flex items-center gap-1 mt-5 mb-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-x-auto whitespace-nowrap"
+        className="sticky top-0 z-10 flex items-center gap-1 mt-5 mb-4 border-b border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 overflow-x-auto whitespace-nowrap"
       >
         {TABS.map((tab) => {
           const selected = tab.id === activeTab
@@ -206,7 +206,7 @@ export function ReportsPage() {
             <div className="overflow-x-auto">
             <table className="w-full text-sm min-w-[460px]">
               <thead>
-                <tr className="text-left border-b border-gray-200 dark:border-gray-800">
+                <tr className="text-left border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
                   <th className="py-2">Floor</th>
                   <th>Assigned</th>
                   <th>Capacity</th>
@@ -215,7 +215,7 @@ export function ReportsPage() {
               </thead>
               <tbody>
                 {utilRows.map((r) => (
-                  <tr key={r.floorId} className="border-b border-gray-100 dark:border-gray-800">
+                  <tr key={r.floorId} className="border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
                     <td className="py-2">{r.floorName}</td>
                     <td className="tabular-nums">{r.assigned}</td>
                     <td className="tabular-nums">{r.capacity}</td>
@@ -243,7 +243,7 @@ export function ReportsPage() {
             <div className="overflow-x-auto">
             <table className="w-full text-sm min-w-[420px]">
               <thead>
-                <tr className="text-left border-b border-gray-200 dark:border-gray-800">
+                <tr className="text-left border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
                   <th className="py-2">Department</th>
                   <th>Count</th>
                   <th>Assigned</th>
@@ -252,7 +252,7 @@ export function ReportsPage() {
               </thead>
               <tbody>
                 {deptRows.map((r) => (
-                  <tr key={r.department} className="border-b border-gray-100 dark:border-gray-800">
+                  <tr key={r.department} className="border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
                     <td className="py-2">{r.department}</td>
                     <td className="tabular-nums">{r.count}</td>
                     <td className="tabular-nums">{r.assigned}</td>
@@ -340,7 +340,7 @@ function StatCard({
   secondary?: string
 }) {
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-3">
+    <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-3">
       <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
         {label}
       </div>
@@ -365,7 +365,7 @@ function EmptyState({
     teamSlug && officeSlug ? `/t/${teamSlug}/o/${officeSlug}/roster` : null
   return (
     <div className="p-3 sm:p-6 max-w-5xl">
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-10 text-center">
+      <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-10 text-center">
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4">
           <Users size={22} aria-hidden="true" />
         </div>
@@ -379,7 +379,7 @@ function EmptyState({
         {rosterHref ? (
           <Link
             to={rosterHref}
-            className="inline-flex items-center gap-1.5 mt-4 text-sm px-3 py-1.5 border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            className="inline-flex items-center gap-1.5 mt-4 text-sm px-3 py-1.5 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
           >
             Go to roster
           </Link>
@@ -399,7 +399,7 @@ function Card({
   children: React.ReactNode
 }) {
   return (
-    <section className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+    <section className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-4">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
           {title}
@@ -407,7 +407,7 @@ function Card({
         {onExport ? (
           <button
             onClick={onExport}
-            className="text-xs px-2 py-1 border border-gray-200 dark:border-gray-800 rounded hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            className="text-xs px-2 py-1 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
           >
             Export CSV
           </button>

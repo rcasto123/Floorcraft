@@ -424,7 +424,7 @@ export function ContextMenu() {
       onKeyDown={onKeyDown}
       onClick={(e) => e.stopPropagation()}
       onContextMenu={(e) => e.preventDefault()}
-      className="fixed z-50 min-w-[200px] py-1 rounded-md border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-900 dark:shadow-black/40"
+      className="fixed z-50 min-w-[200px] py-1 rounded-md border border-[color:var(--color-paper-line)] bg-[color:var(--color-paper-raised)] shadow-xl dark:border-gray-700 dark:bg-gray-900 dark:shadow-black/40"
       style={{ left: contextMenu.x, top: contextMenu.y }}
     >
       {groups.map((group, gi) => (
@@ -453,7 +453,7 @@ export function ContextMenu() {
                 tabIndex={idx === focusIndex ? 0 : -1}
                 onClick={item.onClick}
                 onMouseEnter={() => setFocusIndex(idx)}
-                className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--color-blueprint)] dark:text-gray-200 dark:hover:bg-gray-800/60 dark:focus:bg-gray-800/60"
+                className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] focus:bg-[color:var(--color-paper-sunken)] focus:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--color-blueprint)] dark:text-gray-200 dark:hover:bg-gray-800/60 dark:focus:bg-gray-800/60"
               >
                 <Icon size={14} aria-hidden="true" className="text-gray-500 dark:text-gray-400" />
                 <span className="flex-1">{item.label}</span>

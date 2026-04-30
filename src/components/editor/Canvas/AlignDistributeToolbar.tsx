@@ -113,7 +113,7 @@ export function AlignDistributeToolbar() {
         data-testid="align-distribute-toolbar"
         role="toolbar"
         aria-label="Align and distribute selection"
-        className="pointer-events-auto absolute flex items-center gap-0.5 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-1.5 py-1 shadow-md"
+        className="pointer-events-auto absolute flex items-center gap-0.5 rounded-md border border-[color:var(--color-paper-line)] dark:border-gray-700 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 px-1.5 py-1 shadow-md"
         style={{ left: screenLeft, top, transform }}
       >
         <AlignButton

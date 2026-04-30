@@ -146,7 +146,7 @@ export function RosterFilterPresetsMenu({
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex items-center gap-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+        className="flex items-center gap-1 px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
         title="Saved filters"
       >
         <Bookmark size={14} />
@@ -157,7 +157,7 @@ export function RosterFilterPresetsMenu({
         <div
           role="menu"
           aria-label="Saved filter presets"
-          className="absolute top-full left-0 mt-1 z-20 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-xl w-80 overflow-hidden"
+          className="absolute top-full left-0 mt-1 z-20 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg shadow-xl w-80 overflow-hidden"
         >
           <div className="max-h-72 overflow-y-auto">
             {presets.length === 0 ? (
@@ -170,7 +170,7 @@ export function RosterFilterPresetsMenu({
                 {presets.map((p) => (
                   <li
                     key={p.id}
-                    className="flex items-center gap-1 px-2 py-1 hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                    className="flex items-center gap-1 px-2 py-1 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50"
                   >
                     <button
                       type="button"
@@ -204,12 +204,12 @@ export function RosterFilterPresetsMenu({
               </ul>
             )}
           </div>
-          <div className="border-t border-gray-200 dark:border-gray-800">
+          <div className="border-t border-[color:var(--color-paper-line)] dark:border-gray-800">
             <button
               type="button"
               onClick={handleSave}
               disabled={!hasAnyFilter}
-              className="w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+              className="w-full flex items-center gap-2 px-3 py-2 text-sm text-left hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
               title={
                 hasAnyFilter
                   ? 'Save the current filters as a reusable preset'

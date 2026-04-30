@@ -116,7 +116,7 @@ export function SeatSwapRequestDialog({
           )}
           {!selected && suggestions.length > 0 && (
             <ul
-              className="mt-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800 max-h-40 overflow-y-auto"
+              className="mt-1 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded bg-[color:var(--color-paper-raised)] dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800 max-h-40 overflow-y-auto"
               role="listbox"
             >
               {suggestions.map((s) => (

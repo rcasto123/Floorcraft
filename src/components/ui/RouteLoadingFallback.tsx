@@ -8,7 +8,7 @@
 export function RouteLoadingFallback() {
   return (
     <div
-      className="flex items-center justify-center h-screen w-screen bg-gray-50 dark:bg-gray-800/50"
+      className="flex items-center justify-center h-screen w-screen bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50"
       role="status"
       aria-live="polite"
       aria-label="Loading page"

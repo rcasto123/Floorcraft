@@ -158,7 +158,7 @@ export function MapView() {
 
   if (presentationMode) {
     return (
-      <div className="fixed inset-0 z-50 w-screen h-screen bg-white dark:bg-gray-900">
+      <div className="fixed inset-0 z-50 w-screen h-screen bg-[color:var(--color-paper-raised)] dark:bg-gray-900">
         <CanvasStage />
         <KeyboardShortcutsOverlay />
         <PresentationOverlay />
@@ -222,7 +222,7 @@ export function MapView() {
           {!rightSidebarOpen && <SidebarToggle variant="floating" />}
         </div>
         {rightSidebarOpen && (
-          <div className="w-[320px] flex-shrink-0 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 overflow-y-auto">
+          <div className="w-[320px] flex-shrink-0 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-l border-[color:var(--color-paper-line)] dark:border-gray-800 overflow-y-auto">
             <RightSidebar />
           </div>
         )}

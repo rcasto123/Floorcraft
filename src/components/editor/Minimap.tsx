@@ -319,7 +319,7 @@ export function Minimap() {
         ref={ref}
         role="region"
         aria-label="Canvas overview"
-        className="absolute bottom-12 right-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
+        className="absolute bottom-12 right-4 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
         style={{ width: COLLAPSED_SIZE, height: COLLAPSED_SIZE }}
       >
         <button
@@ -341,7 +341,7 @@ export function Minimap() {
       ref={ref}
       role="region"
       aria-label="Canvas overview"
-      className="absolute bottom-12 right-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg overflow-hidden select-none touch-none cursor-grab active:cursor-grabbing"
+      className="absolute bottom-12 right-4 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg shadow-lg overflow-hidden select-none touch-none cursor-grab active:cursor-grabbing"
       style={{ width: MINIMAP_WIDTH, height: MINIMAP_HEIGHT }}
       onPointerDown={handlePointerDown}
     >
