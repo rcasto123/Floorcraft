@@ -21,8 +21,8 @@ const COLUMNS: ReadonlyArray<FooterColumn> = [
     title: 'Product',
     links: [
       { label: 'Features', to: '/#features' },
-      { label: 'Pricing', to: '/#pricing' },
-      { label: 'Open the demo', to: '/demo' },
+      { label: 'Pricing', to: '/pricing' },
+      { label: 'Changelog', to: '/changelog' },
       { label: 'Sign up', to: '/signup' },
     ],
   },
@@ -31,8 +31,17 @@ const COLUMNS: ReadonlyArray<FooterColumn> = [
     links: [
       { label: 'User guide', to: '/help#getting-started' },
       { label: 'Keyboard shortcuts', to: '/help#shortcuts' },
-      { label: 'CSV import', to: '/help#csv-import' },
-      { label: 'FAQ', to: '/help#faq' },
+      { label: 'CSV templates', to: '/csv-templates' },
+      { label: 'Status', to: '/status' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', to: '/about' },
+      { label: 'Contact', to: '/contact' },
+      { label: 'Privacy', to: '/privacy' },
+      { label: 'Terms', to: '/terms' },
     ],
   },
 ]
@@ -48,7 +57,7 @@ export function LandingFooter() {
       <h2 id="landing-footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 gap-8 sm:grid-cols-3">
+      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 gap-8 sm:grid-cols-4">
         {/* Wordmark / tagline column — anchors the footer visually and
             keeps the link columns from feeling like a directory. */}
         <div className="col-span-2 sm:col-span-1">
