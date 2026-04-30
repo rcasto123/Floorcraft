@@ -971,18 +971,31 @@ function EmptyTeamState({
   onNewDemo: () => void
 }) {
   return (
-    <div className="mt-10 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-xl p-10 text-center max-w-xl mx-auto">
-      <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] mb-4">
+    <div className="relative mt-10 overflow-hidden bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-xl p-10 text-center max-w-xl mx-auto">
+      {/* Faint blueprint grid behind the empty-state card so a brand-
+          new team's first surface still feels architectural rather
+          than generic SaaS. Aria-hidden because it's purely decorative
+          — the headline + body carry the meaning. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-50"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, var(--color-paper-line) 1px, transparent 1px), linear-gradient(to bottom, var(--color-paper-line) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
+      <div className="relative inline-flex items-center justify-center w-14 h-14 rounded-full bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] mb-4">
         <Building2 size={28} aria-hidden="true" />
       </div>
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <h2 className="relative text-lg font-semibold text-gray-900 dark:text-gray-100">
         Welcome to Floorcraft
       </h2>
-      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      <p className="relative mt-2 text-sm text-gray-500 dark:text-gray-400">
         Create your first office to start planning.
       </p>
       {canCreate && (
-        <div className="mt-5 flex items-center justify-center gap-2 flex-wrap">
+        <div className="relative mt-5 flex items-center justify-center gap-2 flex-wrap">
           <button
             type="button"
             onClick={onNew}
