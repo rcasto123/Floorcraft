@@ -6,10 +6,17 @@ import { CanvasFinder } from './CanvasFinder'
 import { CanvasActionDock } from './Canvas/CanvasActionDock'
 import { CanvasScaleBar } from './Canvas/CanvasScaleBar'
 import { NorthArrow } from './Canvas/NorthArrow'
+import { AlignDistributeToolbar } from './Canvas/AlignDistributeToolbar'
+import { ElementHoverCard } from './Canvas/ElementHoverCard'
 import { Minimap } from './Minimap'
 import { StatusBar } from './StatusBar'
 import { FloorSwitcher } from './FloorSwitcher'
 import { ToolSelector } from './LeftSidebar/ToolSelector'
+import { LayerVisibilityPanel } from './LeftSidebar/LayerVisibilityPanel'
+import { CollapsibleSection } from './LeftSidebar/CollapsibleSection'
+import { RightSidebar } from './RightSidebar/RightSidebar'
+import { SidebarToggle } from './RightSidebar/SidebarToggle'
+import { useUIStore } from '../../stores/uiStore'
 import { buildDemoOfficePayload } from '../../lib/demo/createDemoOffice'
 import { useProjectStore } from '../../stores/projectStore'
 import { useElementsStore } from '../../stores/elementsStore'
@@ -47,6 +54,12 @@ import type { Project } from '../../types/project'
  * canvas, not the editor surface.
  */
 export function DemoPage() {
+  // Subscribe to the right-sidebar open flag so toggling via the
+  // floating pull-tab or the inline collapse handle updates the layout
+  // reactively. Demo opens with the sidebar visible so visitors see the
+  // Plan / Roster / Insights structure on first paint.
+  const rightSidebarOpen = useUIStore((s) => s.rightSidebarOpen)
+
   // Hydration runs in `useEffect`, not in the render body — calling
   // Zustand setState during render mutates external state that
   // sibling components (e.g. `NewVersionBanner`, which subscribes to
@@ -130,17 +143,40 @@ export function DemoPage() {
       <DemoBanner />
       <FloorSwitcher />
       <div className="flex flex-1 overflow-hidden">
+        {/* 56-px tool rail (Select / Pan / Measure for shareViewer). */}
         <div className="w-14 flex-shrink-0 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-r border-[color:var(--color-paper-line)] dark:border-gray-800 overflow-y-auto">
           <ToolSelector />
+        </div>
+        {/* Secondary 240-px sidebar — Layers only in read-only mode.
+            The Library tile palette is gated on editMap so it would
+            render half-disabled and just confuse a visitor; we skip it
+            entirely here. */}
+        <div className="w-[240px] flex-shrink-0 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-r border-[color:var(--color-paper-line)] dark:border-gray-800 flex flex-col overflow-y-auto">
+          <CollapsibleSection title="Layers" defaultOpen storageKey="demo-layers">
+            <LayerVisibilityPanel />
+          </CollapsibleSection>
         </div>
         <div className="flex-1 relative overflow-hidden bg-[color:var(--color-paper)]">
           <CanvasStage />
           <StatusBar />
           <Minimap />
+          <AlignDistributeToolbar />
+          <ElementHoverCard />
           <CanvasActionDock />
           <CanvasScaleBar />
           <NorthArrow />
+          {/* Closed-state pull-tab to expand the right sidebar. */}
+          {!rightSidebarOpen && <SidebarToggle variant="floating" />}
         </div>
+        {/* Right inspector — Plan / Roster / Insights tabs. Properties
+            panel inside Plan shows occupant info when a desk is selected;
+            Roster lets visitors browse the seeded employees; Insights
+            surfaces analyzer warnings the seed data triggers. */}
+        {rightSidebarOpen && (
+          <div className="w-[320px] flex-shrink-0 bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border-l border-[color:var(--color-paper-line)] dark:border-gray-800 overflow-y-auto">
+            <RightSidebar />
+          </div>
+        )}
       </div>
       <CanvasFinder />
     </div>
