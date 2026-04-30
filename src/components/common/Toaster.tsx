@@ -226,7 +226,7 @@ function ToastRow({ item, paused, reduced, onDismiss, onPauseStart, onPauseEnd }
       data-testid="toast"
       data-tone={tone}
       data-reduced-motion={reduced ? 'true' : 'false'}
-      className={`pointer-events-auto select-none rounded-lg border border-l-4 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900 ${visual.accent}`}
+      className={`pointer-events-auto select-none rounded-lg border border-l-4 bg-[color:var(--color-paper-raised)] shadow-lg dark:border-neutral-800 dark:bg-neutral-900 ${visual.accent}`}
       style={style}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}

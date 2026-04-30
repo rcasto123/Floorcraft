@@ -53,7 +53,7 @@ export function EmptyCanvasHint() {
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
       <div
-        className="bg-white/95 dark:bg-gray-900/95 backdrop-blur rounded-lg shadow-lg border border-[color:var(--color-paper-line)] dark:border-gray-800 p-6 max-w-xs text-sm text-gray-700 dark:text-gray-200 pointer-events-auto"
+        className="bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-900/95 backdrop-blur rounded-lg shadow-lg border border-[color:var(--color-paper-line)] dark:border-gray-800 p-6 max-w-xs text-sm text-gray-700 dark:text-gray-200 pointer-events-auto"
         role="note"
       >
         <div className="font-medium text-gray-900 dark:text-gray-100 mb-3">Start by adding something</div>

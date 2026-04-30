@@ -362,7 +362,7 @@ function ElementHeader({
   return (
     <div
       data-testid="properties-panel-header"
-      className="sticky top-0 z-10 -mx-3 px-3 py-2.5 bg-white/95 dark:bg-gray-950/95 backdrop-blur border-b border-[color:var(--color-paper-line)] dark:border-gray-800 mb-1 flex items-center gap-2.5"
+      className="sticky top-0 z-10 -mx-3 px-3 py-2.5 bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-950/95 backdrop-blur border-b border-[color:var(--color-paper-line)] dark:border-gray-800 mb-1 flex items-center gap-2.5"
     >
       <div className="w-8 h-8 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0">
         <Icon size={16} aria-hidden="true" />
@@ -1150,7 +1150,7 @@ export function PropertiesPanel() {
       <div className="flex flex-col gap-5" data-testid="properties-multi-select">
         {/* Header row mirrors the single-select header so the visual
             rhythm doesn't shift when the user changes selection size. */}
-        <div className="sticky top-0 z-10 -mx-3 px-3 py-2.5 bg-white/95 dark:bg-gray-950/95 backdrop-blur border-b border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center gap-2.5">
+        <div className="sticky top-0 z-10 -mx-3 px-3 py-2.5 bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-950/95 backdrop-blur border-b border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0">
             <LayoutGrid size={16} aria-hidden="true" />
           </div>

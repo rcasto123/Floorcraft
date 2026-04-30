@@ -104,7 +104,7 @@ function RoleBadge({ role }: { role: TeamMember['role'] }) {
     <span
       className={
         isAdmin
-          ? 'inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300'
+          ? 'inline-flex items-center gap-1 rounded-full bg-[color:var(--color-blueprint-soft)] px-2 py-0.5 text-[11px] font-medium text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
           : 'inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300'
       }
     >

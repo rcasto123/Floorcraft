@@ -366,7 +366,7 @@ export function Minimap() {
         }}
         aria-expanded={true}
         aria-label="Collapse overview"
-        className="absolute top-1 right-1 w-6 h-6 flex items-center justify-center rounded cursor-pointer text-gray-600 dark:text-gray-300 bg-white/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+        className="absolute top-1 right-1 w-6 h-6 flex items-center justify-center rounded cursor-pointer text-gray-600 dark:text-gray-300 bg-[color:var(--color-paper-raised)]/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
       >
         <Minimize2 size={12} />
       </button>

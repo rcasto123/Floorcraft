@@ -1452,7 +1452,7 @@ export function RosterPage() {
             <button
               type="button"
               onClick={() => setBulkEditOpen((v) => !v)}
-              className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-900 rounded border border-[color:var(--color-blueprint)]/40"
+              className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-raised)] dark:hover:bg-gray-900 rounded border border-[color:var(--color-blueprint)]/40"
             >
               Edit…
             </button>
@@ -1484,7 +1484,7 @@ export function RosterPage() {
                 navigate(`/t/${teamSlug}/o/${officeSlug}/map`)
               }
             }}
-            className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-900 rounded border border-[color:var(--color-blueprint)]/40"
+            className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-raised)] dark:hover:bg-gray-900 rounded border border-[color:var(--color-blueprint)]/40"
           >
             Assign to…
           </button>
@@ -2104,7 +2104,7 @@ function InlineText({
       ref={buttonRef}
       type="button"
       onClick={() => setEditing(true)}
-      className="w-full text-left px-1.5 py-1 rounded hover:bg-white dark:hover:bg-gray-900 group-hover:bg-white truncate"
+      className="w-full text-left px-1.5 py-1 rounded hover:bg-[color:var(--color-paper-raised)] dark:hover:bg-gray-900 group-hover:bg-[color:var(--color-paper-raised)] truncate"
     >
       {renderDisplay
         ? renderDisplay(value)
@@ -3376,14 +3376,14 @@ function BulkActionToolbar({
         <button
           type="button"
           onClick={onUnassign}
-          className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-900 rounded"
+          className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-raised)] dark:hover:bg-gray-900 rounded"
         >
           Unassign
         </button>
         <button
           type="button"
           onClick={onExportSelection}
-          className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-900 rounded"
+          className="px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-raised)] dark:hover:bg-gray-900 rounded"
         >
           Export selection
         </button>

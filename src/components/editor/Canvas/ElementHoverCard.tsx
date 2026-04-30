@@ -651,7 +651,7 @@ function AccommodationChip({ accommodation }: { accommodation: Accommodation }) 
   const label = ACCOMMODATION_LABELS[accommodation.type]
   return (
     <span
-      className="inline-flex items-center gap-1 px-1 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-[10px]"
+      className="inline-flex items-center gap-1 px-1 py-0.5 rounded bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] text-[10px]"
       title={accommodation.notes ? `${label} — ${accommodation.notes}` : label}
     >
       <Icon size={10} />

@@ -736,7 +736,7 @@ function AccommodationsField({
                 key={a.id}
                 data-testid={`accommodation-chip-${a.type}`}
                 title={a.notes ?? ACCOMMODATION_LABELS[a.type]}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs bg-indigo-50 text-indigo-800 border border-indigo-200 rounded-full"
+                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] border border-[color:var(--color-blueprint)]/40 rounded-full"
               >
                 <Icon size={12} aria-hidden="true" />
                 <span>{ACCOMMODATION_LABELS[a.type]}</span>
@@ -745,7 +745,7 @@ function AccommodationsField({
                     type="button"
                     aria-label={`Remove ${ACCOMMODATION_LABELS[a.type]}`}
                     onClick={() => handleRemove(a.id)}
-                    className="ml-0.5 text-indigo-600 hover:text-indigo-900"
+                    className="ml-0.5 text-[color:var(--color-blueprint-strong)] hover:opacity-80"
                   >
                     <X size={10} />
                   </button>

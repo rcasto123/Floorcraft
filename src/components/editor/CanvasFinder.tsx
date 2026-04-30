@@ -86,7 +86,7 @@ function CanvasFinderBody() {
       // canvas layer but below modal dialogs (which sit at z-50).
       className="fixed top-4 left-1/2 -translate-x-1/2 z-30
                  flex items-center gap-2 px-3 py-2
-                 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur
+                 rounded-xl bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-900/95 backdrop-blur
                  border border-[color:var(--color-paper-line)] dark:border-gray-800
                  shadow-lg
                  min-w-[360px] max-w-[480px]"

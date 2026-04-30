@@ -69,7 +69,7 @@ export function PanelSection({
   const headerClass = [
     'flex items-center justify-between gap-2',
     sticky
-      ? 'sticky top-0 z-[1] -mx-3 px-3 py-1.5 bg-white/95 dark:bg-gray-950/95 backdrop-blur'
+      ? 'sticky top-0 z-[1] -mx-3 px-3 py-1.5 bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-950/95 backdrop-blur'
       : '',
   ]
     .filter(Boolean)

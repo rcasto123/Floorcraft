@@ -334,7 +334,7 @@ export function FloorSwitcher() {
           <input
             ref={officeNameInputRef}
             aria-label="Rename office"
-            className="text-sm font-semibold px-2 py-1 border border-[color:var(--color-blueprint)] rounded outline-none bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:border-[color:var(--color-blueprint)] max-w-[220px]"
+            className="text-sm font-semibold px-2 py-1 border border-[color:var(--color-blueprint)] rounded outline-none bg-[color:var(--color-paper-raised)] text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:border-[color:var(--color-blueprint)] max-w-[220px]"
             value={officeNameValue}
             onChange={(e) => setOfficeNameValue(e.target.value)}
             onBlur={handleOfficeRenameSubmit}

@@ -68,8 +68,8 @@ export function TeamSettingsPage() {
       'inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900',
       isActive
-        ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-800 dark:text-gray-100'
-        : 'text-gray-600 hover:text-gray-900 hover:bg-white/60 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800/60',
+        ? 'bg-[color:var(--color-paper-raised)] text-gray-900 shadow-sm dark:bg-gray-800 dark:text-gray-100'
+        : 'text-gray-600 hover:text-gray-900 hover:bg-[color:var(--color-paper-raised)]/60 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800/60',
     ].join(' ')
 
   return (

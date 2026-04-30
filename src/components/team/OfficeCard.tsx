@@ -103,7 +103,7 @@ export function OfficeCard({ office, teamSlug, thumbnailElements, stats, avatars
           e.stopPropagation()
           onMenu(office)
         }}
-        className="absolute top-[10px] right-[10px] p-1.5 rounded-md text-gray-400 dark:text-gray-500 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm hover:text-gray-700 dark:hover:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+        className="absolute top-[10px] right-[10px] p-1.5 rounded-md text-gray-400 dark:text-gray-500 bg-[color:var(--color-paper-raised)]/80 dark:bg-gray-900/80 backdrop-blur-sm hover:text-gray-700 dark:hover:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
       >
         <MoreHorizontal size={16} aria-hidden="true" />
       </button>

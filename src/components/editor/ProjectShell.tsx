@@ -328,7 +328,7 @@ export function ProjectShell() {
           visually prominent when focused. */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:px-3 focus:py-2 focus:shadow-lg focus:rounded"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-[color:var(--color-paper-raised)] focus:px-3 focus:py-2 focus:shadow-lg focus:rounded"
       >
         Skip to main content
       </a>
