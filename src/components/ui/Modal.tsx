@@ -72,7 +72,7 @@ export function Modal({
   // (CSV import preview, share modal) can't overflow off-screen.
   const panel = (
     <div
-      className="fixed inset-0 z-50 bg-black/40 dark:bg-black/60 flex items-center justify-center p-3 sm:p-4"
+      className="modal-backdrop-enter fixed inset-0 z-50 bg-black/40 dark:bg-black/60 flex items-center justify-center p-3 sm:p-4"
       onMouseDown={onBackdropClick}
       data-testid="modal-backdrop"
     >
@@ -83,7 +83,7 @@ export function Modal({
         aria-labelledby={resolvedLabelledBy}
         tabIndex={-1}
         className={cn(
-          'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-xl dark:shadow-black/40 w-full outline-none max-h-[90vh] overflow-y-auto',
+          'modal-panel-enter bg-[color:var(--color-paper-raised)] dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-xl dark:shadow-black/40 w-full outline-none max-h-[90vh] overflow-y-auto',
           SIZE_CLASS[size],
         )}
       >
