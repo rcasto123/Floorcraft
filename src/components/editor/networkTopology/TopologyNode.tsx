@@ -134,7 +134,7 @@ export function TopologyNodeCard({ data, selected }: NodeProps) {
               ? `Linked to ${d.linkedLabel}`
               : 'Linked to a floor element'
           }
-          className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-emerald-500 text-white shadow ring-2 ring-white dark:ring-gray-900"
+          className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-emerald-500 text-white shadow ring-2 ring-[color:var(--color-paper-raised)] dark:ring-gray-900"
           data-testid="topology-node-link-badge"
         >
           <MapPin size={10} aria-hidden="true" strokeWidth={2.5} />

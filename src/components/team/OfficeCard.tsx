@@ -71,7 +71,7 @@ export function OfficeCard({ office, teamSlug, thumbnailElements, stats, avatars
                 {avatars.slice(0, 4).map((a) => (
                   <div
                     key={a.id}
-                    className="w-6 h-6 rounded-full ring-2 ring-white flex items-center justify-center text-[10px] font-medium text-white"
+                    className="w-6 h-6 rounded-full ring-2 ring-[color:var(--color-paper-raised)] flex items-center justify-center text-[10px] font-medium text-white"
                     style={{ backgroundColor: a.color }}
                     aria-hidden="true"
                   >
@@ -79,7 +79,7 @@ export function OfficeCard({ office, teamSlug, thumbnailElements, stats, avatars
                   </div>
                 ))}
                 {stats.assigned > avatars.length && (
-                  <div className="w-6 h-6 rounded-full ring-2 ring-white bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 flex items-center justify-center text-[10px] font-medium text-gray-600 dark:text-gray-300">
+                  <div className="w-6 h-6 rounded-full ring-2 ring-[color:var(--color-paper-raised)] bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 flex items-center justify-center text-[10px] font-medium text-gray-600 dark:text-gray-300">
                     +{stats.assigned - avatars.length}
                   </div>
                 )}

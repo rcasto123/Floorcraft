@@ -45,7 +45,7 @@ const toneVisual: Record<ToastTone, ToneVisual> = {
     icon: AlertCircle,
   },
   info: {
-    accent: 'border-l-blue-500',
+    accent: 'border-l-[color:var(--color-blueprint)]',
     iconWrap: 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]',
     icon: Info,
   },

@@ -2480,7 +2480,7 @@ function OfficeDays({ days, todayLabel }: { days: string[]; todayLabel: string }
               on
                 ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]'
                 : 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-400 dark:text-gray-500 border-[color:var(--color-paper-line)] dark:border-gray-800'
-            } ${isToday ? 'ring-2 ring-[color:var(--color-blueprint)] ring-offset-1 ring-offset-white' : ''}`}
+            } ${isToday ? 'ring-2 ring-[color:var(--color-blueprint)] ring-offset-1 ring-offset-[color:var(--color-paper-raised)]' : ''}`}
           >
             {d[0]}
           </span>
