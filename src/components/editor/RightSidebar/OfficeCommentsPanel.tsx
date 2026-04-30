@@ -15,11 +15,13 @@ import type { ShareComment } from '../../../lib/shareComments'
  * SELECT access; non-permitted callers get an empty result, which
  * the panel renders as the empty state. (No need for an RPC layer
  * here — the bearer-token model only matters for the anonymous write
- * path. Reads are owner-gated through the standard policy plumbing.)
+ * path.)
  *
- * Mounted inside the Insights tab as a sibling to Warnings + Reports.
- * Refreshes on mount; future PR can add real-time via Supabase
- * channels if reviewer activity is high enough to warrant the wire.
+ * State convention: `comments === null` means "loading" (or
+ * pre-officeId), `[]` means "loaded, empty", `[...]` means "loaded".
+ * Three-state instead of a separate `isLoading` boolean to avoid
+ * the React 19 set-state-in-effect rule firing on intermediate state
+ * resets.
  */
 export function OfficeCommentsPanel() {
   const officeId = useProjectStore((s) => s.officeId)
@@ -27,12 +29,12 @@ export function OfficeCommentsPanel() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!officeId) {
-      setComments([])
-      return
-    }
     let cancelled = false
-    ;(async () => {
+    async function load() {
+      if (!officeId) {
+        setComments([])
+        return
+      }
       const { data, error: err } = await supabase
         .from('share_comments')
         .select('*')
@@ -44,8 +46,10 @@ export function OfficeCommentsPanel() {
         setComments([])
         return
       }
+      setError(null)
       setComments((data ?? []) as ShareComment[])
-    })()
+    }
+    void load()
     return () => {
       cancelled = true
     }
