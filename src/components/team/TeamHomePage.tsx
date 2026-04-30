@@ -575,7 +575,7 @@ export function TeamHomePage() {
     // first frame. Polite `aria-live` announces the load state for
     // screen readers without re-firing once the team resolves.
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+      <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-8">
           <span className="sr-only" role="status" aria-live="polite">
             Loading team…
@@ -614,7 +614,7 @@ export function TeamHomePage() {
   const subtitleText = `${offices.length} ${offices.length === 1 ? 'office' : 'offices'} · ${totals.employees} ${totals.employees === 1 ? 'employee' : 'employees'} · ${totals.floors} ${totals.floors === 1 ? 'floor' : 'floors'}`
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-8">
         {/* Team identity header. Logo + name on the left, CTAs on
             the right. The "+ New office" button is only rendered for
@@ -674,7 +674,7 @@ export function TeamHomePage() {
                 <button
                   onClick={onNew}
                   disabled={creating}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] text-white rounded-md text-sm font-medium disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1 transition-colors"
                 >
                   <Plus size={14} aria-hidden="true" />
                   New office
@@ -760,7 +760,7 @@ export function TeamHomePage() {
                   aria-label="Search offices"
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  className="w-full pl-8 pr-8 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded-md bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  className="w-full pl-8 pr-8 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
                 />
                 {q && (
                   <button
@@ -779,7 +779,7 @@ export function TeamHomePage() {
                   aria-label="Sort offices"
                   value={sortMode}
                   onChange={(e) => setSortMode(e.target.value as SortMode)}
-                  className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded-md bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  className="px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
                 >
                   {SORT_OPTIONS.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -794,7 +794,7 @@ export function TeamHomePage() {
                   aria-label="Filter offices"
                   value={filterMode}
                   onChange={(e) => setFilterMode(e.target.value as FilterMode)}
-                  className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded-md bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  className="px-2 py-1.5 text-sm border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-md bg-[color:var(--color-paper-raised)] dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
                 >
                   {FILTER_OPTIONS.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -972,7 +972,7 @@ function EmptyTeamState({
 }) {
   return (
     <div className="mt-10 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-10 text-center max-w-xl mx-auto">
-      <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
+      <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] mb-4">
         <Building2 size={28} aria-hidden="true" />
       </div>
       <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -988,7 +988,7 @@ function EmptyTeamState({
             onClick={onNew}
             disabled={creating}
             aria-label="Create office"
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] text-white rounded-md text-sm font-medium disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1 transition-colors"
           >
             <Plus size={14} aria-hidden="true" />
             Create office
