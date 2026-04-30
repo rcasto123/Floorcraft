@@ -615,7 +615,7 @@ function OccupantRow({
           {occupant.name ?? 'Seat assigned'}
         </span>
         {occupant.status === 'on-leave' && (
-          <span className="ml-1 px-1 rounded bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 text-[10px] uppercase tracking-wide">
+          <span className="ml-1 px-1 rounded bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] text-[10px] uppercase tracking-wide">
             On leave
           </span>
         )}

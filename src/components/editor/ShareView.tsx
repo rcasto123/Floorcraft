@@ -241,7 +241,7 @@ function EmbedStatusBar({ fullShareHref }: { fullShareHref: string }) {
         href={fullShareHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="ml-auto text-[10px] text-blue-600 dark:text-blue-300 hover:underline"
+        className="ml-auto text-[10px] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
       >
         Open full view ↗
       </a>

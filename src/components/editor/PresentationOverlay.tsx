@@ -180,7 +180,7 @@ function PresentationOverlayContent({ onExit }: { onExit: () => void }) {
       */}
       <button
         onClick={onExit}
-        className={`fixed top-4 right-4 z-[60] w-9 h-9 rounded-full bg-gray-900/80 hover:bg-gray-900 text-white text-base shadow-lg backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+        className={`fixed top-4 right-4 z-[60] w-9 h-9 rounded-full bg-gray-900/80 hover:bg-gray-900 text-white text-base shadow-lg backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] ${
           cursorNearTopRight || active ? 'opacity-100' : 'opacity-0'
         }`}
         aria-label="Exit presentation mode"

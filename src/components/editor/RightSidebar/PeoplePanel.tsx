@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { Search, Plus, Upload, Users, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react'
 
 const INPUT_CLASS =
-  'w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400 disabled:bg-gray-50 disabled:text-gray-500 bg-white dark:bg-gray-900'
+  'w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500 bg-white dark:bg-gray-900'
 import { useShallow } from 'zustand/react/shallow'
 import { Link, useParams } from 'react-router-dom'
 
@@ -221,7 +221,7 @@ export function PeoplePanel() {
         Search bar — focus styling matches the editor-wide standard
         (`focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]`) used by
         TeamHomePage, OrgChart, and the Help search palette. Pre-fix the
-        bare `focus:border-blue-400` change was so subtle that keyboard
+        bare `focus:border-[color:var(--color-blueprint)]` change was so subtle that keyboard
         users couldn't tell which input had focus, and the panel didn't
         match the rest of the app.
       */}

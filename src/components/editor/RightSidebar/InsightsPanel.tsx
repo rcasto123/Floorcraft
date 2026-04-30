@@ -274,7 +274,7 @@ export function InsightsPanel() {
                     <span className="truncate min-w-0">{insight.title}</span>
                     <button
                       onClick={() => restoreInsight(insight.id)}
-                      className="ml-2 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex-shrink-0"
+                      className="ml-2 text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:text-[color:var(--color-blueprint-strong)] dark:hover:text-[color:var(--color-blueprint)] flex-shrink-0"
                     >
                       Restore
                     </button>

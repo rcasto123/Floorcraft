@@ -193,7 +193,7 @@ export function EmployeeDirectory() {
                     <span className="inline-flex items-center gap-1">
                       {col.label}
                       {sortColumn === col.key && (
-                        <ArrowUpDown size={12} className="text-blue-500 dark:text-blue-400" />
+                        <ArrowUpDown size={12} className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]" />
                       )}
                     </span>
                   </th>
@@ -205,7 +205,7 @@ export function EmployeeDirectory() {
                 <tr
                   key={emp.id}
                   onClick={() => handleRowClick(emp)}
-                  className="hover:bg-blue-50 dark:hover:bg-blue-950/40 cursor-pointer transition-colors"
+                  className="hover:bg-[color:var(--color-blueprint-soft)] cursor-pointer transition-colors"
                 >
                   <td className="px-3 py-2 font-medium text-gray-800 dark:text-gray-100 whitespace-nowrap">{emp.name}</td>
                   <td className="px-3 py-2 text-gray-600 dark:text-gray-300 whitespace-nowrap">{emp.department || '—'}</td>

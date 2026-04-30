@@ -280,7 +280,7 @@ export function ShareLinkDialog({ open, onClose }: Props) {
                           }
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-blue-600 dark:text-blue-300 hover:underline"
+                          className="text-xs text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
                         >
                           Open in new tab ↗
                         </a>

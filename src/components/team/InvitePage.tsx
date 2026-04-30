@@ -133,7 +133,7 @@ export function InvitePage() {
           <>
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
               You've been invited to join{' '}
-              <span className="text-blue-600 dark:text-blue-400">
+              <span className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
                 {preview.teamName}
               </span>
             </h1>
@@ -224,7 +224,7 @@ function InviteErrorCard({ title, body }: { title: string; body: string }) {
       <div className="mt-5">
         <Link
           to="/"
-          className="inline-flex items-center text-sm text-blue-600 hover:underline dark:text-blue-400"
+          className="inline-flex items-center text-sm text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
         >
           Go to Floorcraft home
         </Link>

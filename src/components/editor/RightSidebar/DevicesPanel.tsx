@@ -330,7 +330,7 @@ export function DevicesPanel() {
                   onClick={() => setLayerFilter(p.id)}
                   className={`px-3 py-1 text-xs rounded-full font-medium transition-colors tabular-nums ${
                     active
-                      ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                      ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
@@ -444,7 +444,7 @@ function StatusPill({ status }: { status: string }) {
   // decommissioned=gray (out of scope).
   const map: Record<string, string> = {
     live: 'bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-300',
-    installed: 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300',
+    installed: 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]',
     planned:
       'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-dashed border-amber-300',
     broken: 'bg-red-500 text-white',

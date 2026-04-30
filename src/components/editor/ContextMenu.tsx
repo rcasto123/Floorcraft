@@ -453,7 +453,7 @@ export function ContextMenu() {
                 tabIndex={idx === focusIndex ? 0 : -1}
                 onClick={item.onClick}
                 onMouseEnter={() => setFocusIndex(idx)}
-                className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400 dark:text-gray-200 dark:hover:bg-gray-800/60 dark:focus:bg-gray-800/60"
+                className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--color-blueprint)] dark:text-gray-200 dark:hover:bg-gray-800/60 dark:focus:bg-gray-800/60"
               >
                 <Icon size={14} aria-hidden="true" className="text-gray-500 dark:text-gray-400" />
                 <span className="flex-1">{item.label}</span>

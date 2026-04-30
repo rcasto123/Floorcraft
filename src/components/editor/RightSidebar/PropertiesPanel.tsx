@@ -203,7 +203,7 @@ const WALL_TYPE_LABELS: Record<WallType, string> = {
  */
 const LABEL_CLASS = 'text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block'
 const INPUT_CLASS =
-  'w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-blue-400 disabled:bg-gray-50 disabled:text-gray-500 bg-white dark:bg-gray-900'
+  'w-full text-sm border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 focus:outline-none focus:border-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500 bg-white dark:bg-gray-900'
 
 /**
  * Section helper — thin wrapper around the shared `PanelSection` primitive
@@ -799,7 +799,7 @@ function ElementTopologySection({ elementId }: { elementId: string }) {
             type="button"
             onClick={handleOpenInTopology}
             disabled={!teamSlug || !officeSlug}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-medium text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900/50 hover:bg-blue-50 dark:hover:bg-blue-950/30 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-medium text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border border-[color:var(--color-blueprint)]/40 hover:bg-[color:var(--color-blueprint-soft)] disabled:opacity-50 disabled:cursor-not-allowed"
             data-testid="floor-properties-open-in-topology"
           >
             <ExternalLink size={12} aria-hidden="true" /> Open in topology

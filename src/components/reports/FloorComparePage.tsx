@@ -55,7 +55,7 @@ export function FloorComparePage() {
             </p>
             <Link
               to={officeHref}
-              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
             >
               <ArrowLeft size={14} aria-hidden="true" />
               Back to office

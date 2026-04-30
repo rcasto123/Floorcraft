@@ -69,7 +69,7 @@ export function ViewAsMenu() {
             className="flex items-center justify-between w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50"
           >
             <span>None (owner)</span>
-            {impersonatedRole === null && <Check size={14} className="text-blue-600 dark:text-blue-400" />}
+            {impersonatedRole === null && <Check size={14} className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]" />}
           </button>
           {PREVIEW_ROLES.map((role) => (
             <button
@@ -83,7 +83,7 @@ export function ViewAsMenu() {
               className="flex items-center justify-between w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 dark:hover:bg-gray-800/50"
             >
               <span>{role}</span>
-              {impersonatedRole === role && <Check size={14} className="text-blue-600 dark:text-blue-400" />}
+              {impersonatedRole === role && <Check size={14} className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]" />}
             </button>
           ))}
         </div>

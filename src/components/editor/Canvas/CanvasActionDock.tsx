@@ -164,7 +164,7 @@ function DockButton({ label, title, onClick, pressed, children }: DockButtonProp
   const idle =
     'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700'
   const active =
-    'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-950/60'
+    'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-soft)] dark:hover:bg-[color:var(--color-blueprint-soft)]'
   return (
     <button
       type="button"

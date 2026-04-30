@@ -127,7 +127,7 @@ export function SeatSwapRequestDialog({
                       setTargetId(s.id)
                       setQuery('')
                     }}
-                    className="w-full text-left px-2 py-1 text-xs hover:bg-blue-50 dark:hover:bg-blue-950/40"
+                    className="w-full text-left px-2 py-1 text-xs hover:bg-[color:var(--color-blueprint-soft)]"
                     role="option"
                     aria-selected="false"
                   >

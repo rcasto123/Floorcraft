@@ -643,7 +643,7 @@ export function CSVImportDialog() {
                   Or paste CSV directly
                 </summary>
                 <textarea
-                  className="mt-2 w-full h-32 border border-gray-200 dark:border-gray-800 rounded-lg p-3 text-sm font-mono focus:outline-none focus:border-blue-400"
+                  className="mt-2 w-full h-32 border border-gray-200 dark:border-gray-800 rounded-lg p-3 text-sm font-mono focus:outline-none focus:border-[color:var(--color-blueprint)]"
                   placeholder={`name,email,department,team,title,type,office_days,tags\nJane Smith,jane@co.com,Engineering,Frontend,Senior Engineer,full-time,"Mon,Wed,Fri",standing-desk`}
                   value={csvText}
                   onChange={(e) => {
@@ -710,7 +710,7 @@ export function CSVImportDialog() {
               >
                 <div className="flex-1">
                   <div className="font-medium mb-0.5">Headers matched</div>
-                  <div className="text-blue-800 dark:text-blue-200">
+                  <div className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
                     {Object.keys(preview.headerAliases).length > 0 && (
                       <span>
                         {Object.entries(preview.headerAliases)
@@ -831,7 +831,7 @@ export function CSVImportDialog() {
                                 <input
                                   autoFocus
                                   type="text"
-                                  className="w-full px-1 py-0.5 border border-blue-400 rounded text-xs bg-white dark:bg-gray-900"
+                                  className="w-full px-1 py-0.5 border border-[color:var(--color-blueprint)] rounded text-xs bg-white dark:bg-gray-900"
                                   value={editingValue}
                                   onChange={(e) => setEditingValue(e.target.value)}
                                   onBlur={commitEdit}
@@ -868,7 +868,7 @@ export function CSVImportDialog() {
                                 <input
                                   autoFocus
                                   type="text"
-                                  className="w-full px-1 py-0.5 border border-blue-400 rounded text-xs bg-white dark:bg-gray-900"
+                                  className="w-full px-1 py-0.5 border border-[color:var(--color-blueprint)] rounded text-xs bg-white dark:bg-gray-900"
                                   value={editingValue}
                                   onChange={(e) => setEditingValue(e.target.value)}
                                   onBlur={commitEdit}

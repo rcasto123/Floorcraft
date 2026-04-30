@@ -141,7 +141,7 @@ function TemplatesDialogBody({ onClose }: { onClose: () => void }) {
         </div>
 
         {selected && (
-          <div className="mt-5 rounded-md border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 px-3 py-2 text-xs text-blue-800 dark:text-blue-300">
+          <div className="mt-5 rounded-md border border-[color:var(--color-blueprint)]/40 dark:border-[color:var(--color-blueprint)]/40 bg-[color:var(--color-blueprint-soft)]/60 dark:bg-[color:var(--color-blueprint-soft)] px-3 py-2 text-xs text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
             <span className="font-semibold">{selected.name}:</span>{' '}
             {selected.description}
           </div>
@@ -191,11 +191,11 @@ function TemplateCard({
       className={[
         'relative text-left rounded-lg border p-3 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]',
         selected
-          ? 'border-blue-500 ring-2 ring-blue-500/40 bg-blue-50/60 dark:bg-blue-950/30'
-          : 'border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-800 hover:bg-gray-50 dark:hover:bg-gray-900/40',
+          ? 'border-[color:var(--color-blueprint)] ring-2 ring-[color:var(--color-blueprint)]/40 bg-[color:var(--color-blueprint-soft)]/60 dark:bg-[color:var(--color-blueprint-soft)]'
+          : 'border-gray-200 dark:border-gray-800 hover:border-[color:var(--color-blueprint)] dark:hover:border-[color:var(--color-blueprint)] hover:bg-gray-50 dark:hover:bg-gray-900/40',
       ].join(' ')}
     >
-      <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+      <div className="flex items-center gap-2 text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
         <LayoutTemplate size={16} aria-hidden="true" />
         <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
           {template.name}

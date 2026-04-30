@@ -910,7 +910,7 @@ export function TeamHomePage() {
                   <button
                     onClick={onNewDemo}
                     disabled={creating}
-                    className="text-blue-600 dark:text-blue-400 hover:underline disabled:text-gray-400 disabled:no-underline"
+                    className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline disabled:text-gray-400 disabled:no-underline"
                     title="Pre-populated with ~18 demo employees to exercise the roster features"
                   >
                     Sample office · ~18 employees

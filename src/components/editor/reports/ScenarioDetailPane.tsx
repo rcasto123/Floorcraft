@@ -88,7 +88,7 @@ export function ScenarioDetailPane({
           disabled={!editable}
           onChange={(e) => renameScenario(scenario.id, e.target.value)}
           aria-label="Scenario name"
-          className="flex-1 text-xl font-semibold bg-transparent border-b border-transparent hover:border-gray-200 focus:border-blue-500 focus:outline-none disabled:text-gray-700"
+          className="flex-1 text-xl font-semibold bg-transparent border-b border-transparent hover:border-gray-200 focus:border-[color:var(--color-blueprint)] focus:outline-none disabled:text-gray-700"
         />
         <button
           type="button"

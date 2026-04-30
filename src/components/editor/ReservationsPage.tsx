@@ -216,7 +216,7 @@ export function ReservationsPage() {
                             data-testid={`reservations-cell-${desk.id}-${d}`}
                             className={`w-full min-w-[60px] rounded px-1.5 py-1 text-[11px] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] ${
                               res
-                                ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-200 hover:bg-blue-100 dark:hover:bg-blue-900/40'
+                                ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-soft)] dark:hover:bg-[color:var(--color-blueprint-soft)]'
                                 : 'text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                             } ${canEdit ? '' : 'cursor-not-allowed opacity-60'}`}
                           >

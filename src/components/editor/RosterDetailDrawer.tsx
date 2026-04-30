@@ -423,7 +423,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
                       disabled={!canEditPII}
                       className={`px-1.5 py-0.5 text-[10px] rounded border transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                         matches
-                          ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 border-blue-300'
+                          ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] border-[color:var(--color-blueprint)]'
                           : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                       }`}
                       title={

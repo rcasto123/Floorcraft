@@ -223,7 +223,7 @@ function SeverityIcon({ severity }: { severity: IssueSeverity }) {
   return (
     <Info
       size={16}
-      className="text-blue-500 dark:text-blue-400 flex-shrink-0 mt-0.5"
+      className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] flex-shrink-0 mt-0.5"
       aria-hidden="true"
     />
   )

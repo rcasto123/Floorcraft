@@ -413,7 +413,7 @@ function CommandPaletteBody() {
               onClick={toggleScope}
               data-testid="command-palette-scope-chip"
               data-scope={scope}
-              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-[11px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400"
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-[11px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--color-blueprint)]"
               aria-label={`Toggle scope (currently ${scope === 'office' ? 'this office' : 'all offices'})`}
             >
               {scope === 'office' ? (

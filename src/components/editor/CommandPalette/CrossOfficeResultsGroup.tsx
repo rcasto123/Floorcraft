@@ -75,7 +75,7 @@ export function CrossOfficeResultsGroup({ results, highlightedId, onHover, onPic
                     onMouseEnter={() => onHover(rowKey)}
                     onClick={() => onPick(item)}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
-                      active ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-900' : 'text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                      active ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)]' : 'text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                     }`}
                   >
                     <span

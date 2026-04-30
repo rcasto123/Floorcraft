@@ -527,7 +527,7 @@ export function TeamSettingsMembers({
             </ul>
           ) : (
             <div className="p-8 text-center">
-              <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
+              <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
                 <UserPlus size={18} aria-hidden="true" />
               </div>
               <p className="mt-2 font-medium text-gray-900 dark:text-gray-100">

@@ -177,7 +177,7 @@ export function ReportsPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 selected
-                  ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600'
+                  ? 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-b-2 border-[color:var(--color-blueprint)]'
                   : 'text-gray-600 dark:text-gray-300 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-100'
               }`}
             >

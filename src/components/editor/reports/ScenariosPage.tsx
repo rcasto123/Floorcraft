@@ -208,13 +208,13 @@ export function ScenariosPage() {
                 >
                   <Tabs.Trigger
                     value="edit"
-                    className="px-3 py-2 text-sm font-medium transition-colors text-gray-600 dark:text-gray-300 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-100 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:border-blue-600 -mb-px"
+                    className="px-3 py-2 text-sm font-medium transition-colors text-gray-600 dark:text-gray-300 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-100 data-[state=active]:text-[color:var(--color-blueprint-strong)] dark:data-[state=active]:text-[color:var(--color-blueprint)] data-[state=active]:border-[color:var(--color-blueprint)] -mb-px"
                   >
                     Edit
                   </Tabs.Trigger>
                   <Tabs.Trigger
                     value="compare"
-                    className="px-3 py-2 text-sm font-medium transition-colors text-gray-600 dark:text-gray-300 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-100 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 data-[state=active]:border-blue-600 -mb-px"
+                    className="px-3 py-2 text-sm font-medium transition-colors text-gray-600 dark:text-gray-300 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-100 data-[state=active]:text-[color:var(--color-blueprint-strong)] dark:data-[state=active]:text-[color:var(--color-blueprint)] data-[state=active]:border-[color:var(--color-blueprint)] -mb-px"
                   >
                     Compare
                   </Tabs.Trigger>

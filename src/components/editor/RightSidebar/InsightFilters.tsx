@@ -14,7 +14,7 @@ const CATEGORY_LABELS: Record<InsightCategory, string> = {
 const SEVERITY_COLORS: Record<Severity, { bg: string; text: string; ring: string }> = {
   critical: { bg: 'bg-red-100 dark:bg-red-900/40', text: 'text-red-700 dark:text-red-300', ring: 'ring-red-300' },
   warning: { bg: 'bg-yellow-100 dark:bg-yellow-900/40', text: 'text-yellow-700', ring: 'ring-yellow-300' },
-  info: { bg: 'bg-blue-100 dark:bg-blue-900/40', text: 'text-blue-700 dark:text-blue-300', ring: 'ring-blue-300' },
+  info: { bg: 'bg-[color:var(--color-blueprint-soft)]', text: 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]', ring: 'ring-[color:var(--color-blueprint)]' },
 }
 
 interface InsightFiltersProps {

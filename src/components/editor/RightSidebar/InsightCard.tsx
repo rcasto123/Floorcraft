@@ -10,7 +10,7 @@ const BORDER_COLORS: Record<Severity, string> = {
 const BADGE_COLORS: Record<Severity, string> = {
   critical: 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300',
   warning: 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700',
-  info: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300',
+  info: 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]',
 }
 
 interface InsightCardProps {

@@ -92,7 +92,7 @@ export function SeatLabelStylePicker({ value, onChange }: SeatLabelStylePickerPr
           >
             <span
               aria-hidden="true"
-              className="inline-block w-[14px] text-center text-blue-600 dark:text-blue-400"
+              className="inline-block w-[14px] text-center text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]"
             >
               {isChecked ? '\u2022' : ''}
             </span>

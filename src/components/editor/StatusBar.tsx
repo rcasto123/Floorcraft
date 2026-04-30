@@ -164,7 +164,7 @@ export function StatusBar() {
         title="Set canvas scale by clicking two points of a known distance"
         className={`text-[10px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded transition-colors ${
           activeTool === 'calibrate-scale'
-            ? 'bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300'
+            ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
             : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
         }`}
       >
@@ -201,7 +201,7 @@ function StatItem({
 }) {
   const valueClass =
     accent === 'blue'
-      ? 'text-blue-600 dark:text-blue-300'
+      ? 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
       : accent === 'green'
         ? 'text-green-600 dark:text-green-300'
         : accent === 'amber'

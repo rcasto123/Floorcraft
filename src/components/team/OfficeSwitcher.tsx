@@ -275,7 +275,7 @@ export function OfficeSwitcher({
                         className={cn(
                           'inline-flex h-5 w-5 items-center justify-center rounded text-[10px]',
                           active
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300'
+                            ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
                             : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400',
                         )}
                       >
@@ -284,13 +284,13 @@ export function OfficeSwitcher({
                       {active && (
                         <span
                           aria-hidden="true"
-                          className="h-1.5 w-1.5 rounded-full bg-blue-500"
+                          className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-blueprint)]"
                         />
                       )}
                       <span className={cn('flex-1 truncate', active && 'font-medium')}>
                         {o.name}
                       </span>
-                      {active && <Check size={14} aria-hidden="true" className="text-blue-500" />}
+                      {active && <Check size={14} aria-hidden="true" className="text-[color:var(--color-blueprint-strong)]" />}
                     </button>
                   )
                 })}
@@ -367,7 +367,7 @@ export function OfficeSwitcher({
                   activate(() => navigate(`/t/${teamSlug}?create=1`))
                 }
                 onMouseEnter={() => setFocusedIndex(createIdx)}
-                className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-blue-600 dark:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+                className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
                 data-testid="office-switcher-create"
               >
                 <Plus size={14} aria-hidden="true" />

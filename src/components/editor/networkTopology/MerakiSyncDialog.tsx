@@ -173,9 +173,9 @@ function ConnectStep({ onLoadSample }: { onLoadSample: () => void }) {
             type="button"
             onClick={onLoadSample}
             data-testid="meraki-load-sample"
-            className="text-left rounded-lg border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 p-4 hover:bg-blue-50 dark:hover:bg-blue-950/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+            className="text-left rounded-lg border border-[color:var(--color-blueprint)]/40 dark:border-[color:var(--color-blueprint)]/40 bg-[color:var(--color-blueprint-soft)]/60 dark:bg-[color:var(--color-blueprint-soft)] p-4 hover:bg-[color:var(--color-blueprint-soft)] dark:hover:bg-[color:var(--color-blueprint-soft)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
           >
-            <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+            <div className="flex items-center gap-2 text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
               <Cloud size={16} aria-hidden="true" />
               <span className="text-sm font-semibold">Try with sample data</span>
             </div>
@@ -376,7 +376,7 @@ function EntryRow({
   } else {
     actionBadge = {
       label: 'Update',
-      classes: 'bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-300',
+      classes: 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:bg-[color:var(--color-blueprint-soft)] dark:text-[color:var(--color-blueprint)]',
     }
   }
 
@@ -456,7 +456,7 @@ function SuccessStep({
 const TONE_CLASS: Record<'positive' | 'info' | 'warning' | 'muted', string> = {
   positive:
     'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200 border-emerald-200 dark:border-emerald-900',
-  info: 'bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-200 border-blue-200 dark:border-blue-900',
+  info: 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-[color:var(--color-blueprint)]/40 dark:border-[color:var(--color-blueprint)]/40',
   warning:
     'bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-200 border-amber-200 dark:border-amber-900',
   muted:

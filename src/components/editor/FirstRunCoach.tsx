@@ -499,7 +499,7 @@ function FirstRunCoachTour() {
               i === stepIdx
                 ? 'w-5 bg-[color:var(--color-blueprint)] dark:bg-[color:var(--color-blueprint)]'
                 : i < stepIdx
-                  ? 'w-1.5 bg-blue-300 dark:bg-blue-700'
+                  ? 'w-1.5 bg-[color:var(--color-blueprint-line)] dark:bg-[color:var(--color-blueprint)]'
                   : 'w-1.5 bg-gray-300 dark:bg-gray-700'
             }`}
           />

@@ -515,8 +515,8 @@ function LibraryTile({
           : 'cursor-grab active:cursor-grabbing'
       } ${
         isActive
-          ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-900 dark:text-blue-100 border-blue-300 dark:border-blue-700'
-          : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-800 hover:border-blue-400 dark:hover:border-blue-500'
+          ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-[color:var(--color-blueprint)] dark:border-[color:var(--color-blueprint)]'
+          : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-800 hover:border-[color:var(--color-blueprint)] dark:hover:border-[color:var(--color-blueprint)]'
       }`}
     >
       <button
@@ -564,7 +564,7 @@ function LibraryTile({
           onKeyDown={(e) => {
             if (e.key === ' ' || e.key === 'Enter') handleStarClick(e)
           }}
-          className={`absolute top-0.5 right-0.5 p-1 rounded transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-blue-400 ${
+          className={`absolute top-0.5 right-0.5 p-1 rounded transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] ${
             isFavorite ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
           }`}
         >
@@ -1204,7 +1204,7 @@ export function ElementLibrary() {
                 setQuery('')
                 searchInputRef.current?.focus()
               }}
-              className="text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] rounded px-1"
+              className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] rounded px-1"
             >
               Clear
             </button>

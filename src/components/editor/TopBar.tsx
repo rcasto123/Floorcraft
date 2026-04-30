@@ -572,7 +572,7 @@ export function TopBar() {
         step={2}
         value={settings.gridSize}
         onChange={(e) => setSettings({ gridSize: Number(e.target.value) })}
-        className="hidden md:block w-[60px] text-xs bg-white text-gray-900 border border-gray-200 rounded px-1 py-1 focus:outline-none focus:border-blue-400 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700"
+        className="hidden md:block w-[60px] text-xs bg-white text-gray-900 border border-gray-200 rounded px-1 py-1 focus:outline-none focus:border-[color:var(--color-blueprint)] dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700"
         title="Grid size"
         aria-label="Grid size"
       />
@@ -597,7 +597,7 @@ export function TopBar() {
       {selectedIds.length > 0 && (
         <button
           onClick={clearSelection}
-          className="hidden md:flex items-center gap-1 px-2 py-1 text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-950/40 dark:hover:bg-blue-900/40 rounded"
+          className="hidden md:flex items-center gap-1 px-2 py-1 text-xs font-medium text-[color:var(--color-blueprint-strong)] bg-[color:var(--color-blueprint-soft)] hover:bg-[color:var(--color-blueprint-soft)] dark:text-[color:var(--color-blueprint)] dark:bg-[color:var(--color-blueprint-soft)] dark:hover:bg-[color:var(--color-blueprint-soft)] rounded"
           title="Clear selection"
           aria-label={`Clear selection (${selectedIds.length} selected)`}
         >

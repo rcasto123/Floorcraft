@@ -1370,7 +1370,7 @@ function SectionHeading({
         type="button"
         onClick={() => onCopy(id)}
         aria-label={`Copy link to ${label}`}
-        className="opacity-0 group-hover:opacity-100 focus:opacity-100 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 text-base font-normal transition-opacity"
+        className="opacity-0 group-hover:opacity-100 focus:opacity-100 text-gray-400 dark:text-gray-500 hover:text-[color:var(--color-blueprint-strong)] dark:hover:text-[color:var(--color-blueprint)] text-base font-normal transition-opacity"
       >
         #
       </button>
@@ -1618,7 +1618,7 @@ export function HelpPage() {
                 href={`#${s.id}`}
                 className={`flex items-center gap-2 px-2 py-1.5 rounded transition-colors ${
                   activeId === s.id
-                    ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-medium'
+                    ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] font-medium'
                     : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
@@ -1632,7 +1632,7 @@ export function HelpPage() {
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
                 >
                   Clear
                 </button>
@@ -1664,7 +1664,7 @@ export function HelpPage() {
               <button
                 type="button"
                 onClick={() => setQuery('')}
-                className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
+                className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline text-sm"
               >
                 Clear search
               </button>
@@ -1698,7 +1698,7 @@ export function HelpPage() {
               Guide out of date?{' '}
               <a
                 href="https://github.com/rcasto123/Floorcraft/issues/new"
-                className="text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
                 target="_blank"
                 rel="noreferrer"
               >

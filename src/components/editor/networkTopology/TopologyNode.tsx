@@ -61,7 +61,7 @@ export function TopologyNodeCard({ data, selected }: NodeProps) {
         'relative w-[180px] rounded-lg border-2 bg-white dark:bg-gray-900 shadow-sm transition-all',
         meta.accent,
         selected
-          ? 'ring-2 ring-blue-400 ring-offset-1 dark:ring-offset-gray-950'
+          ? 'ring-2 ring-[color:var(--color-blueprint)] ring-offset-1 dark:ring-offset-gray-950'
           : '',
       ].join(' ')}
     >

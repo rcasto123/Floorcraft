@@ -131,7 +131,7 @@ export function SeatHistoryDrawer({ target, onClose }: Props) {
               {rows.map((entry) => (
                 <li
                   key={entry.id}
-                  className="border-l-2 border-blue-200 pl-3 text-sm text-gray-700 dark:text-gray-200"
+                  className="border-l-2 border-[color:var(--color-blueprint)]/40 pl-3 text-sm text-gray-700 dark:text-gray-200"
                   data-testid="seat-history-row"
                 >
                   <EntryRow

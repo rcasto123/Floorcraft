@@ -174,7 +174,7 @@ export function LinkFloorElementModal({ open, node, onClose, onLinked }: Props) 
                       className={[
                         'flex items-center gap-3 px-3 py-2 cursor-pointer text-sm transition-colors',
                         checked
-                          ? 'bg-blue-50 dark:bg-blue-950/30'
+                          ? 'bg-[color:var(--color-blueprint-soft)]'
                           : 'hover:bg-gray-50 dark:hover:bg-gray-800/40',
                       ].join(' ')}
                     >

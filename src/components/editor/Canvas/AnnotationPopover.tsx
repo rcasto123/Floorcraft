@@ -203,7 +203,7 @@ function PopoverHeader({
         type="button"
         onClick={onClose}
         aria-label="Close annotation editor"
-        className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 rounded p-0.5 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 rounded p-0.5 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
       >
         <X size={14} aria-hidden="true" />
       </button>

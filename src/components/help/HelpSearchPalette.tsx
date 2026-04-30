@@ -114,7 +114,7 @@ function HelpSearchPaletteInner({
                 onMouseEnter={() => setActiveIdx(i)}
                 onClick={() => jumpTo(s.id)}
                 className={`px-4 py-2 text-sm cursor-pointer ${
-                  i === clampedIdx ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                  i === clampedIdx ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                 }`}
               >
                 {s.title}

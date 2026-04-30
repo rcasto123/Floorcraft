@@ -334,7 +334,7 @@ export function FloorSwitcher() {
           <input
             ref={officeNameInputRef}
             aria-label="Rename office"
-            className="text-sm font-semibold px-2 py-1 border border-blue-400 rounded outline-none bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:border-blue-500 max-w-[220px]"
+            className="text-sm font-semibold px-2 py-1 border border-[color:var(--color-blueprint)] rounded outline-none bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:border-[color:var(--color-blueprint)] max-w-[220px]"
             value={officeNameValue}
             onChange={(e) => setOfficeNameValue(e.target.value)}
             onBlur={handleOfficeRenameSubmit}
@@ -382,14 +382,14 @@ export function FloorSwitcher() {
               <div
                 data-testid="floor-drop-caret"
                 aria-hidden="true"
-                className="bg-blue-500 w-0.5 h-6 mr-1"
+                className="bg-[color:var(--color-blueprint)] w-0.5 h-6 mr-1"
               />
             )}
             {renamingFloorId === floor.id ? (
               <input
                 ref={renameInputRef}
                 aria-label={`Rename floor ${floor.name}`}
-                className="px-3 py-1.5 text-sm font-medium rounded-t border border-blue-400 outline-none w-28"
+                className="px-3 py-1.5 text-sm font-medium rounded-t border border-[color:var(--color-blueprint)] outline-none w-28"
                 value={renameValue}
                 onChange={(e) => setRenameValue(e.target.value)}
                 onBlur={handleRenameSubmit}
@@ -409,7 +409,7 @@ export function FloorSwitcher() {
                 onDragEnd={handleDragEnd}
                 className={`px-3 py-1.5 text-sm font-medium rounded-t cursor-pointer transition-colors ${
                   floor.id === activeFloorId
-                    ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 bg-blue-50 dark:bg-blue-950/40'
+                    ? 'text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] border-b-2 border-[color:var(--color-blueprint)] bg-[color:var(--color-blueprint-soft)]'
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                 } ${draggingFloorId === floor.id ? 'opacity-50' : ''}`}
                 onClick={() => handleSwitchFloor(floor.id)}
@@ -424,7 +424,7 @@ export function FloorSwitcher() {
               <div
                 data-testid="floor-drop-caret"
                 aria-hidden="true"
-                className="bg-blue-500 w-0.5 h-6 ml-1"
+                className="bg-[color:var(--color-blueprint)] w-0.5 h-6 ml-1"
               />
             )}
           </div>
