@@ -192,7 +192,7 @@ export function NetworkTopologyPage() {
 
   if (!canViewIT) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+      <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
           <p className="text-sm text-gray-600 dark:text-gray-300">
             The network topology page is restricted to editors and admins
@@ -314,7 +314,7 @@ export function NetworkTopologyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10">
         {/* Page header. Title + description on the left, action cluster
             (save indicator, add-node, reset) on the right. */}

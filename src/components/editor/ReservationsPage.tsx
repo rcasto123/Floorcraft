@@ -243,7 +243,7 @@ export function ReservationsPage() {
 function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900"
+      className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950"
       data-testid="reservations-page"
     >
       <div className="max-w-7xl mx-auto px-6 py-10">{children}</div>

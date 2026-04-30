@@ -218,7 +218,7 @@ export function AccountPage() {
 
   if (session.status === 'loading') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+      <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
         <div className="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-10 text-sm text-gray-500 dark:text-gray-400">
           Loading account…
         </div>
@@ -232,7 +232,7 @@ export function AccountPage() {
   const subtitle = name.trim() ? email : 'Floorcraft account'
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
       <div className="max-w-5xl mx-auto px-3 sm:px-6 py-6 sm:py-10">
         {/* Breadcrumb back-link — small + understated, positioned above
             the identity header so it reads as "how do I leave this

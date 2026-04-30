@@ -33,7 +33,7 @@ export function FloorComparePage() {
 
   if (!canView) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+      <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
         <div className="max-w-5xl mx-auto px-6 py-10">
           <div
             role="alert"
@@ -67,7 +67,7 @@ export function FloorComparePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
       <div className="max-w-5xl mx-auto px-6 py-10 space-y-5">
         {/* "Back to reports" rendered as a chip-style link — matches
             the back-link idiom used elsewhere in the editor. */}

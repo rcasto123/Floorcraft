@@ -181,7 +181,7 @@ function CenteredCard({
   cta?: { href: string; label: string }
 }) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div
           role="alert"
@@ -343,7 +343,7 @@ export function AuditLogPage() {
   if (!teamId) return <NoTeam />
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <div className="min-h-screen bg-[color:var(--color-paper)] dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-6 py-10 space-y-5">
         <header>
           <h1 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
