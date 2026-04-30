@@ -83,11 +83,8 @@ describe('TeamHomePage', () => {
     // Wave 21 (#180): the legacy `window.prompt()` flow was replaced
     // with `CreateOfficeModal`. Clicking "+ New office" now opens the
     // modal; submitting the modal form is what fires `createOffice`.
-    fireEvent.click(screen.getByRole('button', { name: /new office/i }))
-    // The modal should be present with the suggested default name; the
-    // submit button label is "Create office".
-    const submit = await screen.findByRole('button', { name: /^create office$/i })
-    fireEvent.click(submit)
+    fireEvent.click(screen.getByRole('button', { name: /^new office$/i }))
+    fireEvent.click(await screen.findByRole('button', { name: /^create office$/i }))
     await waitFor(() => expect(createOffice).toHaveBeenCalled())
     expect(await screen.findByText('map-view')).toBeInTheDocument()
   })

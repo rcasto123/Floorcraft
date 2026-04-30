@@ -960,23 +960,28 @@ export function TeamHomePage() {
             office" and "Import" header actions; the mode tag tells the
             submit handler where to navigate after the office is
             created. Replaces two `window.prompt()` calls from the
-            pre-Wave-21 flow. */}
-        <CreateOfficeModal
-          open={createModal !== null}
-          onClose={() => {
-            if (creating) return
-            setCreateModal(null)
-          }}
-          defaultName={createModal?.defaultName ?? ''}
-          title={createModal?.mode === 'import' ? 'Import a roster' : 'New office'}
-          description={
-            createModal?.mode === 'import'
-              ? "We'll create the office and open the CSV import dialog so you can paste or drop your employee list."
-              : undefined
-          }
-          submitLabel={createModal?.mode === 'import' ? 'Create and open import' : 'Create office'}
-          onSubmit={handleCreateSubmit}
-        />
+            pre-Wave-21 flow.
+            Conditionally rendered (rather than passing `open` to a
+            persistently-mounted modal) so each open is a fresh mount
+            and `useState(defaultName)` always reads the current
+            suggested name. */}
+        {createModal && (
+          <CreateOfficeModal
+            onClose={() => {
+              if (creating) return
+              setCreateModal(null)
+            }}
+            defaultName={createModal.defaultName}
+            title={createModal.mode === 'import' ? 'Import a roster' : 'New office'}
+            description={
+              createModal.mode === 'import'
+                ? "We'll create the office and open the CSV import dialog so you can paste or drop your employee list."
+                : undefined
+            }
+            submitLabel={createModal.mode === 'import' ? 'Create and open import' : 'Create office'}
+            onSubmit={handleCreateSubmit}
+          />
+        )}
       </div>
     </div>
   )
