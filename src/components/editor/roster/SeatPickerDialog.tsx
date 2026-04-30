@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { Search, Check, Users, X as XIcon, MapPin } from 'lucide-react'
+import { useMemo, useRef, useState } from 'react'
+import { Search, Check, Users, X as XIcon, MapPin, Sparkles } from 'lucide-react'
 import { Button, Modal, ModalBody, ModalFooter } from '../../ui'
 import { useEmployeeStore } from '../../../stores/employeeStore'
 import { useFloorStore } from '../../../stores/floorStore'
@@ -7,7 +7,6 @@ import { useNeighborhoodStore } from '../../../stores/neighborhoodStore'
 import { useToastStore } from '../../../stores/toastStore'
 import { listAvailableSeats, type SeatOption } from '../../../lib/seats/listAvailableSeats'
 import { assignEmployee, unassignEmployee } from '../../../lib/seatAssignment'
-import { Sparkles } from 'lucide-react'
 
 interface SeatPickerDialogProps {
   open: boolean
