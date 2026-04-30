@@ -85,6 +85,27 @@ export function LandingNav() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {/* Compact nav for mobile (`<sm`): the full link row above
+              hides on small viewports because four labels would crowd
+              the strip. Keep the most important destination (Sign in
+              for guests, Dashboard for authenticated users) visible
+              and reachable so a phone visitor can act, not just
+              scroll. */}
+          {isAuthed ? (
+            <Link
+              to="/dashboard"
+              className="sm:hidden text-sm text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] font-medium"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="sm:hidden text-sm text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] font-medium"
+            >
+              Sign in
+            </Link>
+          )}
           <ThemeToggle />
         </div>
       </div>
