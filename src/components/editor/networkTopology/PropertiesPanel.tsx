@@ -193,7 +193,7 @@ function NodeForm({ node, onClose }: { node: TopologyNode; onClose: () => void }
           type="button"
           onClick={onClose}
           aria-label="Close properties panel"
-          className="p-1 rounded text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+          className="p-1 rounded text-gray-500 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-400 dark:hover:bg-gray-800"
         >
           <X size={14} aria-hidden="true" />
         </button>

@@ -399,7 +399,7 @@ const sections: Section[] = [
           on <code>canvasSettings.northRotation</code>). If your floor plan
           has no real-world cardinal alignment, hide the compass entirely
           via <strong>View → Toggle compass</strong> or the{' '}
-          <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded text-[10px] font-mono">N</kbd>{' '}
+          <kbd className="px-1 py-0.5 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded text-[10px] font-mono">N</kbd>{' '}
           hotkey — the setting is per-office and persists.
         </p>
 
@@ -1619,7 +1619,7 @@ export function HelpPage() {
                 className={`flex items-center gap-2 px-2 py-1.5 rounded transition-colors ${
                   activeId === s.id
                     ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] font-medium'
-                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800'
                 }`}
               >
                 <span aria-hidden>{s.icon}</span>

@@ -340,7 +340,7 @@ export function TopBar() {
         <button
           onClick={() => undo()}
           disabled={!canUndo}
-          className={`p-1.5 rounded text-gray-600 dark:text-gray-300 dark:text-gray-400 ${canUndo ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
+          className={`p-1.5 rounded text-gray-600 dark:text-gray-300 dark:text-gray-400 ${canUndo ? 'hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
           title={canUndo ? 'Undo (Ctrl+Z)' : 'Nothing to undo'}
           aria-label="Undo"
         >
@@ -349,7 +349,7 @@ export function TopBar() {
         <button
           onClick={() => redo()}
           disabled={!canRedo}
-          className={`p-1.5 rounded text-gray-600 dark:text-gray-300 dark:text-gray-400 ${canRedo ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
+          className={`p-1.5 rounded text-gray-600 dark:text-gray-300 dark:text-gray-400 ${canRedo ? 'hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800' : 'opacity-40 cursor-not-allowed'}`}
           title={canRedo ? 'Redo (Ctrl+Shift+Z)' : 'Nothing to redo'}
           aria-label="Redo"
         >
@@ -370,7 +370,7 @@ export function TopBar() {
       <div className="relative hidden md:block" ref={viewMenuRef}>
         <button
           onClick={() => setViewMenuOpen((o) => !o)}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 rounded"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 rounded"
           aria-haspopup="menu"
           aria-expanded={viewMenuOpen}
         >
@@ -621,7 +621,7 @@ export function TopBar() {
         className={`hidden md:flex p-1.5 rounded items-center gap-1 ${
           presentationMode
             ? 'bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200'
-            : 'hover:bg-gray-100 text-gray-600 dark:text-gray-400 dark:hover:bg-gray-800'
+            : 'hover:bg-[color:var(--color-paper-sunken)] text-gray-600 dark:text-gray-400 dark:hover:bg-gray-800'
         }`}
         title={
           presentationMode
@@ -766,7 +766,7 @@ function MobileViewNav({
         const next = e.target.value
         navigate(`/t/${teamSlug}/o/${officeSlug}/${next}`)
       }}
-      className="md:hidden text-xs font-semibold uppercase tracking-wide bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-[color:var(--color-paper-line)] dark:border-gray-700 rounded-md px-2 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
+      className="md:hidden text-xs font-semibold uppercase tracking-wide bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-[color:var(--color-paper-line)] dark:border-gray-700 rounded-md px-2 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
     >
       <option value="map">Map</option>
       <option value="roster">Roster</option>

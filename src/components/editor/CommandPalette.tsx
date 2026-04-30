@@ -413,7 +413,7 @@ function CommandPaletteBody() {
               onClick={toggleScope}
               data-testid="command-palette-scope-chip"
               data-scope={scope}
-              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-[color:var(--color-paper-line)] dark:border-gray-700 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-[11px] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--color-blueprint)]"
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-[color:var(--color-paper-line)] dark:border-gray-700 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-[11px] text-gray-600 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--color-blueprint)]"
               aria-label={`Toggle scope (currently ${scope === 'office' ? 'this office' : 'all offices'})`}
             >
               {scope === 'office' ? (
@@ -579,7 +579,7 @@ function PaletteRow({
       onClick={onActivate}
       className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
         active
-          ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100'
+          ? 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-900 dark:text-gray-100'
           : 'text-gray-800 dark:text-gray-100 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/50'
       }`}
     >

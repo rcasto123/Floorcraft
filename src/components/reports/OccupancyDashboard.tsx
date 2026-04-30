@@ -121,7 +121,7 @@ export function OccupancyDashboard() {
                     {f.pct}% ({f.assigned}/{f.seats})
                   </span>
                 </div>
-                <div className="w-full h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${tone.fill}`}
                     style={{ width: `${Math.min(f.pct, 100)}%` }}

@@ -119,10 +119,12 @@
     color-scheme: dark;
   }
 
-  /* Selection color is surprisingly distracting on dark left at default;
-     pin it to a translucent blue that works against either surface. */
+  /* Selection color is surprisingly distracting at the browser default
+     blue. Pin it to a translucent blueprint cyan so highlighted text on
+     marketing copy and editor labels reads as a part of the Drafting
+     Studio identity rather than a foreign UA element. */
   ::selection {
-    background-color: rgb(37 99 235 / 0.30); /* blue-600 / 30% */
+    background-color: rgb(14 116 144 / 0.25); /* --color-blueprint @ 25% */
     color: inherit;
   }
 }
@@ -201,4 +203,55 @@
     linear-gradient(to bottom, var(--color-paper-line) 1px, transparent 1px);
   background-size: 8px 8px;
   background-position: -1px -1px;
+}
+
+/*
+ * Wave 21A — global typography polish.
+ *
+ * `font-mono` numerics across the app (stat cards, status bar, audit
+ * timestamps) read better with `tabular-nums` and `slashed-zero` baked
+ * into the mono stack itself. JetBrains Mono and SF Mono both support
+ * those features; the stylistic-set fallback degrades gracefully on
+ * older fonts. Applied to every `[font-family: monospace]` element so
+ * we don't have to remember `tabular-nums` on each call site.
+ */
+[class*="font-mono"], code, kbd, pre {
+  font-feature-settings: "tnum" 1, "zero" 1, "ss01" 1;
+}
+
+/*
+ * Soft scrollbar styling on WebKit / Blink browsers. The default UA
+ * scrollbar is a chunky gray strip that visually competes with the
+ * warm paper canvas chrome. The new rules use the paper-line and
+ * paper-sunken tokens so the scrollbar reads as part of the page
+ * instead of an OS-level intrusion. Firefox uses `scrollbar-color` on
+ * the same elements; the values are matched to the WebKit equivalents.
+ *
+ * Scoped to scrollable containers (anything with `overflow: auto/scroll`
+ * is implicitly covered by the universal selector).
+ */
+@supports selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-paper-line) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-paper-line);
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-border-strong);
+  }
+  .dark *::-webkit-scrollbar-thumb {
+    background-color: var(--color-paper-line);
+  }
 }

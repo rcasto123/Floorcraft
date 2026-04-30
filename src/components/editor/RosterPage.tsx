@@ -1097,7 +1097,7 @@ export function RosterPage() {
                 setFilter('q', '')
                 searchInputRef.current?.focus()
               }}
-              className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200"
+              className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-200"
               aria-label="Clear search"
               title="Clear search (Esc)"
             >
@@ -1246,7 +1246,7 @@ export function RosterPage() {
                   type="button"
                   onClick={resetSecondaryFilters}
                   disabled={secondaryFilterCount === 0}
-                  className="px-2 py-1 text-xs text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded disabled:text-gray-300 disabled:hover:bg-transparent"
+                  className="px-2 py-1 text-xs text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 rounded disabled:text-gray-300 disabled:hover:bg-transparent"
                   title="Reset secondary filters"
                 >
                   Reset
@@ -1310,20 +1310,20 @@ export function RosterPage() {
         {canEdit && (
           <button
             onClick={() => setCsvImportOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
           >
             <Upload size={14} /> Import
           </button>
         )}
         <button
           onClick={handleExportAll}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
         >
           <Download size={14} /> Export CSV
         </button>
         <button
           onClick={() => setHelpOpen(true)}
-          className="flex items-center justify-center p-1.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
+          className="flex items-center justify-center p-1.5 text-gray-500 dark:text-gray-400 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded"
           aria-label="Show keyboard shortcuts"
           title="Keyboard shortcuts (?)"
         >
@@ -2228,7 +2228,7 @@ function StatsBar({
     // active state flips to a saturated fill so "this axis is narrowing the
     // list" is still obvious at a glance.
     const toneClasses = {
-      gray: isActive ? 'bg-gray-800 text-white border-gray-800' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-700 dark:text-gray-200 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800',
+      gray: isActive ? 'bg-gray-800 text-white border-gray-800' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-700 dark:text-gray-200 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800',
       green: isActive ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-emerald-700 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-emerald-50',
       amber: isActive ? 'bg-amber-600 text-white border-amber-600' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-amber-700 dark:text-amber-300 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-amber-50',
       red: isActive ? 'bg-red-600 text-white border-red-600' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-red-700 dark:text-red-300 border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-red-50 dark:hover:bg-red-950/40',
@@ -2511,7 +2511,7 @@ function Avatar({ employee, deptColor }: { employee: Employee; deptColor?: strin
       <img
         src={employee.photoUrl}
         alt=""
-        className="w-7 h-7 rounded-full object-cover bg-gray-100 dark:bg-gray-800 flex-shrink-0"
+        className="w-7 h-7 rounded-full object-cover bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 flex-shrink-0"
         onError={(e) => {
           // If the URL 404s / CORS-fails, swap in the initials circle by
           // hiding the broken <img> — the sibling fallback renders whenever
@@ -2593,7 +2593,7 @@ function EndingSoonBadge({ endDate }: { endDate: string | null }) {
   if (days < 0) {
     return (
       <span
-        className="text-[10px] font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded"
+        className="text-[10px] font-medium text-gray-500 dark:text-gray-400 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 px-1.5 py-0.5 rounded"
         title={`Ended ${endDate}`}
       >
         Ended
@@ -2633,7 +2633,7 @@ function DepartingSoonBadge({ departureDate }: { departureDate: string | null })
   if (days < 0) {
     return (
       <span
-        className="text-[10px] font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded"
+        className="text-[10px] font-medium text-gray-500 dark:text-gray-400 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 px-1.5 py-0.5 rounded"
         title={`Departed ${departureDate}`}
       >
         Departed
@@ -2707,7 +2707,7 @@ function PersonCardImpl({
   canEdit: boolean
 }) {
   const statusTone =
-    EMPLOYEE_STATUS_PILL_CLASSES[employee.status] ?? 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+    EMPLOYEE_STATUS_PILL_CLASSES[employee.status] ?? 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-500 dark:text-gray-400'
   return (
     <div
       onDoubleClick={(e) => {
@@ -2893,7 +2893,7 @@ function RowActionMenu({
         {canEdit && (
           <button
             onClick={onEdit}
-            className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800"
           >
             Edit full details
           </button>
@@ -2901,7 +2901,7 @@ function RowActionMenu({
         {hasEmail ? (
           <button
             onClick={handleCopyEmail}
-            className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800"
             title={`Copy ${employee.email} to clipboard`}
           >
             {copied ? (
@@ -2926,7 +2926,7 @@ function RowActionMenu({
           <a
             href={mailtoHref}
             onClick={onClose}
-            className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800"
             title={`Email ${employee.email}`}
           >
             <Mail size={12} /> Send invite…
@@ -2947,7 +2947,7 @@ function RowActionMenu({
         <button
           onClick={onRequestSwap}
           disabled={!employee.seatId}
-          className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+          className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           title={employee.seatId ? 'Request a seat swap' : 'Assign a seat before requesting a swap'}
         >
           Request swap
@@ -2956,7 +2956,7 @@ function RowActionMenu({
           <>
             <button
               onClick={onUnassign}
-              className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800"
             >
               Unassign seat
             </button>
@@ -3014,7 +3014,7 @@ function ShortcutsCheatSheet({ onClose }: { onClose: () => void }) {
           <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100">Keyboard shortcuts</h2>
           <button
             onClick={onClose}
-            className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400"
+            className="p-1 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400"
             aria-label="Close"
           >
             <X size={14} />
@@ -3025,7 +3025,7 @@ function ShortcutsCheatSheet({ onClose }: { onClose: () => void }) {
             <div key={key} className="flex items-center justify-between gap-3">
               <dt className="text-gray-600 dark:text-gray-300">{desc}</dt>
               <dd>
-                <kbd className="px-1.5 py-0.5 text-[11px] font-mono font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded">
+                <kbd className="px-1.5 py-0.5 text-[11px] font-mono font-semibold text-gray-700 dark:text-gray-200 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded">
                   {key}
                 </kbd>
               </dd>
@@ -3119,7 +3119,7 @@ function RosterEmptyState({
   const Icon = isFilterMiss ? SearchX : Users
   return (
     <div className="flex flex-col items-center gap-2 text-center py-12">
-      <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gray-100 dark:bg-gray-800/60 text-gray-400 dark:text-gray-500 mb-1">
+      <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/60 text-gray-400 dark:text-gray-500 mb-1">
         <Icon size={28} aria-hidden="true" />
       </div>
       <div className="text-sm font-semibold text-gray-700 dark:text-gray-200">

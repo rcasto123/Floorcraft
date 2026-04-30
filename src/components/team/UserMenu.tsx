@@ -127,7 +127,7 @@ export function UserMenu() {
               tabIndex={focusedIndex === profileIdx ? 0 : -1}
               onClick={() => activate(() => navigate('/account'))}
               onMouseEnter={() => setFocusedIndex(profileIdx)}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
               data-testid="user-menu-profile"
             >
               <UserIcon size={14} aria-hidden="true" />
@@ -154,7 +154,7 @@ export function UserMenu() {
               tabIndex={focusedIndex === helpIdx ? 0 : -1}
               onClick={() => activate(() => navigate('/help'))}
               onMouseEnter={() => setFocusedIndex(helpIdx)}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
               data-testid="user-menu-help"
             >
               <HelpCircle size={14} aria-hidden="true" />
@@ -171,7 +171,7 @@ export function UserMenu() {
                 })
               }
               onMouseEnter={() => setFocusedIndex(shortcutsIdx)}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
               data-testid="user-menu-shortcuts"
             >
               <Keyboard size={14} aria-hidden="true" />

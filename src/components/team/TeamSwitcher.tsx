@@ -113,7 +113,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
         {...triggerProps}
         type="button"
         onClick={toggle}
-        className="flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+        className="flex items-center gap-1 px-2 py-1 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 rounded"
         data-testid="team-switcher-trigger"
       >
         {current?.name ?? 'Teams'}
@@ -168,7 +168,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
                     tabIndex={focusedIndex === idx ? 0 : -1}
                     onClick={() => onRowClick({ kind: 'team', team: t })}
                     onMouseEnter={() => setFocusedIndex(idx)}
-                    className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+                    className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
                     data-testid={`team-switcher-team-${t.slug}`}
                   >
                     <span
@@ -209,7 +209,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
                 tabIndex={focusedIndex === settingsIdx ? 0 : -1}
                 onClick={() => onRowClick({ kind: 'settings' })}
                 onMouseEnter={() => setFocusedIndex(settingsIdx)}
-                className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+                className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
                 data-testid="team-switcher-settings"
               >
                 <Settings size={14} aria-hidden="true" />
@@ -230,7 +230,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
               tabIndex={focusedIndex === helpIdx ? 0 : -1}
               onClick={() => onRowClick({ kind: 'help' })}
               onMouseEnter={() => setFocusedIndex(helpIdx)}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-gray-700 hover:bg-[color:var(--color-paper-sunken)] dark:text-gray-200 dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
               data-testid="team-switcher-help"
             >
               <HelpCircle size={14} aria-hidden="true" />
@@ -247,7 +247,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
               tabIndex={focusedIndex === createIdx ? 0 : -1}
               onClick={() => onRowClick({ kind: 'create' })}
               onMouseEnter={() => setFocusedIndex(createIdx)}
-              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none"
+              className="flex items-center gap-2 w-full text-left px-3 py-1.5 text-sm text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 focus:bg-[color:var(--color-paper-sunken)] dark:focus:bg-gray-800 outline-none"
             >
               <Plus size={14} aria-hidden="true" />
               <span className="flex-1">Create new team</span>

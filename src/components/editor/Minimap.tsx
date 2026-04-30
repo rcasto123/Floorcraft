@@ -328,7 +328,7 @@ export function Minimap() {
           onClick={() => setCollapsed(false)}
           aria-expanded={false}
           aria-label="Expand overview"
-          className="w-full h-full flex items-center justify-center cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+          className="w-full h-full flex items-center justify-center cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
         >
           <Maximize2 size={16} />
         </button>
@@ -366,7 +366,7 @@ export function Minimap() {
         }}
         aria-expanded={true}
         aria-label="Collapse overview"
-        className="absolute top-1 right-1 w-6 h-6 flex items-center justify-center rounded cursor-pointer text-gray-600 dark:text-gray-300 bg-[color:var(--color-paper-raised)]/80 dark:bg-gray-900/80 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
+        className="absolute top-1 right-1 w-6 h-6 flex items-center justify-center rounded cursor-pointer text-gray-600 dark:text-gray-300 bg-[color:var(--color-paper-raised)]/80 dark:bg-gray-900/80 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
       >
         <Minimize2 size={12} />
       </button>

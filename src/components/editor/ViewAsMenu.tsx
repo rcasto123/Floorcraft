@@ -42,7 +42,7 @@ export function ViewAsMenu() {
         className={`flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded ${
           impersonatedRole
             ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-800 hover:bg-amber-200'
-            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+            : 'text-gray-600 dark:text-gray-300 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800'
         }`}
         aria-haspopup="menu"
         aria-expanded={open}

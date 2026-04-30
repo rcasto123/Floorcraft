@@ -161,7 +161,7 @@ export function EmployeeDirectory() {
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Employee directory</h2>
           <button
             onClick={handleClose}
-            className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            className="p-1.5 rounded-lg hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           >
             <X size={18} />
           </button>
@@ -188,7 +188,7 @@ export function EmployeeDirectory() {
                   <th
                     key={col.key}
                     onClick={() => handleSort(col.key)}
-                    className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 whitespace-nowrap select-none"
+                    className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 whitespace-nowrap select-none"
                   >
                     <span className="inline-flex items-center gap-1">
                       {col.label}

@@ -167,7 +167,7 @@ export function ScenariosPage() {
                       className={`w-full text-left text-sm px-2 py-1.5 rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] ${
                         s.id === activeId
                           ? 'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 font-medium'
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                          : 'hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800'
                       }`}
                     >
                       <div className="truncate">{s.name}</div>
@@ -301,7 +301,7 @@ function NoActiveScenarioState({
       <div className="text-center max-w-sm">
         <div
           aria-hidden="true"
-          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"
+          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"
         >
           <Layers size={22} />
         </div>
@@ -334,7 +334,7 @@ function UnauthorizedState() {
     <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-10 text-center">
       <div
         aria-hidden="true"
-        className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"
+        className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-500 dark:text-gray-400 mb-4"
       >
         <Lock size={22} />
       </div>

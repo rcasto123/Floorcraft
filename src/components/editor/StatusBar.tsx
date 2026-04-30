@@ -165,7 +165,7 @@ export function StatusBar() {
         className={`text-[10px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded transition-colors ${
           activeTool === 'calibrate-scale'
             ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
-            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800'
         }`}
       >
         Set scale

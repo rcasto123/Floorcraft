@@ -331,7 +331,7 @@ export function DevicesPanel() {
                   className={`px-3 py-1 text-xs rounded-full font-medium transition-colors tabular-nums ${
                     active
                       ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
                   {p.label} ({count})
@@ -361,7 +361,7 @@ export function DevicesPanel() {
                   className={`px-2 py-0.5 text-[10px] rounded-full font-medium transition-colors tabular-nums ${
                     active
                       ? 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'
-                      : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+                      : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800'
                   }`}
                 >
                   {p.label} ({count})
@@ -419,7 +419,7 @@ function DeviceRow({ element, onClick }: DeviceRowProps) {
       >
         <span
           aria-hidden
-          className="w-7 h-7 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center flex-shrink-0 text-gray-500 dark:text-gray-400"
+          className="w-7 h-7 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 flex items-center justify-center flex-shrink-0 text-gray-500 dark:text-gray-400"
         >
           <Icon size={14} />
         </span>
@@ -449,9 +449,9 @@ function StatusPill({ status }: { status: string }) {
       'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-dashed border-amber-300',
     broken: 'bg-red-500 text-white',
     decommissioned:
-      'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400',
+      'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-500 dark:text-gray-400',
   }
-  const cls = map[status] ?? 'bg-gray-100 dark:bg-gray-800 text-gray-600'
+  const cls = map[status] ?? 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600'
   return (
     <span
       className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium flex-shrink-0 ${cls}`}

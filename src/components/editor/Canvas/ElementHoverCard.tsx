@@ -491,7 +491,7 @@ function SummaryBody({ card }: { card: SummaryCard }) {
     <>
       <div className="flex items-center gap-2">
         <span
-          className="inline-flex items-center justify-center w-5 h-5 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex-shrink-0"
+          className="inline-flex items-center justify-center w-5 h-5 rounded bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex-shrink-0"
           aria-hidden="true"
         >
           <Icon size={12} />
@@ -543,7 +543,7 @@ function SeatBody({
     <>
       <div className="flex items-center gap-2">
         <span
-          className="inline-flex items-center justify-center w-5 h-5 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex-shrink-0"
+          className="inline-flex items-center justify-center w-5 h-5 rounded bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex-shrink-0"
           aria-hidden="true"
         >
           <Icon size={12} />

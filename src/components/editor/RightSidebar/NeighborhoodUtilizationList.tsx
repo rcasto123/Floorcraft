@@ -91,7 +91,7 @@ export function NeighborhoodUtilizationList() {
                 />
               </button>
               <div
-                className="h-1 rounded bg-gray-100 dark:bg-gray-800 overflow-hidden mx-1 mb-0.5"
+                className="h-1 rounded bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 overflow-hidden mx-1 mb-0.5"
                 aria-hidden
               >
                 <div

@@ -324,7 +324,7 @@ function ReportButton({
     >
       <div
         className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${
-          active ? 'bg-[color:var(--color-blueprint-soft)]' : 'bg-gray-100 dark:bg-gray-800'
+          active ? 'bg-[color:var(--color-blueprint-soft)]' : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800'
         }`}
       >
         {IconComponent && (

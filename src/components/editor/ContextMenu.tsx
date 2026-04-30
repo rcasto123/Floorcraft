@@ -432,7 +432,7 @@ export function ContextMenu() {
           {gi > 0 && (
             <div
               role="separator"
-              className="my-1 h-px bg-gray-100 dark:bg-gray-800"
+              className="my-1 h-px bg-[color:var(--color-paper-sunken)] dark:bg-gray-800"
             />
           )}
           <div

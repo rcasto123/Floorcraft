@@ -205,10 +205,10 @@ function TemplateCard({
         {template.tagline}
       </p>
       <div className="mt-3 flex gap-2 text-[11px] text-gray-600 dark:text-gray-400">
-        <span className="inline-flex items-center rounded bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5">
+        <span className="inline-flex items-center rounded bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 px-1.5 py-0.5">
           {template.nodeCount} nodes
         </span>
-        <span className="inline-flex items-center rounded bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5">
+        <span className="inline-flex items-center rounded bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 px-1.5 py-0.5">
           {template.edgeCount} links
         </span>
       </div>

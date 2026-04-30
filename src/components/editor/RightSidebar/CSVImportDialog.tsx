@@ -264,7 +264,7 @@ function FilterBar({ value, counts, onChange }: FilterBarProps) {
     const active = value === k
     const cls = active
       ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]'
-      : 'bg-transparent text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800'
+      : 'bg-transparent text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800'
     return (
       <button
         key={k}
@@ -749,7 +749,7 @@ export function CSVImportDialog() {
                 <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
                   <FilterBar value={filter} counts={filterCounts} onChange={setFilter} />
                   <span
-                    className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200"
+                    className="text-xs font-medium px-2 py-1 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-700 dark:text-gray-200"
                     aria-live="polite"
                   >
                     {`${selectedCount} of ${totalRows} selected`}
@@ -855,7 +855,7 @@ export function CSVImportDialog() {
                               ) : (
                                 <button
                                   type="button"
-                                  className="text-left w-full hover:bg-gray-100 dark:hover:bg-gray-800 rounded px-1 py-0.5 -mx-1"
+                                  className="text-left w-full hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 rounded px-1 py-0.5 -mx-1"
                                   onClick={() => beginEdit(rowIndex, 'name', r.name || '')}
                                   aria-label={`Edit name "${r.name || 'blank'}" for row ${rowIndex}`}
                                 >
@@ -892,7 +892,7 @@ export function CSVImportDialog() {
                               ) : (
                                 <button
                                   type="button"
-                                  className="text-left w-full hover:bg-gray-100 dark:hover:bg-gray-800 rounded px-1 py-0.5 -mx-1"
+                                  className="text-left w-full hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 rounded px-1 py-0.5 -mx-1"
                                   onClick={() => beginEdit(rowIndex, 'email', r.email || '')}
                                   aria-label={`Edit email "${r.email || 'blank'}" for row ${rowIndex}`}
                                 >

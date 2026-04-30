@@ -91,7 +91,7 @@ export function CrossOfficeResultsGroup({ results, highlightedId, onHover, onPic
                         <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">{item.sublabel}</span>
                       )}
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 whitespace-nowrap">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 whitespace-nowrap">
                       {item.officeName}
                     </span>
                   </button>

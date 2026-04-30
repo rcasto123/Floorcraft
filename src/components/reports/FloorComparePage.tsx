@@ -41,7 +41,7 @@ export function FloorComparePage() {
           >
             <div
               aria-hidden="true"
-              className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
+              className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--color-paper-sunken)] text-gray-500 dark:bg-gray-800 dark:text-gray-400"
             >
               <Lock size={22} />
             </div>

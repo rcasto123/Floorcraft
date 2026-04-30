@@ -175,7 +175,7 @@ export function RosterFilterPresetsMenu({
                     <button
                       type="button"
                       onClick={() => handleApply(p)}
-                      className="flex-1 text-left text-sm px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 truncate"
+                      className="flex-1 text-left text-sm px-2 py-1 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 truncate"
                       aria-label={`Apply preset ${p.name}`}
                       title={p.query || '(no filters)'}
                     >
@@ -186,7 +186,7 @@ export function RosterFilterPresetsMenu({
                       onClick={() => handleRename(p.id, p.name)}
                       aria-label={`Rename preset ${p.name}`}
                       title="Rename"
-                      className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100"
+                      className="p-1 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100"
                     >
                       <Pencil size={12} />
                     </button>
@@ -195,7 +195,7 @@ export function RosterFilterPresetsMenu({
                       onClick={() => handleDelete(p.id, p.name)}
                       aria-label={`Delete preset ${p.name}`}
                       title="Delete"
-                      className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400"
+                      className="p-1 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400"
                     >
                       <Trash2 size={12} />
                     </button>

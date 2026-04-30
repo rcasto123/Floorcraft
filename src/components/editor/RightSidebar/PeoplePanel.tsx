@@ -257,7 +257,7 @@ export function PeoplePanel() {
           className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'all'
               ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           All ({totalCount})
@@ -269,7 +269,7 @@ export function PeoplePanel() {
           className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'unassigned'
               ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           Unassigned ({unassignedCount})
@@ -281,7 +281,7 @@ export function PeoplePanel() {
           className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'new-hires'
               ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
-              : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+              : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
           New hires ({newHiresCount})
@@ -292,7 +292,7 @@ export function PeoplePanel() {
       <div className="flex-1 overflow-y-auto -mx-3 px-3">
         {filteredEmployees.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 px-4 text-center">
-            <div aria-hidden className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-3">
+            <div aria-hidden className="w-12 h-12 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 flex items-center justify-center mb-3">
               <Users size={20} className="text-gray-400 dark:text-gray-500" />
             </div>
             <p className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
@@ -329,7 +329,7 @@ export function PeoplePanel() {
                     <span className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
                       {dept}
                     </span>
-                    <span className="ml-auto px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-[10px] font-medium text-gray-600 dark:text-gray-300 tabular-nums">
+                    <span className="ml-auto px-1.5 py-0.5 rounded-full bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-[10px] font-medium text-gray-600 dark:text-gray-300 tabular-nums">
                       {deptEmployees.length}
                     </span>
                   </button>

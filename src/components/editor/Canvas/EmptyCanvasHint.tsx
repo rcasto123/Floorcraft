@@ -60,7 +60,7 @@ export function EmptyCanvasHint() {
         <ul className="space-y-1.5 mb-4 list-disc pl-5">
           <li>Drag a desk from the left sidebar →</li>
           <li>
-            or press <kbd className="px-1 py-0.5 text-[11px] font-mono bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded">W</kbd> to draw a wall
+            or press <kbd className="px-1 py-0.5 text-[11px] font-mono bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 border border-[color:var(--color-paper-line)] dark:border-gray-700 rounded">W</kbd> to draw a wall
           </li>
         </ul>
         <div className="flex justify-center">

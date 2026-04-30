@@ -364,7 +364,7 @@ function ElementHeader({
       data-testid="properties-panel-header"
       className="sticky top-0 z-10 -mx-3 px-3 py-2.5 bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-950/95 backdrop-blur border-b border-[color:var(--color-paper-line)] dark:border-gray-800 mb-1 flex items-center gap-2.5"
     >
-      <div className="w-8 h-8 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0">
+      <div className="w-8 h-8 rounded-md bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0">
         <Icon size={16} aria-hidden="true" />
       </div>
       <div className="min-w-0 flex-1">
@@ -396,7 +396,7 @@ function ElementHeader({
         data-testid="properties-lock-toggle"
         onClick={onToggleLock}
         disabled={!canEdit}
-        className="p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+        className="p-1.5 rounded text-gray-500 dark:text-gray-400 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
       >
         {locked ? <Lock size={14} aria-hidden="true" /> : <Unlock size={14} aria-hidden="true" />}
       </button>
@@ -1140,7 +1140,7 @@ export function PropertiesPanel() {
         title={label}
         onClick={onClick}
         disabled={inputDisabled}
-        className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 border border-[color:var(--color-paper-line)] dark:border-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
+        className="p-1.5 rounded hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 border border-[color:var(--color-paper-line)] dark:border-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <Icon size={16} />
       </button>
@@ -1151,7 +1151,7 @@ export function PropertiesPanel() {
         {/* Header row mirrors the single-select header so the visual
             rhythm doesn't shift when the user changes selection size. */}
         <div className="sticky top-0 z-10 -mx-3 px-3 py-2.5 bg-[color:var(--color-paper-raised)]/95 dark:bg-gray-950/95 backdrop-blur border-b border-[color:var(--color-paper-line)] dark:border-gray-800 flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0">
+          <div className="w-8 h-8 rounded-md bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center flex-shrink-0">
             <LayoutGrid size={16} aria-hidden="true" />
           </div>
           <div className="min-w-0 flex-1">
@@ -1260,7 +1260,7 @@ export function PropertiesPanel() {
                 title="Distribute horizontally"
                 onClick={() => distributeElements(selectedIds, 'horizontal')}
                 disabled={selectedIds.length < 3 || inputDisabled}
-                className="p-1.5 rounded text-gray-600 dark:text-gray-300 border border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="p-1.5 rounded text-gray-600 dark:text-gray-300 border border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <AlignHorizontalSpaceAround size={16} />
               </button>
@@ -1270,7 +1270,7 @@ export function PropertiesPanel() {
                 title="Distribute vertically"
                 onClick={() => distributeElements(selectedIds, 'vertical')}
                 disabled={selectedIds.length < 3 || inputDisabled}
-                className="p-1.5 rounded text-gray-600 dark:text-gray-300 border border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="p-1.5 rounded text-gray-600 dark:text-gray-300 border border-[color:var(--color-paper-line)] dark:border-gray-800 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 <AlignVerticalSpaceAround size={16} />
               </button>

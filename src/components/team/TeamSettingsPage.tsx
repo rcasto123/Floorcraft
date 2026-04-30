@@ -102,7 +102,7 @@ export function TeamSettingsPage() {
           ) : (
             <div
               aria-hidden="true"
-              className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 shrink-0"
+              className="w-10 h-10 rounded-lg bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 shrink-0"
             >
               <Building2 size={20} />
             </div>

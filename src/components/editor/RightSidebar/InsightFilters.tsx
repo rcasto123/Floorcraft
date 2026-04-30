@@ -44,7 +44,7 @@ export function InsightFilters({
               className={`px-2.5 py-1 text-xs rounded-full font-medium transition-colors ${
                 active
                   ? `${colors.bg} ${colors.text} ring-1 ${colors.ring}`
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500'
+                  : 'bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 text-gray-400 dark:text-gray-500'
               }`}
             >
               {sev.charAt(0).toUpperCase() + sev.slice(1)}

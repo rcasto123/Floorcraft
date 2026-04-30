@@ -442,7 +442,7 @@ export function FloorSwitcher() {
             type="button"
             onClick={handleAddFloor}
             aria-label="Add floor"
-            className="flex items-center gap-1 px-2 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors"
+            className="flex items-center gap-1 px-2 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 rounded transition-colors"
           >
             <Plus size={14} aria-hidden="true" />
             <span>Add floor</span>
@@ -457,13 +457,13 @@ export function FloorSwitcher() {
           style={{ left: contextMenuPos.x, top: contextMenuPos.y }}
         >
           <button
-            className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800"
             onClick={() => handleRenameStart(contextMenuFloorId)}
           >
             Rename
           </button>
           <button
-            className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="w-full text-left px-3 py-1.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800"
             onClick={() => handleDuplicate(contextMenuFloorId)}
           >
             Duplicate

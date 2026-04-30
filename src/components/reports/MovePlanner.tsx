@@ -204,7 +204,7 @@ export function MovePlanner() {
         </button>
         <button
           onClick={handleDiscard}
-          className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="flex items-center justify-center gap-1.5 flex-1 px-3 py-2 text-xs font-medium text-gray-600 dark:text-gray-300 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
         >
           <Trash2 size={12} />
           Discard
