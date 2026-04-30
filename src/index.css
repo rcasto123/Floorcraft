@@ -216,9 +216,29 @@
 @media (prefers-reduced-motion: reduce) {
   .modal-panel-enter,
   .modal-backdrop-enter,
-  .dropdown-enter {
+  .dropdown-enter,
+  .hero-glow-pulse {
     animation: none;
   }
+}
+
+/*
+ * Wave 21A — slow pulse on the hero glow behind the landing-page
+ * technical drawing. Cycles opacity between 0.55 and 0.85 over 6
+ * seconds so the page feels gently alive without distracting from
+ * the headline. Skipped via the reduced-motion gate above.
+ */
+@keyframes hero-glow-pulse {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.hero-glow-pulse {
+  animation: hero-glow-pulse 6000ms ease-in-out infinite;
 }
 
 /*

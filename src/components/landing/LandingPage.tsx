@@ -104,7 +104,7 @@ export function LandingPage() {
             {/* Faint cyan glow lifts the drawing off the gridded background */}
             <div
               aria-hidden="true"
-              className="absolute -inset-6 rounded-2xl bg-[color:var(--color-blueprint-soft)] blur-2xl opacity-70"
+              className="hero-glow-pulse absolute -inset-6 rounded-2xl bg-[color:var(--color-blueprint-soft)] blur-2xl"
             />
             <div className="relative rounded-xl border border-[color:var(--color-paper-line)] dark:border-gray-700 bg-[color:var(--color-paper-raised)] shadow-[0_1px_0_0_rgba(0,0,0,0.04),0_24px_48px_-24px_rgba(15,23,42,0.18)] overflow-hidden">
               {/* Sheet header — mimics a CAD title bar */}
