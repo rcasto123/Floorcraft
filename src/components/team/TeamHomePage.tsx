@@ -242,10 +242,10 @@ function StatCard({
       // six non-actions to reach the search input.
       aria-hidden={false}
     >
-      <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+      <div className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
         {label}
       </div>
-      <div className="mt-1 text-2xl font-semibold tabular-nums text-gray-900 dark:text-gray-100">
+      <div className="mt-1 font-mono text-2xl font-medium tabular-nums text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
         {value}
       </div>
     </div>
@@ -812,7 +812,7 @@ export function TeamHomePage() {
               <section className="mb-6" aria-labelledby="recent-heading">
                 <h2
                   id="recent-heading"
-                  className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2"
+                  className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-2"
                 >
                   Recent
                 </h2>
@@ -861,7 +861,7 @@ export function TeamHomePage() {
                 {recentOffices.length > 0 && q.trim() === '' && filterMode === 'all' && (
                   <h2
                     id="all-offices-heading"
-                    className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2"
+                    className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-2"
                   >
                     All offices
                   </h2>

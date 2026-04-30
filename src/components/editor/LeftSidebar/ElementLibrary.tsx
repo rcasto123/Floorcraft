@@ -643,7 +643,7 @@ function LibrarySection({
   // Centralising the class string here means the next palette tweak is a
   // single-line change rather than spread across three call sites.
   const HEADER_CLASS =
-    'text-[11px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500'
+    'font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500'
 
   return (
     <div className={`mb-3 ${showDivider ? 'pt-3 border-t border-[color:var(--color-paper-line)] dark:border-gray-800/60' : ''}`}>

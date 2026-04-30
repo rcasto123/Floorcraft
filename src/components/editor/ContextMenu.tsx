@@ -438,7 +438,7 @@ export function ContextMenu() {
           <div
             // 10px tracking-wider uppercase headers match the FileMenu /
             // View dropdown styling so the editor speaks one menu dialect.
-            className="px-3 pt-1.5 pb-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500"
+            className="px-3 pt-1.5 pb-0.5 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500"
           >
             {group.heading}
           </div>

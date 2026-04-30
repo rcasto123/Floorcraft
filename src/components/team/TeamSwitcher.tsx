@@ -153,7 +153,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
 
           {showSwitchGroup && filteredTeams.length > 0 && (
             <div>
-              <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+              <div className="px-3 pt-1.5 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
                 Switch team
               </div>
               {filteredTeams.map((t, ti) => {
@@ -199,7 +199,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
           {current && (
             <div>
               <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
-              <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+              <div className="px-3 pt-1.5 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
                 Manage
               </div>
               <button
@@ -220,7 +220,7 @@ export function TeamSwitcher({ currentSlug }: { currentSlug: string | undefined 
 
           <div>
             <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
-            <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+            <div className="px-3 pt-1.5 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
               Help
             </div>
             <button

@@ -114,8 +114,8 @@ function SectionHeading({
       id={id}
       className={
         tone === 'danger'
-          ? 'text-[10px] font-semibold uppercase tracking-wider text-red-600 dark:text-red-400'
-          : 'text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400'
+          ? 'font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-red-600 dark:text-red-400'
+          : 'font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400'
       }
     >
       {children}

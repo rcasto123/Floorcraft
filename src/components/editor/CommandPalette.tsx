@@ -454,7 +454,7 @@ function CommandPaletteBody() {
           {showRecents && (
             <li data-testid="command-palette-section-recent-wrap">
               <div
-                className="px-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider"
+                className="px-4 pt-3 pb-1 font-mono text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-[0.18em]"
                 data-testid="command-palette-section-recent"
               >
                 Recent
@@ -502,7 +502,7 @@ function CommandPaletteBody() {
             return (
               <li key={group.section}>
                 <div
-                  className="px-4 pt-3 pb-1 flex items-center gap-1.5 text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider"
+                  className="px-4 pt-3 pb-1 flex items-center gap-1.5 font-mono text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-[0.18em]"
                   data-testid={`command-palette-section-${group.section}`}
                 >
                   <Icon size={11} aria-hidden="true" />

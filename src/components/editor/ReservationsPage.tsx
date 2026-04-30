@@ -180,7 +180,7 @@ export function ReservationsPage() {
                 <tr>
                   <th
                     scope="col"
-                    className="px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 sticky left-0 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50"
+                    className="px-3 py-2 text-left font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sticky left-0 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50"
                   >
                     Desk
                   </th>
@@ -188,7 +188,7 @@ export function ReservationsPage() {
                     <th
                       key={d}
                       scope="col"
-                      className="px-2 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 whitespace-nowrap tabular-nums"
+                      className="px-2 py-2 text-left font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 whitespace-nowrap tabular-nums"
                     >
                       {d.slice(5)}
                     </th>

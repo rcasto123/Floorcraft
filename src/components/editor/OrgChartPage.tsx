@@ -247,7 +247,7 @@ function StatStrip({ stats }: { stats: OrgStats }) {
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
     <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-3">
-      <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+      <div className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
         {label}
       </div>
       <div className="mt-1 text-2xl font-semibold tabular-nums text-gray-900 dark:text-gray-100">

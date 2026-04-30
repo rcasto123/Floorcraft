@@ -120,7 +120,7 @@ interface InnerProps {
  * just match the visual rhythm.
  */
 const SECTION_LABEL_CLASS =
-  'text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400'
+  'font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400'
 const TEXTAREA_CLASS =
   'w-full text-xs border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded px-2 py-1.5 ' +
   'focus:outline-none focus:border-[color:var(--color-blueprint)] focus:ring-2 focus:ring-[color:var(--color-blueprint)]/30 ' +

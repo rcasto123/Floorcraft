@@ -293,7 +293,7 @@ function PreviewStep({
           className="rounded-md border border-[color:var(--color-paper-line)] dark:border-gray-800 overflow-hidden"
           data-testid="meraki-entries-table"
         >
-          <div className="grid grid-cols-[28px_minmax(0,2fr)_minmax(0,1.4fr)_120px_120px] text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 bg-[color:var(--color-paper-sunken)] dark:bg-gray-900/60 border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
+          <div className="grid grid-cols-[28px_minmax(0,2fr)_minmax(0,1.4fr)_120px_120px] font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 bg-[color:var(--color-paper-sunken)] dark:bg-gray-900/60 border-b border-[color:var(--color-paper-line)] dark:border-gray-800">
             <div className="px-2 py-2"></div>
             <div className="px-2 py-2">Device</div>
             <div className="px-2 py-2">Maps to</div>

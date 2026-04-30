@@ -173,7 +173,7 @@ export function InviteMemberModal({
           <div>
             <label
               htmlFor="invite-fallback-link"
-              className="block mb-1 text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+              className="block mb-1 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400"
             >
               Invite link
             </label>

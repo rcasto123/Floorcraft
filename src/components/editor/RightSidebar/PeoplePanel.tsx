@@ -326,7 +326,7 @@ export function PeoplePanel() {
                     ) : (
                       <ChevronDown size={12} className="text-gray-500 dark:text-gray-400" />
                     )}
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
                       {dept}
                     </span>
                     <span className="ml-auto px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-[10px] font-medium text-gray-600 dark:text-gray-300 tabular-nums">

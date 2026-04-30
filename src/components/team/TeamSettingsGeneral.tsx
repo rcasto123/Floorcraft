@@ -98,7 +98,7 @@ export function TeamSettingsGeneral({ team, isAdmin }: { team: Team; isAdmin: bo
       <section aria-labelledby="team-identity-heading" className="space-y-3">
         <h2
           id="team-identity-heading"
-          className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+          className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400"
         >
           Team identity
         </h2>
@@ -172,7 +172,7 @@ export function TeamSettingsGeneral({ team, isAdmin }: { team: Team; isAdmin: bo
         <section aria-labelledby="danger-zone-heading" className="space-y-3">
           <h2
             id="danger-zone-heading"
-            className="text-[10px] font-semibold uppercase tracking-wider text-red-600 dark:text-red-400"
+            className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-red-600 dark:text-red-400"
           >
             Danger zone
           </h2>

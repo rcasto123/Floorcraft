@@ -248,7 +248,7 @@ export function OfficeSwitcher({
 
           {showSwitchGroup && (
             <div>
-              <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+              <div className="px-3 pt-1.5 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
                 Switch office
               </div>
               {/* Cap the scroll height so a team with dozens of offices
@@ -316,7 +316,7 @@ export function OfficeSwitcher({
               user has 1 office or 50. */}
           <div>
             <div className="my-1 border-t border-[color:var(--color-paper-line)] dark:border-gray-800" />
-            <div className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+            <div className="px-3 pt-1.5 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
               Manage
             </div>
             <button

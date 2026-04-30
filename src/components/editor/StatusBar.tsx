@@ -211,7 +211,7 @@ function StatItem({
             : 'text-gray-700 dark:text-gray-200'
   return (
     <span className="inline-flex items-baseline gap-1.5">
-      <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+      <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
         {label}
       </span>
       <span className={`tabular-nums font-medium ${valueClass}`}>{value}</span>

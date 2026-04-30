@@ -138,7 +138,7 @@ export function ScenariosPage() {
           {/* Sidebar — list of scenarios. */}
           <aside className="w-64 border-r border-[color:var(--color-paper-line)] dark:border-gray-800 bg-[color:var(--color-paper-sunken)] dark:bg-gray-800/50 p-4 flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+              <h2 className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
                 Scenarios
               </h2>
               {canEdit && (

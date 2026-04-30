@@ -450,7 +450,7 @@ export function AuditLogPage() {
                       className="hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800/40"
                     >
                       <td
-                        className="px-4 py-2.5 text-gray-600 dark:text-gray-300 whitespace-nowrap tabular-nums"
+                        className="px-4 py-2.5 font-mono text-xs text-gray-600 dark:text-gray-300 whitespace-nowrap tabular-nums"
                         title={e.created_at ?? ''}
                       >
                         {formatRelative(e.created_at, now)}

@@ -107,7 +107,7 @@ export function OccupancyDashboard() {
 
       {/* Per-floor breakdown */}
       <div>
-        <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+        <div className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-2">
           By floor
         </div>
         <div className="flex flex-col gap-2">
@@ -135,7 +135,7 @@ export function OccupancyDashboard() {
 
       {/* Per-department breakdown */}
       <div>
-        <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+        <div className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 mb-2">
           By department
         </div>
         <div className="flex flex-col gap-1.5">

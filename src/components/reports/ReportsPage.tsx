@@ -341,10 +341,10 @@ function StatCard({
 }) {
   return (
     <div className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-3">
-      <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+      <div className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
         {label}
       </div>
-      <div className="mt-1 text-2xl font-semibold tabular-nums text-gray-900 dark:text-gray-100">
+      <div className="mt-1 font-mono text-2xl font-medium tabular-nums text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
         {value}
       </div>
       {secondary ? (
@@ -401,7 +401,7 @@ function Card({
   return (
     <section className="bg-[color:var(--color-paper-raised)] dark:bg-gray-900 border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded-lg p-4">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        <h2 className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
           {title}
         </h2>
         {onExport ? (

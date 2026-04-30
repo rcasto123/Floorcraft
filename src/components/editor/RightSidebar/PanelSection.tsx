@@ -90,7 +90,7 @@ export function PanelSection({
     >
       <div className={headerClass}>
         <div className="flex flex-col min-w-0">
-          <h3 className="text-[11px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+          <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500">
             {title}
           </h3>
           {subtitle && (

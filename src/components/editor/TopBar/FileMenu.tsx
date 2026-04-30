@@ -184,7 +184,7 @@ export function FileMenu({ groups, triggerId }: FileMenuProps) {
               )}
               {group.heading && (
                 <div
-                  className="px-3 pt-1.5 pb-1 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500"
+                  className="px-3 pt-1.5 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-400 dark:text-gray-500"
                   data-testid="file-menu-heading"
                 >
                   {group.heading}

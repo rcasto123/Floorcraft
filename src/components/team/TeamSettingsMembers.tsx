@@ -504,7 +504,7 @@ export function TeamSettingsMembers({
       <section aria-labelledby="members-heading" className="space-y-2">
         <h2
           id="members-heading"
-          className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+          className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400"
         >
           Members ({memberCount})
         </h2>
@@ -557,7 +557,7 @@ export function TeamSettingsMembers({
         <section aria-labelledby="invites-heading" className="space-y-2">
           <h2
             id="invites-heading"
-            className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400"
+            className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400"
           >
             Pending invites ({invites.length})
           </h2>
