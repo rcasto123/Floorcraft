@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Search, Check, Users, X as XIcon, MapPin, Sparkles } from 'lucide-react'
 import { Button, Modal, ModalBody, ModalFooter } from '../../ui'
 import { useEmployeeStore } from '../../../stores/employeeStore'
@@ -61,24 +61,18 @@ export function SeatPickerDialog({
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
 
-  // Reset transient state when re-opening with a new employee.
-  // No useEffect-based setState (set-state-in-effect rule) — we key off
-  // a `lastOpenedFor` ref and reconcile imperatively in handlers.
-  const initFor = useMemo(
-    () => ({ employeeId, bulkIds: bulkEmployeeIds, open }),
-    [employeeId, bulkEmployeeIds, open],
-  )
-  const initRef = useRef(initFor)
-  if (initRef.current !== initFor) {
-    initRef.current = initFor
-    if (open) {
-      setQuery('')
-      setActiveIdx(0)
-      setBulkRemaining(bulkEmployeeIds ?? [])
-      // Defer focus to next tick so Modal's own panel autofocus doesn't fight.
-      window.setTimeout(() => inputRef.current?.focus(), 0)
-    }
-  }
+  // Reset transient state lives at the parent level: the dialog is
+  // mounted with `key={employeeId}` so each open is a fresh mount and
+  // every useState initializer re-runs with the right defaults. That
+  // avoids both the set-state-in-effect rule AND the
+  // ref-access-during-render rule.
+
+  // Defer focus to the next tick so Modal's own panel autofocus doesn't
+  // fight with this one.
+  useEffect(() => {
+    const id = window.setTimeout(() => inputRef.current?.focus(), 0)
+    return () => window.clearTimeout(id)
+  }, [])
 
   const isBulk = !employeeId && (bulkEmployeeIds?.length ?? 0) > 0
   const currentEmployeeId = isBulk ? bulkRemaining[0] : employeeId
@@ -168,14 +162,13 @@ export function SeatPickerDialog({
     }
   }
 
-  // Scroll the active option into view when it changes.
-  // Dom-side effect (no React state) so it doesn't trip set-state-in-effect.
-  if (open && listRef.current) {
-    queueMicrotask(() => {
-      const el = listRef.current?.querySelector<HTMLElement>(`[data-idx="${safeActive}"]`)
-      el?.scrollIntoView({ block: 'nearest' })
-    })
-  }
+  // Scroll the active option into view when keyboard navigation moves
+  // the highlight past the visible window. Pure DOM side-effect, no
+  // setState — won't trip the set-state-in-effect rule.
+  useEffect(() => {
+    const el = listRef.current?.querySelector<HTMLElement>(`[data-idx="${safeActive}"]`)
+    el?.scrollIntoView({ block: 'nearest' })
+  }, [safeActive])
 
   if (!currentEmployee) {
     // No employee target left — nothing to render. The dialog should

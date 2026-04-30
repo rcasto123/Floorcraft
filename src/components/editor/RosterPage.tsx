@@ -1924,6 +1924,16 @@ export function RosterPage() {
 
       {seatPicker && (
         <SeatPickerDialog
+          // Fresh mount per open so transient state (query, active idx,
+          // bulk-remaining queue) reinitializes from props without the
+          // dialog needing to reconcile state during render — keeps it
+          // clean of both set-state-in-effect and ref-during-render
+          // lint rules.
+          key={
+            seatPicker.mode === 'single'
+              ? seatPicker.employeeId
+              : `bulk:${seatPicker.bulkIds.join(',')}`
+          }
           open
           employeeId={seatPicker.mode === 'single' ? seatPicker.employeeId : null}
           bulkEmployeeIds={seatPicker.mode === 'bulk' ? seatPicker.bulkIds : undefined}
