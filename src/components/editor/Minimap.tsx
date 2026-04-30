@@ -122,8 +122,14 @@ const MinimapBackground = memo(function MinimapBackground({
           y={(t.bounds.y - bounds.y) * minimapScale}
           width={Math.max(t.bounds.width * minimapScale, 2)}
           height={Math.max(t.bounds.height * minimapScale, 2)}
-          fill="#3B82F6"
-          stroke="#1D4ED8"
+          // Wave 21A — selected-tile indicator on the minimap picks up
+          // the blueprint accent so it matches the canvas selection
+          // chrome above. Konva can't read CSS variables; the literal
+          // hex is the dark variant of `--color-blueprint` (`cyan-700`)
+          // for the fill and `--color-blueprint-strong` (`cyan-800`)
+          // for the stroke.
+          fill="#0E7490"
+          stroke="#155E75"
           strokeWidth={1}
           data-testid={`minimap-selected-${t.id}`}
         />
@@ -170,8 +176,10 @@ function MinimapViewport({ bounds, minimapScale }: MinimapViewportProps) {
       y={viewportY}
       width={Math.max(viewportW, 10)}
       height={Math.max(viewportH, 8)}
-      fill="rgba(59, 130, 246, 0.15)"
-      stroke="#3B82F6"
+      // Viewport indicator — translucent blueprint cyan so it reads as
+      // part of the same identity as the gridded canvas it overlays.
+      fill="rgba(14, 116, 144, 0.18)"
+      stroke="#0E7490"
       strokeWidth={1.5}
       rx={2}
     />
