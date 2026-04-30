@@ -119,7 +119,7 @@ export function PeoplePanel() {
           {rosterHref && (
             <Link
               to={rosterHref}
-              className="inline-flex items-center gap-0.5 text-[11px] text-blue-600 dark:text-blue-400 hover:text-blue-800 hover:underline"
+              className="inline-flex items-center gap-0.5 text-[11px] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:opacity-80 hover:underline"
               title="Open full roster view"
             >
               Open Roster
@@ -140,7 +140,7 @@ export function PeoplePanel() {
             type="button"
             onClick={() => setShowAddForm(!showAddForm)}
             aria-expanded={showAddForm}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-900"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-[color:var(--color-blueprint)] text-white rounded-md hover:bg-[color:var(--color-blueprint-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-900"
           >
             <Plus size={12} aria-hidden="true" />
             Add
@@ -148,7 +148,7 @@ export function PeoplePanel() {
           <button
             type="button"
             onClick={() => setCsvImportOpen(true)}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-900"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1 dark:focus-visible:ring-offset-gray-900"
           >
             <Upload size={12} aria-hidden="true" />
             CSV
@@ -206,7 +206,7 @@ export function PeoplePanel() {
             <button
               onClick={handleAddEmployee}
               disabled={!newName.trim()}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-40"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium bg-[color:var(--color-blueprint)] text-white rounded-md hover:bg-[color:var(--color-blueprint-strong)] disabled:opacity-40"
               title="Add employee"
               aria-label="Add employee"
             >
@@ -219,7 +219,7 @@ export function PeoplePanel() {
 
       {/*
         Search bar — focus styling matches the editor-wide standard
-        (`focus-visible:ring-2 focus-visible:ring-blue-500`) used by
+        (`focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]`) used by
         TeamHomePage, OrgChart, and the Help search palette. Pre-fix the
         bare `focus:border-blue-400` change was so subtle that keyboard
         users couldn't tell which input had focus, and the panel didn't
@@ -228,7 +228,7 @@ export function PeoplePanel() {
       <div className="relative mb-3">
         <Search size={14} className="absolute left-2.5 top-2.5 text-gray-400 dark:text-gray-500" aria-hidden="true" />
         <input
-          className="w-full pl-8 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-transparent"
+          className="w-full pl-8 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:border-transparent"
           placeholder="Search people…"
           aria-label="Search people"
           value={searchQuery}
@@ -256,7 +256,7 @@ export function PeoplePanel() {
           onClick={() => setFilterBy('all')}
           className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
             filterBy === 'all'
-              ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+              ? 'bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]'
               : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           }`}
         >
@@ -302,7 +302,7 @@ export function PeoplePanel() {
               {searchQuery ? 'Try a different search term, or import a CSV to get started.' : 'Add a teammate manually or bulk-import from CSV.'}
             </p>
             <div className="flex gap-2">
-              <button onClick={() => setShowAddForm(true)} className="px-3 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              <button onClick={() => setShowAddForm(true)} className="px-3 py-1.5 text-xs font-medium bg-[color:var(--color-blueprint)] text-white rounded-md hover:bg-[color:var(--color-blueprint-strong)]">
                 Add person
               </button>
               <button onClick={() => setCsvImportOpen(true)} className="px-3 py-1.5 text-xs font-medium border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50">

@@ -1086,7 +1086,7 @@ export function RosterPage() {
                 ;(e.target as HTMLInputElement).blur()
               }
             }}
-            className={`w-full px-3 py-1.5 ${q ? 'pr-8' : ''} text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`w-full px-3 py-1.5 ${q ? 'pr-8' : ''} text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]`}
           />
           {q && (
             <button
@@ -1109,7 +1109,7 @@ export function RosterPage() {
         <select
           value={statusFilter}
           onChange={(e) => setFilter('status', e.target.value)}
-          className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
           aria-label="Filter by status"
         >
           <option value="">All statuses</option>
@@ -1121,7 +1121,7 @@ export function RosterPage() {
         <select
           value={deptFilter}
           onChange={(e) => setFilter('dept', e.target.value)}
-          className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
           aria-label="Filter by department"
         >
           <option value="">All depts</option>
@@ -1142,7 +1142,7 @@ export function RosterPage() {
             onClick={() => setMoreFiltersOpen((o) => !o)}
             className={`flex items-center gap-1.5 px-2 py-1.5 text-sm border rounded ${
               secondaryFilterCount > 0
-                ? 'border-blue-300 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40'
+                ? 'border-[color:var(--color-blueprint)] bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:opacity-90'
                 : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50'
             }`}
             aria-haspopup="dialog"
@@ -1166,7 +1166,7 @@ export function RosterPage() {
                   <select
                     value={presetFilter}
                     onChange={(e) => setFilter('preset', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Preset view"
                     title={
                       presetFilter
@@ -1188,7 +1188,7 @@ export function RosterPage() {
                   <select
                     value={floorFilter}
                     onChange={(e) => setFilter('floor', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by floor"
                   >
                     <option value="">All floors</option>
@@ -1203,7 +1203,7 @@ export function RosterPage() {
                   <select
                     value={seatFilter}
                     onChange={(e) => setFilter('seat', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by seat assignment"
                   >
                     <option value="">All seats</option>
@@ -1217,7 +1217,7 @@ export function RosterPage() {
                   <select
                     value={dayFilter}
                     onChange={(e) => setFilter('day', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by office day"
                   >
                     <option value="">All days</option>
@@ -1232,7 +1232,7 @@ export function RosterPage() {
                   <select
                     value={equipFilter}
                     onChange={(e) => setFilter('equip', e.target.value)}
-                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
                     aria-label="Filter by equipment status"
                   >
                     <option value="">All equipment</option>
@@ -1416,7 +1416,7 @@ export function RosterPage() {
               if (v === '__clear__') handleBulkClearDepartment()
               else handleBulkSetDepartment(v)
             }}
-            className="px-2 py-1 text-xs border border-blue-200 rounded bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-2 py-1 text-xs border border-blue-200 rounded bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             aria-label="Set department on selected rows"
           >
             <option value="" disabled>
@@ -1437,7 +1437,7 @@ export function RosterPage() {
               const v = e.target.value as EmployeeStatus | ''
               if (v) handleBulkSetStatus(v)
             }}
-            className="px-2 py-1 text-xs border border-blue-200 rounded bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-2 py-1 text-xs border border-blue-200 rounded bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             aria-label="Set status on selected rows"
           >
             <option value="" disabled>
@@ -1524,7 +1524,7 @@ export function RosterPage() {
               <select
                 value={sortColumn}
                 onChange={(e) => setSortColumn(e.target.value as SortColumn)}
-                className="px-1.5 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="px-1.5 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
                 aria-label="Sort column"
               >
                 <option value="name">Name</option>
@@ -1796,7 +1796,7 @@ export function RosterPage() {
                           onChange={(e) =>
                             handleRowSetStatus(emp.id, e.target.value as EmployeeStatus)
                           }
-                          className="text-xs px-1.5 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          className="text-xs px-1.5 py-1 border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)]"
                           aria-label={`Status for ${emp.name}`}
                         >
                           {EMPLOYEE_STATUSES.map((s) => (

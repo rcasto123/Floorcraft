@@ -122,16 +122,16 @@ interface InnerProps {
 const SECTION_LABEL_CLASS =
   'text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400'
 const TEXTAREA_CLASS =
-  'w-full text-xs border border-gray-200 dark:border-gray-800 rounded px-2 py-1.5 ' +
-  'focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 ' +
-  'bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 resize-y'
+  'w-full text-xs border border-[color:var(--color-paper-line)] dark:border-gray-800 rounded px-2 py-1.5 ' +
+  'focus:outline-none focus:border-[color:var(--color-blueprint)] focus:ring-2 focus:ring-[color:var(--color-blueprint)]/30 ' +
+  'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 text-gray-900 dark:text-gray-100 resize-y'
 const PRIMARY_BTN_CLASS =
-  'bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed ' +
-  'text-white px-3 py-1.5 text-xs rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+  'bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] disabled:opacity-40 disabled:cursor-not-allowed ' +
+  'text-white px-3 py-1.5 text-xs rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]'
 const SECONDARY_BTN_CLASS =
-  'bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 ' +
-  'text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 ' +
-  'px-3 py-1.5 text-xs rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+  'bg-[color:var(--color-paper-raised)] dark:bg-gray-900 hover:bg-[color:var(--color-paper-sunken)] dark:hover:bg-gray-800 ' +
+  'text-gray-700 dark:text-gray-200 border border-[color:var(--color-paper-line)] dark:border-gray-700 ' +
+  'px-3 py-1.5 text-xs rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]'
 const DELETE_BTN_CLASS =
   'text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 ' +
   'px-3 py-1.5 text-xs rounded focus:outline-none focus:ring-2 focus:ring-red-400'

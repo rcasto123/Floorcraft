@@ -165,9 +165,9 @@ function DropZone({ fileName, rowCount, onFile, onClear }: DropZoneProps) {
   )
 
   const baseCls =
-    'relative w-full min-h-[120px] flex items-center justify-center text-center px-4 py-6 border-2 border-dashed rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400'
+    'relative w-full min-h-[120px] flex items-center justify-center text-center px-4 py-6 border-2 border-dashed rounded-lg transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]'
   const stateCls = dragOver
-    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+    ? 'border-[color:var(--color-blueprint)] bg-[color:var(--color-blueprint-soft)]'
     : fileName
       ? 'border-green-400 dark:border-green-600 bg-green-50/50 dark:bg-green-900/10'
       : 'border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/40'
@@ -208,7 +208,7 @@ function DropZone({ fileName, rowCount, onFile, onClear }: DropZoneProps) {
         }}
       />
       {dragOver ? (
-        <div className="text-sm font-medium text-blue-700 dark:text-blue-200">
+        <div className="text-sm font-medium text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)]">
           Release to upload
         </div>
       ) : fileName ? (
@@ -224,7 +224,7 @@ function DropZone({ fileName, rowCount, onFile, onClear }: DropZoneProps) {
           </div>
           <button
             type="button"
-            className="ml-2 text-xs text-blue-600 dark:text-blue-400 underline hover:no-underline"
+            className="ml-2 text-xs text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] underline hover:no-underline"
             onClick={(e) => {
               e.stopPropagation()
               onClear()
@@ -263,7 +263,7 @@ function FilterBar({ value, counts, onChange }: FilterBarProps) {
   const pill = (k: FilterValue, label: string, count: number) => {
     const active = value === k
     const cls = active
-      ? 'bg-blue-600 text-white border-blue-600'
+      ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]'
       : 'bg-transparent text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800'
     return (
       <button
@@ -626,7 +626,7 @@ export function CSVImportDialog() {
                 <button
                   type="button"
                   onClick={handleDownloadTemplate}
-                  className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="inline-flex items-center gap-1 text-xs text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline"
                 >
                   <Download size={12} aria-hidden="true" />
                   Download template
@@ -706,7 +706,7 @@ export function CSVImportDialog() {
               <div
                 role="status"
                 data-testid="alias-banner"
-                className="mb-3 px-3 py-2 rounded border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/30 text-xs text-blue-900 dark:text-blue-100 flex items-start justify-between gap-2"
+                className="mb-3 px-3 py-2 rounded border border-[color:var(--color-blueprint)]/40 dark:border-[color:var(--color-blueprint)]/30 bg-[color:var(--color-blueprint-soft)] text-xs text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] flex items-start justify-between gap-2"
               >
                 <div className="flex-1">
                   <div className="font-medium mb-0.5">Headers matched</div>
@@ -728,7 +728,7 @@ export function CSVImportDialog() {
                 </div>
                 <button
                   type="button"
-                  className="text-blue-700 dark:text-blue-300 hover:underline shrink-0"
+                  className="text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:underline shrink-0"
                   onClick={() => setAliasBannerDismissed(true)}
                   aria-label="Dismiss headers matched notice"
                 >

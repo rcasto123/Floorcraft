@@ -120,7 +120,7 @@ export function RosterBulkEditPopover({ selectedIds, onClose }: Props) {
         <button
           type="button"
           onClick={apply}
-          className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+          className="px-3 py-1 bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] text-white text-sm rounded transition-colors"
         >
           Apply
         </button>

@@ -216,7 +216,7 @@ function FirstRunDemoSeeder() {
       <div className="flex items-start gap-3">
         <div
           aria-hidden="true"
-          className="bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-full w-9 h-9 flex items-center justify-center flex-shrink-0"
+          className="bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] rounded-full w-9 h-9 flex items-center justify-center flex-shrink-0"
         >
           <Sparkles size={18} aria-hidden="true" />
         </div>
@@ -236,7 +236,7 @@ function FirstRunDemoSeeder() {
         <button
           type="button"
           onClick={handleDismiss}
-          className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 flex-shrink-0 -mr-1 -mt-1 p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 flex-shrink-0 -mr-1 -mt-1 p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)]"
           aria-label="Dismiss sample-content card"
         >
           <X size={16} aria-hidden="true" />
@@ -248,7 +248,7 @@ function FirstRunDemoSeeder() {
           type="button"
           onClick={handleLoad}
           disabled={loading}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[color:var(--color-blueprint)] text-white rounded-md text-sm font-medium hover:bg-[color:var(--color-blueprint-strong)] disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-blueprint)] focus-visible:ring-offset-1"
         >
           <Sparkles size={14} aria-hidden="true" />
           {loading ? 'Loading…' : 'Load sample content'}
@@ -441,7 +441,7 @@ function FirstRunCoachTour() {
       <div className="flex items-start gap-3">
         <div
           aria-hidden="true"
-          className="bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0"
+          className="bg-[color:var(--color-blueprint-soft)] text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0"
         >
           <Sparkles size={20} aria-hidden="true" />
         </div>
@@ -497,7 +497,7 @@ function FirstRunCoachTour() {
             aria-current={i === stepIdx ? 'step' : undefined}
             className={`h-1.5 rounded-full transition-all ${
               i === stepIdx
-                ? 'w-5 bg-blue-600 dark:bg-blue-400'
+                ? 'w-5 bg-[color:var(--color-blueprint)] dark:bg-[color:var(--color-blueprint)]'
                 : i < stepIdx
                   ? 'w-1.5 bg-blue-300 dark:bg-blue-700'
                   : 'w-1.5 bg-gray-300 dark:bg-gray-700'
@@ -544,7 +544,7 @@ function FirstRunCoachTour() {
                 ref={primaryBtnRef}
                 type="button"
                 onClick={handleDismiss}
-                className="px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-700 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                className="px-3 py-1.5 text-sm font-medium rounded-md bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]/40"
               >
                 Done
               </button>
@@ -554,7 +554,7 @@ function FirstRunCoachTour() {
               ref={primaryBtnRef}
               type="button"
               onClick={handleNext}
-              className="px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-700 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+              className="px-3 py-1.5 text-sm font-medium rounded-md bg-[color:var(--color-blueprint)] hover:bg-[color:var(--color-blueprint-strong)] text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]/40"
             >
               Next
             </button>

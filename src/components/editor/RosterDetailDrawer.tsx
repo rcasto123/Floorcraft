@@ -268,7 +268,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
           <Field label="Name">
             <input
               ref={firstFieldRef}
-              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
               defaultValue={employee.name}
               onBlur={(e) => {
                 const trimmed = e.target.value.trim()
@@ -288,7 +288,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
           </Field>
           <Field label="Email">
             <input
-              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
               defaultValue={employee.email}
               onBlur={(e) =>
                 updateEmployee(employee.id, { email: e.target.value.trim() })
@@ -301,7 +301,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <Field label="Team">
               <input
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 defaultValue={employee.team ?? ''}
                 onBlur={(e) =>
                   updateEmployee(employee.id, { team: e.target.value.trim() || null })
@@ -311,7 +311,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
             </Field>
             <Field label="Type">
               <select
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 value={employee.employmentType}
                 onChange={(e) =>
                   updateEmployee(employee.id, {
@@ -332,7 +332,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
           <Field label="Manager">
             <div className="space-y-1">
               <select
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 value={danglingManager ? '' : (employee.managerId ?? '')}
                 onChange={(e) => {
                   const candidate = e.target.value || null
@@ -393,7 +393,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
                       disabled={!canEditPII}
                       className={`px-2 py-1 text-xs font-medium rounded border transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                         active
-                          ? 'bg-blue-600 text-white border-blue-600'
+                          ? 'bg-[color:var(--color-blueprint)] text-white border-[color:var(--color-blueprint)]'
                           : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                       }`}
                     >
@@ -444,7 +444,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
             <Field label="Start date">
               <input
                 type="date"
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 defaultValue={employee.startDate ?? ''}
                 onBlur={(e) =>
                   updateEmployee(employee.id, { startDate: e.target.value || null })
@@ -455,7 +455,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
             <Field label="End date">
               <input
                 type="date"
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 defaultValue={employee.endDate ?? ''}
                 onBlur={(e) =>
                   updateEmployee(employee.id, { endDate: e.target.value || null })
@@ -466,7 +466,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
             <Field label="Departure date">
               <input
                 type="date"
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 defaultValue={employee.departureDate ?? ''}
                 onBlur={(e) =>
                   updateEmployee(employee.id, { departureDate: e.target.value || null })
@@ -478,7 +478,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
 
           <Field label="Tags (comma-separated)">
             <input
-              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
               defaultValue={employee.tags.join(', ')}
               onBlur={(e) => onTagsBlur(e.target.value)}
               disabled={!canEditPII}
@@ -488,7 +488,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
           <div className="grid grid-cols-2 gap-3">
             <Field label="Equipment needs">
               <input
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 defaultValue={employee.equipmentNeeds.join(', ')}
                 onBlur={(e) => onEquipmentNeedsBlur(e.target.value)}
                 disabled={!canEdit}
@@ -496,7 +496,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
             </Field>
             <Field label="Equipment status">
               <select
-                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                 value={employee.equipmentStatus}
                 onChange={(e) =>
                   updateEmployee(employee.id, {
@@ -516,7 +516,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
 
           <Field label="Photo URL">
             <input
-              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
               defaultValue={employee.photoUrl ?? ''}
               onBlur={(e) =>
                 updateEmployee(employee.id, { photoUrl: e.target.value.trim() || null })
@@ -527,7 +527,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
 
           <Field label="Status">
             <select
-              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+              className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
               value={employee.status}
               onChange={(e) =>
                 updateEmployee(employee.id, { status: e.target.value as EmployeeStatus })
@@ -546,7 +546,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
             <>
               <Field label="Leave type">
                 <select
-                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                   value={employee.leaveType ?? ''}
                   onChange={(e) =>
                     updateEmployee(employee.id, {
@@ -565,7 +565,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
               <Field label="Expected return">
                 <input
                   type="date"
-                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                   defaultValue={employee.expectedReturnDate ?? ''}
                   onChange={(e) =>
                     updateEmployee(employee.id, {
@@ -579,7 +579,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
               <Field label="Coverage">
                 <input
                   list="coverage-employees"
-                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
                   defaultValue={employees[employee.coverageEmployeeId ?? '']?.name ?? ''}
                   onBlur={(e) => {
                     const name = e.target.value.trim()
@@ -602,7 +602,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
 
               <Field label="Leave notes">
                 <textarea
-                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500 resize-y"
+                  className="w-full px-2 py-1.5 text-sm border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500 resize-y"
                   defaultValue={employee.leaveNotes ?? ''}
                   onBlur={(e) =>
                     updateEmployee(employee.id, { leaveNotes: e.target.value || null })
@@ -648,7 +648,7 @@ export function RosterDetailDrawer({ employeeId, onClose }: Props) {
               <button
                 type="button"
                 onClick={() => setHistoryOpen(true)}
-                className="mt-1 text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 underline-offset-2 hover:underline"
+                className="mt-1 text-xs text-[color:var(--color-blueprint-strong)] dark:text-[color:var(--color-blueprint)] hover:opacity-80 underline-offset-2 hover:underline"
                 data-testid="roster-seat-history-link"
               >
                 Seat history
@@ -762,7 +762,7 @@ function AccommodationsField({
         <div className="flex items-center gap-1.5">
           <select
             aria-label="Accommodation type"
-            className="flex-shrink-0 px-2 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-shrink-0 px-2 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             value={type}
             onChange={(e) => setType((e.target.value as AccommodationType) || '')}
           >
@@ -775,7 +775,7 @@ function AccommodationsField({
           </select>
           <input
             aria-label="Accommodation notes"
-            className="flex-1 min-w-0 px-2 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 min-w-0 px-2 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)]"
             placeholder="Notes (optional)"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -784,7 +784,7 @@ function AccommodationsField({
             type="button"
             onClick={handleAdd}
             disabled={!type}
-            className="flex-shrink-0 px-2 py-1 text-xs font-medium rounded bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+            className="flex-shrink-0 px-2 py-1 text-xs font-medium rounded bg-[color:var(--color-blueprint)] text-white hover:bg-[color:var(--color-blueprint-strong)] disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
           >
             Add
           </button>
@@ -869,7 +869,7 @@ function SensitivityTagsField({
 
       <input
         aria-label="Sensitivity tags"
-        className="w-full px-2 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-500"
+        className="w-full px-2 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50 disabled:text-gray-500"
         placeholder="e.g. audit, legal, insider-risk"
         // `key`s the tag list so re-seeding the employee (navigation
         // between rows, or after a remove) refreshes the uncontrolled
@@ -974,7 +974,7 @@ function ScheduledStatusChanges({
             type="date"
             value={draftDate}
             onChange={(e) => setDraftDate(e.target.value)}
-            className="px-1.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-50"
+            className="px-1.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50"
             min={today}
             disabled={!canEdit}
             aria-label="Effective date"
@@ -982,7 +982,7 @@ function ScheduledStatusChanges({
           <select
             value={draftStatus}
             onChange={(e) => setDraftStatus(e.target.value as EmployeeStatus)}
-            className="px-1.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-50"
+            className="px-1.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50"
             disabled={!canEdit}
             aria-label="New status"
           >
@@ -994,7 +994,7 @@ function ScheduledStatusChanges({
             type="text"
             value={draftNote}
             onChange={(e) => setDraftNote(e.target.value)}
-            className="flex-1 min-w-0 px-1.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-50"
+            className="flex-1 min-w-0 px-1.5 py-1 text-xs border border-gray-200 dark:border-gray-800 rounded focus:outline-none focus:ring-1 focus:ring-[color:var(--color-blueprint)] disabled:bg-gray-50"
             placeholder="Note (optional)"
             disabled={!canEdit}
             aria-label="Note"
@@ -1003,7 +1003,7 @@ function ScheduledStatusChanges({
             type="button"
             onClick={handleAdd}
             disabled={addDisabled}
-            className="px-2 py-1 text-xs font-medium bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+            className="px-2 py-1 text-xs font-medium bg-[color:var(--color-blueprint)] text-white rounded hover:bg-[color:var(--color-blueprint-strong)] disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
           >
             Schedule
           </button>

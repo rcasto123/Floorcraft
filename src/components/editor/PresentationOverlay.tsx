@@ -238,7 +238,7 @@ function FirstRunHint() {
   return (
     <div
       role="status"
-      className="fixed top-4 left-4 z-[60] px-3 py-2 rounded-md bg-blue-600 text-white text-sm font-medium shadow-lg"
+      className="fixed top-4 left-4 z-[60] px-3 py-2 rounded-md bg-[color:var(--color-blueprint-strong)] text-white text-sm font-medium shadow-lg"
     >
       Use <kbd className="font-mono bg-white/20 px-1 rounded">←</kbd>{' '}
       <kbd className="font-mono bg-white/20 px-1 rounded">→</kbd> to switch floors
