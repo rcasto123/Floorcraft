@@ -14,7 +14,17 @@ vi.mock('../lib/offices/officeRepository', () => ({
   saveOffice: (...a: unknown[]) => saveOffice(...a),
   saveOfficeForce: (...a: unknown[]) => saveOfficeForce(...a),
 }))
-vi.mock('../lib/supabase', () => ({ supabase: { from: (...a: unknown[]) => fromMock(...a) } }))
+vi.mock('../lib/supabase', () => ({
+  supabase: {
+    from: (...a: unknown[]) => fromMock(...a),
+    // TeamSuspendedBanner subscribes to a realtime channel — stub it
+    // so the JSDOM tests don't throw on `supabase.channel(...)`.
+    channel: () => ({
+      on: () => ({ on: () => ({ subscribe: () => null }), subscribe: () => null }),
+    }),
+    removeChannel: () => undefined,
+  },
+}))
 vi.mock('../lib/auth/session', () => ({
   useSession: () => ({ status: 'authenticated', user: { id: 'u1', email: 'a@b.c' } }),
 }))
