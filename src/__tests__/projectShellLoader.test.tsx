@@ -52,6 +52,13 @@ describe('ProjectShell loader', () => {
       select: () => ({
         eq: () => ({
           single: () => Promise.resolve({ data: { id: 't1', slug: 'acme', name: 'Acme' }, error: null }),
+          // TeamSuspendedBanner reads suspension state via maybeSingle().
+          // Default: not suspended.
+          maybeSingle: () =>
+            Promise.resolve({
+              data: { is_suspended: false, suspension_reason: null, suspended_at: null },
+              error: null,
+            }),
         }),
       }),
     }))
@@ -74,6 +81,7 @@ describe('ProjectShell loader', () => {
       select: () => ({
         eq: () => ({
           single: () => Promise.resolve({ data: null, error: null }),
+          maybeSingle: () => Promise.resolve({ data: null, error: null }),
         }),
       }),
     }))
@@ -113,6 +121,13 @@ describe('ProjectShell loader', () => {
             maybeSingle: () => Promise.resolve({ data: null, error: null }),
           }),
           single: () => Promise.resolve({ data: { id: 't1', slug: 'acme', name: 'Acme' }, error: null }),
+          // TeamSuspendedBanner reads suspension state via maybeSingle()
+          // on the single-eq chain. Default: not suspended.
+          maybeSingle: () =>
+            Promise.resolve({
+              data: { is_suspended: false, suspension_reason: null, suspended_at: null },
+              error: null,
+            }),
         }),
       }),
     }))
