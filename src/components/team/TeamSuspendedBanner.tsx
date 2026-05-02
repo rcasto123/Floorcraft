@@ -27,16 +27,20 @@ export function TeamSuspendedBanner() {
   const [state, setState] = useState<SuspensionState | null>(null)
 
   useEffect(() => {
-    if (!teamId) {
-      setState(null)
-      return
-    }
     let cancelled = false
+    // Wrap the team-switch reset + the fetch in a single async fn so
+    // the React 19 lint rule (`react-hooks/set-state-in-effect`) sees
+    // setState happening only inside an async continuation, never
+    // synchronously in the effect body.
     async function load() {
+      if (!teamId) {
+        setState(null)
+        return
+      }
       const { data, error } = await supabase
         .from('teams')
         .select('is_suspended, suspension_reason, suspended_at')
-        .eq('id', teamId!)
+        .eq('id', teamId)
         .maybeSingle()
       if (cancelled) return
       if (error || !data) {
@@ -46,6 +50,12 @@ export function TeamSuspendedBanner() {
       setState(data as SuspensionState)
     }
     void load()
+
+    if (!teamId) {
+      return () => {
+        cancelled = true
+      }
+    }
 
     // Realtime: if a platform admin flips the suspension while the
     // member is mid-session, surface it without a refresh.
