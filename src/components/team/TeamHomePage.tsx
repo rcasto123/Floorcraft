@@ -33,6 +33,7 @@ import { getPins, togglePin as togglePinSlug } from '../../lib/pinnedOffices'
 import { useDocumentTitle } from '../../lib/useDocumentTitle'
 import { UserMenu } from './UserMenu'
 import { TeamActivityFeed } from './TeamActivityFeed'
+import { OnboardingChecklist } from './OnboardingChecklist'
 
 /**
  * Wave 14A: refresh the post-login dashboard to match the JSON-Crack /
@@ -1065,6 +1066,24 @@ export function TeamHomePage() {
           <SuspensionBanner
             reason={team.suspension_reason ?? null}
             suspendedAt={team.suspended_at ?? null}
+          />
+        )}
+
+        {/* Onboarding checklist for fresh teams that just got past
+            their first office. Suppressed in the zero-offices case
+            because EmptyTeamState already covers the "create your
+            first office" step with the same CTA — two of the same
+            button on one screen reads as a layout bug. The
+            checklist hides itself entirely once all four steps are
+            checked off. */}
+        {!loadingOffices && !isTeamEmpty && (
+          <OnboardingChecklist
+            hasOffice={offices.length > 0}
+            hasEmployees={totals.employees > 0}
+            hasTeammates={memberCount > 1}
+            canCreateOffices={canCreateOffices}
+            onCreateOffice={onNew}
+            teamSlug={team.slug}
           />
         )}
 
